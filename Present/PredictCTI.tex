@@ -1,0 +1,309 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LaTeX Example: Project Report
+%
+% Source: http://www.howtotex.com
+%
+% Feel free to distribute this example, but please keep the referral
+% to howtotex.com
+% Date: March 2011
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use writeLaTeX:
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+% If you're new to LaTeX, the wikibook is a great place to start:
+% http://en.wikibooks.org/wiki/LaTeX
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Edit the title below to update the display in My Documents
+%\title{Project Report}
+%
+%%% Preamble
+\documentclass[paper=a4, fontsize=11pt]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+
+\usepackage[english]{babel}															% English language/hyphenation
+\usepackage[protrusion=true,expansion=true]{microtype}	
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage[pdftex]{graphicx}	
+\usepackage{url}
+%\usepackage{marginnote}
+\usepackage{bm}
+\usepackage{color}
+%%% Custom sectioning
+\usepackage{sectsty}
+\allsectionsfont{\centering \normalfont\scshape}
+
+
+%%% Custom headers/footers (fancyhdr package)
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\fancyhead{}											% No page header
+\fancyfoot[L]{}											% Empty
+\fancyfoot[C]{}											% Empty
+\fancyfoot[R]{\thepage}									% Pagenumbering
+\renewcommand{\headrulewidth}{0pt}			% Remove header underlines
+\renewcommand{\footrulewidth}{0pt}				% Remove footer underlines
+\setlength{\headheight}{13.6pt}
+
+
+%%% Equation and float numbering
+\numberwithin{equation}{section}		% Equationnumbering: section.eq#
+\numberwithin{figure}{section}			% Figurenumbering: section.fig#
+\numberwithin{table}{section}				% Tablenumbering: section.tab#
+
+
+%%% Maketitle metadata
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} 	% Horizontal rule
+
+\title{
+		%\vspace{-1in} 	
+		\usefont{OT1}{bch}{b}{n}
+		\normalfont \normalsize \textsc{Tsinghua University} \\ [25pt]
+		\horrule{0.5pt} \\[0.4cm]
+		\huge Predicting Compound-Protein Interactions by Multi-Task Learning\\
+		\horrule{2pt} \\[0.5cm]
+}
+\author{
+		\normalfont 								\normalsize
+        Songpeng Zu\\[-3pt]		\normalsize
+        \today
+}
+\date{}
+
+
+%%% Begin document
+\begin{document}
+\maketitle
+\begin{abstract}
+It is a key problem to evaluate the compound-protein interactions (CPIs) in the early stage of drug discovery and drug design. Many in silico methods have been used to predict compound-protein interactions due to the high cost and high risk experiments.
+
+In this paper, we develop a Bayesian Hierarchical model to predict compound-protein interactions. The main innovations are : a) we integrate both chemoinformation and genomic information, i.e., large-scale compound-protein interactions information, compounds 2D structure fingerprints, chemo-physics information and several levels protein information, such as proteins family information, proteins sequence information, functional information and protein-protein interactions network information. b) instead of predicting whether or not they interact like most papers do, here we can predict the CPIs potencies. c) last but most importantly, we predict compound-protein interactions by ligand-based approach, but not independently. That means we incorporate other proteins chemoinformation into the current learning procedure, namely which kind of compounds can interact with a specific proteins, by considering proteins similarities from different levels.
+
+\end{abstract}
+\newpage
+\tableofcontents
+\newpage
+%\section{Introduction}
+%\section{Data}
+\section{Introduction}
+\begin{itemize}
+\item New chemical scaffold
+\end{itemize}
+\newpage
+\section{Method and Materials}
+\subsection{Materials}
+\subsection{Method}
+Suppose we have m groups of data. In each group, we have the data $ \mathbf{\mathcal{D}}_{j} = \left\{\textbf{X}_{j},\textbf{y}_{j}\right\},j=1,...,m$, and $\textbf{X}_{j}\in\mathbb{R}^{d\times n_{j}}$. Then we have
+\begin{equation}
+  \mathbf{y}_{j} \sim \mathcal{N}\left(\mathbf{X}_{j}^{T}\mathbf{\omega}_{j},\sigma_{y}^{2}\mathbf{I}\right)
+\end{equation}
+Since different groups data may share similar or common structures, we assume the parameters of $\mathbf{\omega}_{j}$ have the same mean on the prior distribution.
+\begin{equation}
+  \mathbf{\omega}_{j} \sim \mathcal{N} \left(\mathbf{\omega}_{\ast},\sigma_{j}^{2}\mathbf{I}\right)
+\end{equation}
+In which,
+\begin{equation}
+  \mathbf{\omega}_{\ast} \sim \mathcal{N} \left(\mathbf{\mu},\mathbf{\sigma}_{\ast}^2\mathbf{I}\right)
+\end{equation}
+
+Suppose, for simplicity, that $\mathbf{\mu}=\textbf{0}$,$p(\sigma_{y}^2)\propto 1$, and that $\sigma_{j}^2$ and $\sigma_{\ast}$ are fixed. Let
+$\mathbf{\Theta} = \left\{\mathbf{\omega}_j, j=1,...,m,\mathbf{\omega}_\ast,\sigma_{y}^2\right\}$. We have
+\begin{equation}
+\begin{aligned}
+  %\textit{logp}(\mathbf{w}|\mathcal{D})
+  \mathcal{L}_{hier}(\mathcal{D;\mathbf{\Theta}})& =
+  % \textit{logp}
+  \mathcal{L}_{orig}(\mathcal{D}|\mathbf{\Theta})+ \textit{logp}(\mathbf{\Theta})\\
+  &=\sum_{j}\left(\textit{logp}(\mathcal{D}_{j}|\mathbf{\omega}_{j})-\frac{\parallel\mathbf{\omega}_{j}-\mathbf{\omega}_{\ast}\parallel^{2}}{2\sigma_{j}^2}\right)
+  -\frac{\parallel\mathbf{\omega}_{\ast}\parallel^{2}}{2\sigma_{\ast}^2}
+  - \overbrace{\sum_{j}\frac{d}{2}\textit{log}(2\pi\sigma_{j}^2)-\frac{d}{2}\textit{log}(2\pi\sigma_{\ast}^2)}^{\textit{Const}}\\
+  &=\sum_{j}\left(-\frac{\parallel\mathbf{y}_{j}-\mathbf{X}^{T}_{j}\mathbf{\omega}_{j}\parallel^{2}}{2\sigma_{y}^2}-\frac{\parallel\mathbf{\omega}_{j}-\mathbf{\omega}_{\ast}\parallel^{2}}{2\sigma_{j}^2}\right)-
+  \frac{\parallel\mathbf{\omega}_{\ast}\parallel^{2}}{2\sigma_{\ast}^2}-\sum_{j}\frac{n_{j}}{2}\textit{log}(2\pi\sigma_{y}^2)\\
+  &- \overbrace{\sum_{j}\frac{d}{2}\textit{log}(2\pi\sigma_{j}^2)-\frac{d}{2}\textit{log}(2\pi\sigma_{\ast}^2)}^{\textit{Const}}
+\end{aligned}
+\end{equation}
+Then we can get
+\begin{equation}
+\begin{aligned}
+  \frac{\partial\mathcal{L}_{hier}(\mathcal{D};\mathbf{\Theta})}{\partial\mathbf{\omega}_j}
+  &= -\frac{1}{2\sigma_{y}^2}\frac{\parallel\mathbf{y}_j-\mathbf{X}_{j}^{T}\mathbf{\omega}_j\parallel^2}{\partial\mathbf{\omega}_j}
+  -\frac{1}{2\sigma_{j}^2}\frac{\parallel\mathbf{\omega}_j-\mathbf{\omega}_{\ast}\parallel^{2}}{\partial\mathbf{\omega}_j}\\
+  &=\frac{\mathbf{X}_j\mathbf{y}_j}{\sigma_{y}^2}+\frac{\mathbf{\omega}_{\ast}}{\sigma^2_j}-
+  \left(\frac{\mathbf{X}_j\mathbf{X}_j^{T}}{\sigma_{y}^2}+\frac{1}{\sigma_{j}^2}\mathbf{I}\right)\mathbf{\omega}_{j}
+\end{aligned}
+\end{equation}
+\begin{equation}
+  \frac{\partial\mathcal{L}_{hier}(\mathcal{D};\mathbf{\Theta})}{\partial\mathbf{\omega}_{\ast}}
+  =-\sum_j\frac{\mathbf{\omega}_{\ast}-\mathbf{\omega}_j}{\sigma_{j}^2}-\frac{\mathbf{\omega}_{\ast}}{\sigma_{\ast}^2}
+\end{equation}
+\begin{equation}
+  \frac{\partial\mathcal{L}_{hier}(\mathcal{D};\mathbf{\Theta})}{\partial\sigma_{y}^2}
+  =\frac{\sum_j\parallel\mathbf{y}_j-\mathbf{X}_{j}^{T}\mathbf{\omega}_j\parallel^2}{2(\sigma_{y}^2)^2}-\frac{n}{2\sigma_{y}^2}
+\end{equation}
+where n is the total number of samples in all the groups.
+
+In this way, L-BFGS-B method is used to get the MAP estimations of these parameters following the function of  $\mathcal{L}_{hier}(\mathcal{D};\mathbf{\omega})$ and their derivations
+\footnote{Note that $\sigma_{y}^2>0$, this is an bound-constrained optimization. L-BFGS-B is memory-limited ,especially used in bound-constrained, and suitable for quite large-dimensional optimization.}.
+
+Also we can derived the conditional posterior distribution of these parameters. \\
+\begin{equation}
+p(\mathbf{\omega}_j|\mathbf{\omega}_{[-j]},\sigma_{y}^2) \sim \mathcal{N}\left(\mathbf{\mu}_j,\mathbf{\Sigma}_j\right)\\
+\end{equation}
+\begin{equation*}
+  \mathbf{\mu}_j = \mathbf{\Sigma}_j\mathbf{\eta}_j,~
+   \mathbf{\eta}_j = \frac{\mathbf{X}_j\mathbf{y}_j}{\sigma_{y}^2}+\frac{\mathbf{\omega}_{\ast}}{\sigma_{j}^2},~
+   \mathbf{\Sigma}_j^{-1} = \frac{\mathbf{I}}{\sigma_{j}^2}+\frac{\mathbf{X}_{j}^T\mathbf{X}_j}{\sigma_{y}^2}
+\end{equation*}
+\begin{equation}
+    p(\mathbf{\omega}_{\ast}|\mathbf{\omega}_{[-\ast]},\sigma_{y}^2) \sim \mathcal{N}\left(\mathbf{\mu_{\ast}},\mathbf{\Sigma}_{\ast}\right)
+\end{equation}
+\begin{equation*}
+    \mathbf{\mu_{\ast}} = \mathbf{\Sigma}_{\ast}\mathbf{\eta}_{\ast},~
+    \mathbf{\eta}_{\ast} = \sum_j\frac{\mathbf{\omega}_j}{\sigma_j^2},~
+    \mathbf{\Sigma}_{\ast}^{-1} = \sum_j\frac{\mathbf{I}}{\sigma_j^2}+\frac{\mathbf{I}}{\sigma_{\ast}^2}
+\end{equation*}
+\begin{equation}
+    p(\sigma_{y}^2|\mathbf{\omega}) \sim Inv-\chi^2(\nu,s^2)
+\end{equation}
+\begin{equation*}
+    \nu = n-2,~
+    s^2 = \frac{\sum_{j}\parallel\mathbf{y}_j-\mathbf{X}_j^T\mathbf{\omega_j}\parallel^2}{n-2}
+\end{equation*}
+Then we can also use Gibbs Samplers method to get the final results.
+
+If m equals to 1, our model is reduced into the ridge regression model.
+\begin{equation}
+  \mathbf{\omega}_j \sim \mathcal{N}\left(\mathbf{0},(\sigma^2_j+\sigma_{\ast}^2)\mathbf{I}\right)
+\end{equation}
+This can be derived based on the relationship
+\begin{equation}
+E(x) = E\left(E(x|y)\right),~ \textit{Var}(x) = E\left(\textit{Var}(x|y)\right) + \textit{Var}\left(E(x|y)\right)
+\end{equation}
+and the marginal distribution is normal distribution if the hyperprior of mean and the conditional distribution is normal.
+\newpage
+\section{Result}
+\subsection{The performance of different chemical features}
+\subsection{Compare with modeling on a single protein}
+\subsection{Compare with modeling on a protein family}
+\subsection{Chemical substructures against different proteins}
+\subsection{New scaffold discovery against several proteins from traditional Chinese Medicine herbs}
+\subsection{Discovery the compounds targeting RIP3 or PSH}
+%\subsection{Simulation Test}
+%\subsection{Compared with SEA}
+\section{Discussion}
+\section*{Reference}
+\newpage
+\section{Append}
+Suppose there are M different groups of data, i.e.,
+\begin{displaymath}
+\left\{(y_{i}^{(g)},\bm{x}_{i}^{(g)})\right\}_{i=1}^{n^{(g)}};
+1\leq g \leq M
+\end{displaymath}
+
+In our work, we have M proteins, and for each protein g ($1\leq g\leq M$),there are $n_g$ compounds target it. $y_{i}^{(g)}$ represents the potency of the compound i against the protein g \footnote{The variance of potencies might be too large, should take log.}. $\textbf{x}_{i}^{(g)}$, a binary vector which has D dimensions, represents the compound i's two-dimensional chemical structure fingerprints in the protein g. Here we use a linear model to describe the relationship between the potency and chemical structure fingerprints \footnote{Further complex function can be involved, like Gauss Process}. All the vectors, if no special explanations, are column vectors.
+\begin{equation}
+  y_{i}^{(g)} = \mu^{(g)} + \textbf{x}_{i}^{(g)^{T}}\cdot \bm{\beta}^{(g)} + \varepsilon
+\end{equation}
+
+In which, $\mu^{(g)}$ is the average effect\footnote{If $\bm{y}$ is centered, we can ignore the $\mu$.}, $\bm{\beta}^{(g)}$ is the coefficients and $\varepsilon$ is the systematic random error.
+\begin{equation}
+\varepsilon \sim N(0,\tau^{-1})
+\end{equation}
+\begin{equation}
+\tau \sim Gamma(\kappa_{1},\kappa_{2})
+\end{equation}
+
+And
+\begin{equation}
+  \mu^{(g)}|\tau \sim N(0,\sigma_{\mu}^2\tau^{-1})
+\end{equation}
+
+Considering the fact that proteins having similar pharmacological properties tend to interact with structure similar compounds, we construct a hierarchical model to fit this phenomenon.
+
+Let
+\begin{displaymath}
+\bm{\beta} =
+\left( \begin{array}{cccc}
+\beta_{11} & \beta_{12} & \ldots & \beta_{1D}\\
+\beta_{21} & \beta_{22} & \ldots & \beta_{2D}\\
+\vdots & \vdots & \ddots & \vdots \\
+\beta_{M1} & \beta_{M2} & \ldots & \beta_{MD}
+\end{array}
+\right)
+\end{displaymath}
+Then $\bm{\beta}^{(g)}$ corresponds to the gth row of $\bm{\beta}$ matrix and let $\bm{\beta}_{(d)}$ corresponds to the dth column of $\bm{\beta}$ matrix.
+We assume that
+\begin{equation}
+  \bm{\beta}_{(d)} \sim MVN\left(\bm{0},\sigma^{2}\tau^{-1}\Sigma_{\beta}\right)
+\end{equation}
+
+In which, $\sigma^{2}$ is a scale parameter, and follows a non-informative prior,
+\begin{equation}
+Pr(\sigma^2) \propto \frac{1}{\sigma^2}
+\end{equation}
+
+$\Sigma_{\beta}$ can be treated as a kind of covariance matrix. In our model,
+\begin{equation}
+\Sigma_{\beta} = \sum_{1\leq n \leq N}\omega_{n}\Omega^{(n)}.
+\end{equation}
+
+In which, $\Sigma^{n}$ is a similarity Matrix between different proteins. Since we have several ways to define their similarities, such as sequence similarity, GO functional similarity, the distances in the protein-protein interaction networks and so on. So n corresponds to the nth definition of the protein similarity and in total we have N ways. $\omega_{n}$ is the weight for $\Sigma^{n}$.\footnote{We can also maximum similarity or the correlation among them.}
+
+Then we can derive the posterior distribution as followed, let $\bm{\Theta} = \left\{\tau, \sigma^{2},\bm{\beta},\bm{\mu},\right\}$. Then,
+\begin{equation}
+\begin{aligned}
+  Pr(\bm{\Theta}|\bm{y},\bm{X}) & \propto Pr(\tau)Pr(\sigma^{2})Pr(\bm{\beta}|\tau,\sigma^{2})Pr(\bm{\mu}|\tau)
+  Pr(\bm{y}|\bm{X},\bm{\Theta})\\
+  & \propto\tau^{\kappa_{1}-1}e^{-\tau \kappa_{2}}\frac{1}{\sigma^{2}}\prod_{d=1}^{D}\frac{1}{\sqrt{(2\pi)^{M}
+  \left|\sigma^2\Sigma_{\beta}\tau^{-1}\right|}}exp\left\{-\frac{1}{2}
+  \beta_{(d)}^{T}\left(\sigma^2\tau^{-1}\Sigma_{\beta}\right)^{-1}\beta_{(d)}\right\}\\
+  &\cdot \prod_{g=1}^{M}\frac{1}{\sqrt{2\pi \sigma_{\mu}^2\tau^{-1}}}exp\left\{-\frac{1}{2}\frac{\mu^{(g)^{2}}}
+  {\sigma_{\mu}^2\tau^{-1}}\right\}\cdot \prod_{g=1}^{M}\prod_{i=1}^{n^{(g)}}\frac{1}{\sqrt{2\pi\tau^{-1}}}exp\left\{-
+  \frac{1}{2}\frac{\left(y_{i}^{(g)}-\mu^{(g)}-\bm{x}_{i}^{(g)^T}\bm{\beta}^{(g)}
+  \right)^2}{\tau^{-1}}\right\}
+\end{aligned}
+\end{equation}
+
+Then, we can derive the conditional posterior distribution for these parameters.
+
+The conditional posterior distribution of $\bm{\beta}_{(d)}$ follows multivariable normal distribution,
+\begin{equation}
+\begin{aligned}
+  Pr(\bm{\beta_{(d)}}|\bm{y},\bm{X},\bm{\beta_{[-d]}},\tau,\sigma^2,\bm{\mu})
+  & \propto Pr(\bm{\beta_{(d)}}|\sigma^2,\tau)Pr(\bm{y}|\bm{X},\bm{\Theta})\\
+  & \propto exp\left\{-\frac{1}{2}\bm{\beta}_{(d)}^T(\sigma^2\tau^{-1}\Sigma_{\beta}^{-1})
+  \bm{\beta}_{(d)}\right\}\\
+  & \cdot exp\left\{-\frac{\tau}{2}\bm{\beta}_{d}^T\bm{\Psi}_{d}\bm{\beta}_{d}
+  +\tau\bm{\varphi}^T\bm{\beta}_{(d)}+Const\right\}
+\end{aligned}
+\end{equation}
+
+The conditional posterior distribution of $\tau$ follows Gamma distribution,
+\begin{equation}
+  \begin{aligned}
+    Pr(\tau|\bm{y},\bm{X},\bm{\beta},\bm{\sigma^2},\bm{\mu})
+    & \propto Pr(\tau)Pr(\bm{\beta}|\tau,\sigma^{2})Pr(\bm(\mu)|\tau)
+    Pr(\bm{y}|\bm{X},\bm{\Theta})\\
+    & \propto \tau^{\kappa_1+\frac{D\cdot M}{2}+\frac{M}{2}+{\color[rgb]{1,0,0} M\cdot n^{(g)}/2}}exp\Bigg\{-\tau\kappa_2-\tau\sum_{d=1}^{D}\frac{1}{2}
+    \bm{\beta}_{(d)}^T(\sigma^2\Sigma_{\beta})^{-1}\bm{\beta}_{(d)}
+    -\tau\sum_{g=1}^M\frac{1}{2}\frac{\mu^{(g)^2}}{\sigma_{\mu}^2}\\
+    & - \tau\sum_{g=1}^{M}\sum_{i=1}^{n^{(g)}}\frac{1}{2}\left(y_{i}^{(g)}-\mu^{(g)}
+    -\bm{x}^{(g)^T}_i\bm{\beta}^{(g)}\right)^2\Bigg\}
+  \end{aligned}
+\end{equation}
+
+
+
+
+
+\end{document}
