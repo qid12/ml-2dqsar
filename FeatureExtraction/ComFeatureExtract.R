@@ -35,6 +35,7 @@ chemblphychemp <- merge(phychemprop,cid2smiuniq,by=c("cid"))
 
 # I face some problems in this part. And try to use the python packages of RDKit and openbabel.
 chem2cid <- read.table("chembl_id-cid.txt",header=FALSE,col.names=c("compound","cid"),sep="\t",quote="")
-chem2cid2smiles <- merge(chem2cid,chemblphychemp[,c("cid","smilesStripSalts","cansmi","cansmiNS"),with=FALSE],
+chem2cid2smilestmp <- merge(chem2cid,chemblphychemp[,c("cid","smilesStripSalts","cansmi","cansmiNS"),with=FALSE],
                             by=c("cid"))
+chem2cid2smiles <- chem2cid2smilestmp[!duplicated(chem2cid2smilestmp[,c("cid")]),]
 write.table(chem2cid2smiles,file="chemble2cid2smiles.txt",sep="\t",col.names=TRUE,row.names=FALSE,quote=FALSE)
