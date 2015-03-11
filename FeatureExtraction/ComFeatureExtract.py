@@ -38,6 +38,7 @@ def readFILE(filen):
     f.close()
     return(compounds)
 
+# This function doesnot work well, it seems that the chemilid and the comid are not the same as recorded in the website.
 def getSMILESfromCHEMBL(chemblid):
     """Generate the SMILES format of a compound recorded as CHEMBL ID.
     The record is like "CHEMBLE116"
@@ -48,41 +49,54 @@ def getSMILESfromCHEMBL(chemblid):
     Return: a string represented the SMILES format.
     """
     webstr = "https://www.ebi.ac.uk/chembldb/download_helper/getmol/"
-    comid = chemblid.replace("CHEMBL")
+    comid = chemblid.replace("CHEMBL","")
     cominfor = urllib2.urlopen(webstr+comid)
     d = cominfor.read()
     m = Chem.MolFromMolBlock(cominfor.read())
     return(Chem.MolToSmiles(m))
 
-def phychemDataFrame(chempandas,smicol):
+def phychemDataFrame(chempandas,namecol,smicol):
     """ Generate the physicochemical properties of the compounds.
     The compounds are stored in the DataFrame Structure defined by pandas.
 
     Keyword arguments:
     chempandas: the compounds stored in DataFrame, which contain the name and SMILES as columns.
+    namecol: the column number of the name of SMILES.
     smicol: the column number of SMILES in the DataFrame.
 
     Return: a DataFrame of the compounds merging chempadas and the phychem by columns. 
     If None is detected given a SMILES-like string, it would be not deleted. 
+    Note: The SMILES output by Chem.MolToSmiles is canonical, and might be different with the original.
+    Add the names to different compounds.
     """
     assert chempandas.shape[0] <= MAXLINES
     molsmitmp = [Chem.MolFromSmiles(x) for x in chempandas.iloc[:,smicol]]
-    molsmi = [x for x in molsmitmp if x is not None]
+#   molsmi = [x for x in molsmitmp if x is not None]
+    i = 0
+    molsmi = []
+    for x in molsmitmp:
+        if x is not None:
+            x.SetProp("_Name",chempandas.iloc[i,namecol])
+            molsmi.append(x)
+        i += 1
+
     nms = [x[0] for x in Descriptors._descList]
     nms.remove("MolWt")
     calc = MoleculeDescriptors.MolecularDescriptorCalculator(nms)
     descrs = [calc.CalcDescriptors(x) for x in molsmi]
     descrsmat = np.matrix(descrs)
-    df = DataFrame(descrsmat, index = [Chem.MolToSmiles(x) for x in molsmi], columns=nms)
-    df['SMILES'] = df.index
+    df = DataFrame(descrsmat, index = [x.GetProp("_Name") for x in molsmi], columns=nms)
+    df['SMILES'] = [Chem.MolToSmiles(x) for x in molsmi]
+    df['CHEMBL'] = df.index
     return(df)
 
-def phychemFileStream(inputfile,smicol,outputfile,chunknum=1000):
+def phychemFileStream(inputfile,namecol,smicol,outputfile,chunknum=1000):
     """ Generate the physicochemical properties of the compounds from files.
     The compounds are recorded as the SMILES format.
 
     Keyword argument:
     inputfile: the file of compounds in which each row a compound.
+    namecol: the column number of the name of SMILES.
     smicol: the column number of SMILES in the DataFrame.
     outputfile: the file of results in which each row a compound and each column a physiclchemical feature.
     chunknum: number of lines are read once a time due to the file might be quite large.
@@ -91,7 +105,7 @@ def phychemFileStream(inputfile,smicol,outputfile,chunknum=1000):
     Return: outputfile containing these properties.
     """
     assert chunknum <= MAXLINES
-    chunker = pd.read_table("chemble2cid2smiles.txt",sep="\t",chunksize=chunknum)
+    chunker = pd.read_table(inputfile,sep="\t",chunksize=chunknum)
     nms = [x[0] for x in Descriptors._descList]
     nms.remove("MolWt")
 #    title = "\t".join(nms.append("SMILES"))+"\n"
@@ -99,18 +113,24 @@ def phychemFileStream(inputfile,smicol,outputfile,chunknum=1000):
 #    f.write(title)
 #    f.close()
     for piece in chunker:
-        df = phychemDataFrame(piece,smicol)
+        df = phychemDataFrame(piece,namecol,smicol)
 #       dfnew = df.append(Series(list(df.columns.values),index=list(df.columns.values)),ignore_index=True)
         df.to_csv(outputfile,mode="a",header=False,sep="\t",index=False)
     return(0)
 
-def main(inputfile, smicol,outputfile):
-    phychemFileStream(inputfile,smicol,outputfile)
+def main(inputfile,namecol, smicol,outputfile):
+    phychemFileStream(inputfile,namecol,smicol,outputfile,chunknum=1000)
+#   Some compounds might lose because of the illegal format of SMILES.
+#   Thus we need more careful about the results and retrieve those lost compounds.
 
 
 if __name__ == "__main__":
     inputfile = "chemble2cid2smiles.txt"
-    outputfile = "phychemRDKit.txt"
+    outputfile = "phychemRDKit_smiles2chembl.txt"
+    namecol = 1
     smicol = 2
-    main(inputfile,smicol,outputfile)
+    main(inputfile,namecol,smicol,outputfile)
+    
+
+
     
