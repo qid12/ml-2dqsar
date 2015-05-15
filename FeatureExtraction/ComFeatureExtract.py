@@ -118,6 +118,23 @@ def phychemFileStream(inputfile,namecol,smicol,outputfile,chunknum=1000):
         df.to_csv(outputfile,mode="a",header=False,sep="\t",index=False)
     return(0)
 
+def fingerprintDataFrame(chempandas,namecol,smicol):
+    """ Generate the physicochemical properties of the compounds.
+    The compounds are stored in the DataFrame Structure defined by pandas.
+
+    Keyword arguments:
+    chempandas: the compounds stored in DataFrame, which contain the name and SMILES as columns.
+    namecol: the column number of the name of SMILES.
+    smicol: the column number of SMILES in the DataFrame.
+
+    Return: a DataFrame of the compounds merging chempadas and the fingerprints by columns. 
+    If None is detected given a SMILES-like string, it would be not deleted. 
+    Note: The SMILES output by Chem.MolToSmiles is canonical, and might be different with the original.
+    Add the names to different compounds.
+    """
+    
+    return(df)
+    
 def main(inputfile,namecol, smicol,outputfile):
     phychemFileStream(inputfile,namecol,smicol,outputfile,chunknum=1000)
 #   Some compounds might lose because of the illegal format of SMILES.
