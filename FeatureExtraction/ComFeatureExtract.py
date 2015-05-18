@@ -132,7 +132,21 @@ def fingerprintDataFrame(chempandas,namecol,smicol):
     Note: The SMILES output by Chem.MolToSmiles is canonical, and might be different with the original.
     Add the names to different compounds.
     """
-    
+    assert chempandas.shape[0] <= MAXLINES
+    molsmitmp = [Chem.MolFromSmiles(x) for x in chempandas.iloc[:,smicol]]
+    i = 0
+    molsmi = []
+    for x in molsmitmp:
+        if x is not None:
+            x.SetProp("_Name",chempandas.iloc[i,namecol])
+            molsmi.append(x)
+        i += 1
+    # MACC Fingerprints.
+    fps = [MACCSkeys.GenMACCSKeys(x) for x in molsmi]
+    fpsmat = np.matrix(fps)
+    df = DataFrame(fpsmat,index = [x.GetProp("_Name") for x in molsmi]) # how to name the col?
+    df['SMILES'] = [Chem.MolToSmiles(x) for x in molsmi]
+    df['CHEMBL'] = df.index
     return(df)
     
 def main(inputfile,namecol, smicol,outputfile):
