@@ -118,7 +118,7 @@ def phychemFileStream(inputfile,namecol,smicol,outputfile,chunknum=1000):
         df.to_csv(outputfile,mode="a",header=False,sep="\t",index=False)
     return(0)
 
-def fingerprintDataFrame(chempandas,namecol,smicol):
+def MACCfpDataFrame(chempandas,namecol,smicol):
     """ Generate the physicochemical properties of the compounds.
     The compounds are stored in the DataFrame Structure defined by pandas.
 
@@ -148,6 +148,28 @@ def fingerprintDataFrame(chempandas,namecol,smicol):
     df['SMILES'] = [Chem.MolToSmiles(x) for x in molsmi]
     df['CHEMBL'] = df.index
     return(df)
+
+def TOPOLOGYfpDataFrame(chempandas,namecol,smicol):
+    """
+    Topology-based fingerprints 2048 bits. 
+    """
+    assert chempandas.shape[0] <= MAXLINES
+    molsmitmp = [Chem.MolFromSmiles(x) for x in chempandas.iloc[:,smicol]]
+    i = 0
+    molsmi = []
+    for x in molsmitmp:
+        if x is not None:
+            x.SetProp("_Name",chempandas.iloc[i,namecol])
+            molsmi.append(x)
+        i += 1
+    # TOPOLOGY Fingerprints.
+    fps = [FingerprintMols.FingerprintMol(x) for x in molsmi]
+    fpsmat = np.matrix(fps)
+    df = DataFrame(fpsmat,index = [x.GetProp("_Name") for x in molsmi]) # how to name the col?
+    df['SMILES'] = [Chem.MolToSmiles(x) for x in molsmi]
+    df['CHEMBL'] = df.index
+    return(df)
+
     
 def main(inputfile,namecol, smicol,outputfile):
     phychemFileStream(inputfile,namecol,smicol,outputfile,chunknum=1000)
