@@ -169,6 +169,70 @@ def TOPOLOGYfpDataFrame(chempandas,namecol,smicol):
     df['SMILES'] = [Chem.MolToSmiles(x) for x in molsmi]
     df['CHEMBL'] = df.index
     return(df)
+    
+def ATOMPAIRSfpDataFrame(chempandas,namecol,smicol):
+    """
+    AtomPairs-based fingerprints 2048 bits.
+    """
+    assert chempandas.shape[0] <= MAXLINES
+    molsmitmp = [Chem.MolFromSmiles(x) for x in chempandas.iloc[:,smicol]]
+    i = 0
+    molsmi = []
+    for x in molsmitmp:
+        if x is not None:
+            x.SetProp("_Name",chempandas.iloc[i,namecol])
+            molsmi.append(x)
+        i += 1
+    # ATOMPAIRS Fingerprints.
+    fps = [Pairs.GetAtomPairFingerprintAsBitVect(x) for x in molsmi]
+    fpsmat = np.matrix(fps)
+    df = DataFrame(fpsmat,index = [x.GetProp("_Name") for x in molsmi]) # how to name the col?
+    df['SMILES'] = [Chem.MolToSmiles(x) for x in molsmi]
+    df['CHEMBL'] = df.index
+    return(df)
+
+def TORSIONSfpDataFrame(chempandas,namecol,smicol):
+    """
+    Torsions-based fingerprints 2048 bits. 
+    """
+    assert chempandas.shape[0] <= MAXLINES
+    molsmitmp = [Chem.MolFromSmiles(x) for x in chempandas.iloc[:,smicol]]
+    i = 0
+    molsmi = []
+    for x in molsmitmp:
+        if x is not None:
+            x.SetProp("_Name",chempandas.iloc[i,namecol])
+            molsmi.append(x)
+        i += 1
+    # TORSIONS Fingerprints.
+    fps = [Torsions.GetTopologicalTorsionFingerprintAsIntVect(x) for x in molsmi]
+    fpsmat = np.matrix(fps)
+    df = DataFrame(fpsmat,index = [x.GetProp("_Name") for x in molsmi]) # how to name the col?
+    df['SMILES'] = [Chem.MolToSmiles(x) for x in molsmi]
+    df['CHEMBL'] = df.index
+    return(df)
+
+def MORGANfpDataFrame(chempandas,namecol,smicol):
+    """
+    MORGAN-based fingerprints 1024 bits. 
+    """
+    assert chempandas.shape[0] <= MAXLINES
+    molsmitmp = [Chem.MolFromSmiles(x) for x in chempandas.iloc[:,smicol]]
+    i = 0
+    molsmi = []
+    for x in molsmitmp:
+        if x is not None:
+            x.SetProp("_Name",chempandas.iloc[i,namecol])
+            molsmi.append(x)
+        i += 1
+    # MORGAN Fingerprints.
+    fps = [AllChem.GetMorganFingerprint(x,2,useFeatures=TURE,nBits=1024) for x in molsmi]
+    # Note above: multi parameters can be used to generate E/FCFP.
+    fpsmat = np.matrix(fps)
+    df = DataFrame(fpsmat,index = [x.GetProp("_Name") for x in molsmi]) # how to name the col?
+    df['SMILES'] = [Chem.MolToSmiles(x) for x in molsmi]
+    df['CHEMBL'] = df.index
+    return(df)
 
     
 def main(inputfile,namecol, smicol,outputfile):
