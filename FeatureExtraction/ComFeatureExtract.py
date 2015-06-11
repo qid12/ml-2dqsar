@@ -118,6 +118,123 @@ def phychemFileStream(inputfile,namecol,smicol,outputfile,chunknum=1000):
         df.to_csv(outputfile,mode="a",header=False,sep="\t",index=False)
     return(0)
 
+def MACCfpDataFrame(chempandas,namecol,smicol):
+    """ Generate the physicochemical properties of the compounds.
+    The compounds are stored in the DataFrame Structure defined by pandas.
+
+    Keyword arguments:
+    chempandas: the compounds stored in DataFrame, which contain the name and SMILES as columns.
+    namecol: the column number of the name of SMILES.
+    smicol: the column number of SMILES in the DataFrame.
+
+    Return: a DataFrame of the compounds merging chempadas and the fingerprints by columns. 
+    If None is detected given a SMILES-like string, it would be not deleted. 
+    Note: The SMILES output by Chem.MolToSmiles is canonical, and might be different with the original.
+    Add the names to different compounds.
+    """
+    assert chempandas.shape[0] <= MAXLINES
+    molsmitmp = [Chem.MolFromSmiles(x) for x in chempandas.iloc[:,smicol]]
+    i = 0
+    molsmi = []
+    for x in molsmitmp:
+        if x is not None:
+            x.SetProp("_Name",chempandas.iloc[i,namecol])
+            molsmi.append(x)
+        i += 1
+    # MACC Fingerprints.
+    fps = [MACCSkeys.GenMACCSKeys(x) for x in molsmi]
+    fpsmat = np.matrix(fps)
+    df = DataFrame(fpsmat,index = [x.GetProp("_Name") for x in molsmi]) # how to name the col?
+    df['SMILES'] = [Chem.MolToSmiles(x) for x in molsmi]
+    df['CHEMBL'] = df.index
+    return(df)
+
+def TOPOLOGYfpDataFrame(chempandas,namecol,smicol):
+    """
+    Topology-based fingerprints 2048 bits. 
+    """
+    assert chempandas.shape[0] <= MAXLINES
+    molsmitmp = [Chem.MolFromSmiles(x) for x in chempandas.iloc[:,smicol]]
+    i = 0
+    molsmi = []
+    for x in molsmitmp:
+        if x is not None:
+            x.SetProp("_Name",chempandas.iloc[i,namecol])
+            molsmi.append(x)
+        i += 1
+    # TOPOLOGY Fingerprints.
+    fps = [FingerprintMols.FingerprintMol(x) for x in molsmi]
+    fpsmat = np.matrix(fps)
+    df = DataFrame(fpsmat,index = [x.GetProp("_Name") for x in molsmi]) # how to name the col?
+    df['SMILES'] = [Chem.MolToSmiles(x) for x in molsmi]
+    df['CHEMBL'] = df.index
+    return(df)
+    
+def ATOMPAIRSfpDataFrame(chempandas,namecol,smicol):
+    """
+    AtomPairs-based fingerprints 2048 bits.
+    """
+    assert chempandas.shape[0] <= MAXLINES
+    molsmitmp = [Chem.MolFromSmiles(x) for x in chempandas.iloc[:,smicol]]
+    i = 0
+    molsmi = []
+    for x in molsmitmp:
+        if x is not None:
+            x.SetProp("_Name",chempandas.iloc[i,namecol])
+            molsmi.append(x)
+        i += 1
+    # ATOMPAIRS Fingerprints.
+    fps = [Pairs.GetAtomPairFingerprintAsBitVect(x) for x in molsmi]
+    fpsmat = np.matrix(fps)
+    df = DataFrame(fpsmat,index = [x.GetProp("_Name") for x in molsmi]) # how to name the col?
+    df['SMILES'] = [Chem.MolToSmiles(x) for x in molsmi]
+    df['CHEMBL'] = df.index
+    return(df)
+
+def TORSIONSfpDataFrame(chempandas,namecol,smicol):
+    """
+    Torsions-based fingerprints 2048 bits. 
+    """
+    assert chempandas.shape[0] <= MAXLINES
+    molsmitmp = [Chem.MolFromSmiles(x) for x in chempandas.iloc[:,smicol]]
+    i = 0
+    molsmi = []
+    for x in molsmitmp:
+        if x is not None:
+            x.SetProp("_Name",chempandas.iloc[i,namecol])
+            molsmi.append(x)
+        i += 1
+    # TORSIONS Fingerprints.
+    fps = [Torsions.GetTopologicalTorsionFingerprintAsIntVect(x) for x in molsmi]
+    fpsmat = np.matrix(fps)
+    df = DataFrame(fpsmat,index = [x.GetProp("_Name") for x in molsmi]) # how to name the col?
+    df['SMILES'] = [Chem.MolToSmiles(x) for x in molsmi]
+    df['CHEMBL'] = df.index
+    return(df)
+
+def MORGANfpDataFrame(chempandas,namecol,smicol):
+    """
+    MORGAN-based fingerprints 1024 bits. 
+    """
+    assert chempandas.shape[0] <= MAXLINES
+    molsmitmp = [Chem.MolFromSmiles(x) for x in chempandas.iloc[:,smicol]]
+    i = 0
+    molsmi = []
+    for x in molsmitmp:
+        if x is not None:
+            x.SetProp("_Name",chempandas.iloc[i,namecol])
+            molsmi.append(x)
+        i += 1
+    # MORGAN Fingerprints.
+    fps = [AllChem.GetMorganFingerprint(x,2,useFeatures=TURE,nBits=1024) for x in molsmi]
+    # Note above: multi parameters can be used to generate E/FCFP.
+    fpsmat = np.matrix(fps)
+    df = DataFrame(fpsmat,index = [x.GetProp("_Name") for x in molsmi]) # how to name the col?
+    df['SMILES'] = [Chem.MolToSmiles(x) for x in molsmi]
+    df['CHEMBL'] = df.index
+    return(df)
+
+    
 def main(inputfile,namecol, smicol,outputfile):
     phychemFileStream(inputfile,namecol,smicol,outputfile,chunknum=1000)
 #   Some compounds might lose because of the illegal format of SMILES.
