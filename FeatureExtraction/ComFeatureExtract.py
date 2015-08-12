@@ -32,7 +32,7 @@ import urllib2
 MAXLINES = 1000
 
 #-- Definitions of functions.
-def readFILE(filen):
+def readFILE(f):
     with open(filen) as f:
         compounds = f.readlines()
     f.close()

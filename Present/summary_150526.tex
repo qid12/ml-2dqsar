@@ -1,0 +1,112 @@
+\documentclass[mathserif,fleqn]{beamer}
+
+\mode<presentation>
+{
+  %\usetheme{Warsaw}
+  \usetheme{Antibes}
+  %\usetheme{Boadilla}
+  \setbeamercovered{transparent}
+}
+%% 下面的包控制beamer的风格，可以根据自己的爱好修改
+%\usepackage{beamerthemesplit}   % 使用split风格
+\usepackage{beamerthemeshadow}  % 使用shadow风格
+%\usepackage[width=2cm,dark,tab]{beamerthemesidebar}
+
+
+%% 这些包是可能会用到的，不必修改
+\usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps}
+%\usepackage[tbtags]{amsmath}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{color,xcolor}
+\usepackage{graphicx}
+\usepackage{multimedia}
+\usepackage{manfnt}
+\usepackage[english]{babel}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{setspace}
+\usepackage[timeinterval=1]{tdclock}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+%\beamersetaveragebackground{black!10}
+\usefonttheme[stillsansseriflarge]{serif}
+\usepackage{times}
+%% 定义一些自选的模板，包括背景、图标、导航条和页脚等，修改要慎重
+\beamertemplatesolidbackgroundcolor{white} %设置单一的背景色
+%\beamertemplateshadingbackground{white!90}{structure!1}
+%\beamertemplatesolidbackgroundcolor{white!90!blue}
+\beamertemplatetransparentcovereddynamic
+\beamertemplateballitem
+\beamertemplatenumberedballsectiontoc
+%\beamertemplatelargetitlepage
+\beamertemplateboldpartpage
+\setbeamertemplate{itemize item}[triangle] % item 栏为三角号
+%\setbeamertemplate{footline}[page number]  %底部导航栏为PPT页码标记。
+\setbeamertemplate{footline}[text line]{%
+\llap{Songpeng Zu\hspace{-5mm}}\centerline{\strut Machine Learning on Compound-Protein Interactions}\llap{\insertframenumber\hspace{-5mm}}}
+\newtheorem{jiashe}{Assumption~}[section]
+
+
+%\setbeamertemplate{item}[triangle]
+\graphicspath{{./figures/}}
+%\AtBeginSection[]{                              % 在每个Section前都会加入的Frame
+%  \frame<handout:0>{
+%    \frametitle{Content}
+%    \tableofcontents[current,currentsubsection]
+%  }
+%}
+%\AtBeginSubsection[]{
+%  \frame<handout:0>{
+%    \frametitle{Content}
+%    \tableofcontents[current,currentsubsection] % 显示在目录中加亮当前章节。
+%  }
+%}
+% Table rules
+\def\toprule{\noalign{\ifnum0=`}\fi\hrule \@height 0.5pt \hrule \@height 6pt \@width 0pt \futurelet
+   \@tempa\@xhline}
+\def\midrule{\noalign{\ifnum0=`}\fi \hrule \@height 6.75pt \@width 0pt \hrule \@height 0.5pt
+    \hrule \@height 6pt \@width 0pt \futurelet \@tempa\@xhline}
+\def\botrule{\noalign{\ifnum0=`}\fi \hrule \@height 5.75pt \@width 0pt \hrule \@height 0.5pt \futurelet
+   \@tempa\@xhline}
+
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=blue!20,
+    text width=4.5em, text badly centered, node distance=2.5cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20,
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=2.5cm,
+    minimum height=2em]
+
+
+\begin{document}
+
+\title{Predicting Compound-Protein Interactions from the Machine Learning Perspective}
+\author[zusp]{PhD Candidate: Songpeng Zu\\Advisor: Shao Li}
+\institute[TNLIST]{
+  FIT 1-108,  Tsinghua University\\
+}
+%\date[\initclock\mmddyyyy\tddate\ \ \hhmmss\tdtime]{\today}
+\date[\initclock\tdtime]{\today}
+%\maketitle
+\frame[plain]{\titlepage}
+\section*{Content}
+\frame
+{
+    \setbeamercolor{uppercol}{fg=white,bg=teal}
+    %\setbeamercolor{lowercol}{fg=black,bg=lime}
+    \begin{beamerboxesrounded}[upper=uppercol,shadow=true]{Outline}
+    \begin{spacing}{1.2}
+      \begin{itemize}
+      \item
+      Inference on Chemogenomic Features from Drug-Target Interactions
+      \item
+      Quantitatively Predicting Compound-Protein Interactions by Multi-Task Learning
+      \item
+      Predicting compound-protein interactions by the graph partition model.
+      \end{itemize}
+    \end{spacing}
+    \end{beamerboxesrounded}
+}
+
+\end{document}
