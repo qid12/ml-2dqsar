@@ -234,7 +234,23 @@ def MORGANfpDataFrame(chempandas,namecol,smicol):
     df['CHEMBL'] = df.index
     return(df)
 
-    
+def get_fingerprint_from_DataFrame(chem_smile,fpfunc):
+    molsmitmp = [Chem.MolFromSmiles(x) for x in chem_smile.iloc['smiles']]
+    i = 0
+    molsmi = []
+    for x in molsmitmp:
+        if x is not None:
+            x.SetProp("_Name",chem_smile.iloc['compound'][i])
+            molsmi.append(x)
+        i += 1
+        fps = [fpfunc(x) for x in molsmi]
+    # Note above: multi parameters can be used to generate E/FCFP.
+    fpsmat = np.matrix(fps)
+    df = DataFrame(fpsmat,index = [x.GetProp("_Name") for x in molsmi]) 
+    df['SMILES'] = [Chem.MolToSmiles(x) for x in molsmi]
+    df['CHEMBL'] = df.index
+    return(df)
+
 def main(inputfile,namecol, smicol,outputfile):
     phychemFileStream(inputfile,namecol,smicol,outputfile,chunknum=1000)
 #   Some compounds might lose because of the illegal format of SMILES.
