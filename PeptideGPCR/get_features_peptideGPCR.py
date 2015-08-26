@@ -26,6 +26,8 @@ from rdkit.Chem.AtomPairs import Pairs, Torsions
 from rdkit.Chem import Descriptors
 from rdkit.ML.Descriptors import MoleculeDescriptors
 
+#sys.path.append("/usr/share/doc/rdkit-doc/Book/")
+
 #-- Extract phychem and fingerprints for Peptide-GPCR.
 def get_phychem_from_CPI_file(CPI_file,phychem_file,outfile):
     """
@@ -119,14 +121,13 @@ def main():
     chembl2smiles_file = "chembl2smilesStripSalts_tab"
     ChEMBL2Smil_fullpath = common_path+"FeatureExtraction/"+chembl2smiles_file
 
-    # Get the phy-chem
+    #-- Get the phy-chem
     out_file = "phychem_compounds_PeptideGPCR"
     out_file_fullpath = common_path + "PeptideGPCR/" + out_file
     get_phychem_from_CPI_file(CPI_fullpath,phychem_fullpath, out_file_fullpathi,chunk=1000)
 
-    # Get the fingerprints.
+    #-- Get the fingerprints.
     out_file_fp_tag = "_fingerprint_PeptideGPCR"
-
     # MACCSKey
     macc_pre = "MACCSKeys"
     out_macc = common_path + "PeptideGPCR/" + macc_pre + out_file_fp_tag
@@ -137,14 +138,12 @@ def main():
     out_topo = common_path + "PeptideGPCR/" + topo_pre + out_file_fp_tag
     get_fingerprint_from_CPI_file(CPI_fullpath, ChEMBL2Smil_fullpath,
                                   FingerprintMols.FingerprintMols,out_topo)
-
     # Atompair
     atompair_pre = "ATOMPair"
     out_atom = common_path + "PeptideGPCR/" + atompair_pre + out_file_fp_tag
     get_fingerprint_from_CPI_file(CPI_fullpath, ChEMBL2Smil_fullpath,
                                   Pairs.GetAtomPairFingerprintAsBitVect,
                                   out_atom)
-
     # Torsions
     torsions_pre = "TORSIONS"
     out_torsions = common_path + "PeptideGPCR/" + torsions_pre + out_file_fp_tag
@@ -157,5 +156,6 @@ def main():
     radius = 2 # Set the radius for Morgan.
     get_Morgan_from_CPI_file(CPI_fullpath, ChEMBL2Smil_fullpath,
                              out_file_fp_tag,radius)
+
 if __name__ == "__main__":
     main()
