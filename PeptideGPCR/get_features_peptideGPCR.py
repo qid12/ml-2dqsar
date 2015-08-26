@@ -46,7 +46,7 @@ def get_fingerprint_from_DataFrame(chem_smile,fpfunc):
     molsmi = []
     for x in molsmitmp:
         if x is not None:
-            x.SetProp("_Name",chem_smile['compound'][i])
+            x.SetProp("_Name",chem_smile['compound'].loc[i])
             molsmi.append(x)
         i += 1
     fps = [fpfunc(x) for x in molsmi]
@@ -60,8 +60,8 @@ def get_fingerprint_from_DataFrame(chem_smile,fpfunc):
     return(df)
 
 
-def get_fingerprint_from_CPI_file(CPI_file,ChEMBL2Smil_file,fpfunc,
-                                  outfilepath,chunk = 1000):
+
+def get_fingerprint_from_CPI_file(CPI_file,ChEMBL2Smil_file,fpfunc,outfilepath):
     """
     Get different kinds of fingerprints for Peptide-GPCR from RDKit.
     """
@@ -94,12 +94,12 @@ def main():
     # Get the phy-chem
     out_file = "phychem_compounds_PeptideGPCR"
     out_file_fullpath = common_path + "PeptideGPCR/" + out_file
-    get_phychem_from_CPI_file(CPI_fullpath,phychem_fullpath, out_file_fullpath)
+    get_phychem_from_CPI_file(CPI_fullpath,phychem_fullpath, out_file_fullpathi,chunk=1000)
 
     # Get the fingerprints.
     out_file_fp = "test_MACC_fingerprint"
     out_file_fp_fullpath = common_path + "PeptideGPCR/" + out_file_fp
     get_fingerprint_from_CPI_file(CPI_fullpath,ChEMBL2Smil_fullpath,
-                                  Chem.MolToSmiles, out_file_fp_fullpath, chunk=1000)
+                                  MACCSkeys.GenMACCSKeys, out_file_fp_fullpath)
 if __name__ == "__main__":
     main()
