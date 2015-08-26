@@ -243,12 +243,14 @@ def get_fingerprint_from_DataFrame(chem_smile,fpfunc):
             x.SetProp("_Name",chem_smile['compound'][i])
             molsmi.append(x)
         i += 1
-        fps = [fpfunc(x) for x in molsmi]
+    fps = [fpfunc(x) for x in molsmi]
     # Note above: multi parameters can be used to generate E/FCFP.
     fpsmat = np.matrix(fps)
     df = DataFrame(fpsmat,index = [x.GetProp("_Name") for x in molsmi]) 
-    df['SMILES'] = [Chem.MolToSmiles(x) for x in molsmi]
-    df['CHEMBL'] = df.index
+    df.insert(0,'chembl',df.index)
+    df.insert(1,'smiles',[Chem.MolToSmiles(x) for x in molsmi])
+    #df['SMILES'] = [Chem.MolToSmiles(x) for x in molsmi]
+    #df['CHEMBL'] = df.index
     return(df)
 
 def main(inputfile,namecol, smicol,outputfile):

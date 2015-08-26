@@ -52,14 +52,14 @@ def get_fingerprint_from_DataFrame(chem_smile,fpfunc):
     fps = [fpfunc(x) for x in molsmi]
     # Note above: multi parameters can be used to generate E/FCFP.
     fpsmat = np.matrix(fps)
+    del fps
     df = DataFrame(fpsmat,index = [x.GetProp("_Name") for x in molsmi])
+    del fpsmat
     df.insert(0,'chembl',df.index)
     df.insert(1,'smiles',[Chem.MolToSmiles(x) for x in molsmi])
     #df[1,'SMILES'] = [Chem.MolToSmiles(x) for x in molsmi]
     #df[0,'CHEMBL'] = df.index
     return(df)
-
-
 
 def get_fingerprint_from_CPI_file(CPI_file,ChEMBL2Smil_file,fpfunc,outfilepath):
     """
@@ -79,6 +79,34 @@ def get_fingerprint_from_CPI_file(CPI_file,ChEMBL2Smil_file,fpfunc,outfilepath):
 #        df = get_fingerprint_from_DataFrame(chembl_with_smiles,fpfunc)
 #        df.to_csv(outfilepath,mode="a",header=True,sep="\t",index=False)
 
+def get_Morgan_from_CPI_file(CPI_file,ChEBML2Smil_file,outfilepath,radius=2):
+    """
+    Special function for Morgan finerprints. Set useFeatures=True, nBits=1024.
+    User should set the radius, whose default value is 2 (like 4 in ECFP).
+    """
+    ChEMBL2Smil = pd.read_table(ChEBML2Smil_file,header=None)
+    ChEMBL2Smil.columns = ['compound','smiles']
+    cpi_data = pd.read_table(CPI_file, sep="\t")
+    cpi_smile = DataFrame.merge(cpi_data,ChEMBL2Smil,how='inner')
+    del cpi_data
+    molsmitmp = [Chem.MolFromSmiles(x) for x in cpi_smile['smiles']]
+    i = 0
+    molsmi = []
+    for x in molsmitmp:
+        if x is not None:
+            x.SetProp("_Name",cpi_smile['compound'][i])
+            molsmi.append(x)
+        i += 1
+    fps = [AllChem.GetMorganFingerprint(x,radius,useFeatures=True,nBits=1024)
+           for x in molsmi]
+    fpsmat = np.matrix(fps)
+    del fps
+    df = DataFrame(fpsmat,index=[x.GetProp("_Name") for x in molsmi])
+    del fpsmat
+    df.insert(0,'chembl',df.index)
+    df.insert(0,'smiles',[chem.MolToSmiles(x) for x in molsmi])
+    df.to_csv(outfilepath,header=True,sep="\t",index=False)
+
 def main():
     # Input file path
     common_path = "/home/zusongpeng/lab/TransferCPIs/QSARMulT/"
@@ -97,9 +125,37 @@ def main():
     get_phychem_from_CPI_file(CPI_fullpath,phychem_fullpath, out_file_fullpathi,chunk=1000)
 
     # Get the fingerprints.
-    out_file_fp = "test_MACC_fingerprint"
-    out_file_fp_fullpath = common_path + "PeptideGPCR/" + out_file_fp
+    out_file_fp_tag = "_fingerprint_PeptideGPCR"
+
+    # MACCSKey
+    macc_pre = "MACCSKeys"
+    out_macc = common_path + "PeptideGPCR/" + macc_pre + out_file_fp_tag
     get_fingerprint_from_CPI_file(CPI_fullpath,ChEMBL2Smil_fullpath,
-                                  MACCSkeys.GenMACCSKeys, out_file_fp_fullpath)
+                                  MACCSkeys.GenMACCSKeys, out_macc)
+    # TOPOLOGY
+    topo_pre = "TOPOLOGY"
+    out_topo = common_path + "PeptideGPCR/" + topo_pre + out_file_fp_tag
+    get_fingerprint_from_CPI_file(CPI_fullpath, ChEMBL2Smil_fullpath,
+                                  FingerprintMols.FingerprintMols,out_topo)
+
+    # Atompair
+    atompair_pre = "ATOMPair"
+    out_atom = common_path + "PeptideGPCR/" + atompair_pre + out_file_fp_tag
+    get_fingerprint_from_CPI_file(CPI_fullpath, ChEMBL2Smil_fullpath,
+                                  Pairs.GetAtomPairFingerprintAsBitVect,
+                                  out_atom)
+
+    # Torsions
+    torsions_pre = "TORSIONS"
+    out_torsions = common_path + "PeptideGPCR/" + torsions_pre + out_file_fp_tag
+    get_fingerprint_from_CPI_file(CPI_fullpath, ChEMBL2Smil_fullpath,
+                                  Torsions.GetTopologicalTorsionFingerprintAsIntVect,
+                                  out_torsions)
+    # Morgan
+    morgan_pre = "Morgan"
+    out_morgan = common_path + "PeptideGPCR/" + morgan_pre + out_file_fp_tag
+    radius = 2 # Set the radius for Morgan.
+    get_Morgan_from_CPI_file(CPI_fullpath, ChEMBL2Smil_fullpath,
+                             out_file_fp_tag,radius)
 if __name__ == "__main__":
     main()
