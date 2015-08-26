@@ -235,12 +235,12 @@ def MORGANfpDataFrame(chempandas,namecol,smicol):
     return(df)
 
 def get_fingerprint_from_DataFrame(chem_smile,fpfunc):
-    molsmitmp = [Chem.MolFromSmiles(x) for x in chem_smile.iloc['smiles']]
+    molsmitmp = [Chem.MolFromSmiles(x) for x in chem_smile['smiles']]
     i = 0
     molsmi = []
     for x in molsmitmp:
         if x is not None:
-            x.SetProp("_Name",chem_smile.iloc['compound'][i])
+            x.SetProp("_Name",chem_smile['compound'][i])
             molsmi.append(x)
         i += 1
         fps = [fpfunc(x) for x in molsmi]
