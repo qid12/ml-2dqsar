@@ -25,8 +25,7 @@ from rdkit.Chem.AtomPairs import Pairs, Torsions
 # Import Descriptor Calculation
 from rdkit.Chem import Descriptors
 from rdkit.ML.Descriptors import MoleculeDescriptors
-
-#sys.path.append("/usr/share/doc/rdkit-doc/Book/")
+#sys.path.append("/usr/share/doc/rdkit-doc/Book/") # the path for data of pharmaco.
 
 #-- Extract phychem and fingerprints for Peptide-GPCR.
 def get_phychem_from_CPI_file(CPI_file,phychem_file,outfile):
@@ -56,6 +55,11 @@ def get_molsmi_from_CPI_file(CPI_file,ChEMBL2Smil_file):
             molsmi.append(x)
         i += 1
     return(molsmi)
+def fingerprint_write_to_csv(fpsmat,molsmi,outfilepath):
+    df = DataFrame(fpsmat,index=[x.GetProp("_Name") for x in molsmi])
+    df.insert(0,'chembl',df.index)
+    df.insert(1,'smiles',[Chem.MolToSmiles(x) for x in molsmi])
+    df.to_csv(outfilepath,header=True,sep="\t",index=False)
 
 def get_fingerprint_from_DataFrame(chem_smile,fpfunc):
     molsmitmp = [Chem.MolFromSmiles(x) for x in chem_smile['smiles']]
@@ -101,28 +105,30 @@ def get_Morgan_from_CPI_file(CPI_file,ChEBML2Smil_file,outfilepath,radius=2):
     Special function for Morgan finerprints. Set useFeatures=True, nBits=1024.
     User should set the radius, whose default value is 2 (like 4 in ECFP).
     """
-    ChEMBL2Smil = pd.read_table(ChEBML2Smil_file,header=None)
-    ChEMBL2Smil.columns = ['compound','smiles']
-    cpi_data = pd.read_table(CPI_file, sep="\t")
-    cpi_smile = DataFrame.merge(cpi_data,ChEMBL2Smil,how='inner')
-    del cpi_data
-    molsmitmp = [Chem.MolFromSmiles(x) for x in cpi_smile['smiles']]
-    i = 0
-    molsmi = []
-    for x in molsmitmp:
-        if x is not None:
-            x.SetProp("_Name",cpi_smile['compound'][i])
-            molsmi.append(x)
-        i += 1
+#    ChEMBL2Smil = pd.read_table(ChEBML2Smil_file,header=None)
+#    ChEMBL2Smil.columns = ['compound','smiles']
+#    cpi_data = pd.read_table(CPI_file, sep="\t")
+#    cpi_smile = DataFrame.merge(cpi_data,ChEMBL2Smil,how='inner')
+#    del cpi_data
+#    molsmitmp = [Chem.MolFromSmiles(x) for x in cpi_smile['smiles']]
+#    i = 0
+#    molsmi = []
+#    for x in molsmitmp:
+#        if x is not None:
+#            x.SetProp("_Name",cpi_smile['compound'][i])
+#            molsmi.append(x)
+#        i += 1
+    molsmi = get_molsmi_from_CPI_file(CPI_file, ChEMBL2Smile_file)
     fps = [AllChem.GetMorganFingerprintAsBitVect(x,radius,useFeatures=True,nBits=1024)
            for x in molsmi]
-    fpsmat = np.matrix(fps)
-    del fps
-    df = DataFrame(fpsmat,index=[x.GetProp("_Name") for x in molsmi])
-    del fpsmat
-    df.insert(0,'chembl',df.index)
-    df.insert(0,'smiles',[Chem.MolToSmiles(x) for x in molsmi])
-    df.to_csv(outfilepath,header=True,sep="\t",index=False)
+    fingerprint_write_to_csv(np.matrix(fps),molsmi,outfilepath)
+#    fpsmat = np.matrix(fps)
+#    del fps
+#    df = DataFrame(fpsmat,index=[x.GetProp("_Name") for x in molsmi])
+#    del fpsmat
+#    df.insert(0,'chembl',df.index)
+#    df.insert(1,'smiles',[Chem.MolToSmiles(x) for x in molsmi])
+#    df.to_csv(outfilepath,header=True,sep="\t",index=False)
 
 def get_topology_from_CPI_file(CPI_file, ChEMBL2Smile_file,outfilepath):
     """
@@ -133,10 +139,8 @@ def get_topology_from_CPI_file(CPI_file, ChEMBL2Smile_file,outfilepath):
     fps = [FingerprintMols.FingerprintMol(x) for x in molsmi]
     list_array = [np.fromstring(DataStructs.cDataStructs.ExplicitBitVect.ToBitString(x),'u1') - ord('0')
                   for x in fps]
-    fpsmat = np.matrix(np.array(list_array))
-
-
-
+    fingerprint_write_to_csv(np.matrix(np.array(list_array)),
+                             molsmi,outfilepath)
 
 def main():
     # Input file path
