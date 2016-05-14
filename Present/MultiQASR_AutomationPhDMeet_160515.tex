@@ -40,7 +40,7 @@
 \setbeamertemplate{itemize item}[triangle]
 %\setbeamertemplate{footline}[page number]
 \setbeamertemplate{footline}[text line]{%
-\llap{Songpeng Zu\hspace{-5mm}}\centerline{\strut Machine Learning on Compound-Protein Interactions}\llap{\insertframenumber\hspace{-5mm}}}
+\llap{Songpeng Zu\hspace{-5mm}}\centerline{\strut MulTQSAR}\llap{\insertframenumber\hspace{-5mm}}}
 \newtheorem{jiashe}{Assumption~}[section]
 
 
@@ -79,13 +79,10 @@
 \begin{document}
 
 \title{Qualitatively Predicting Compound-Protein Interactions by Multi-Task Learning}
-\author[zusp]{Songpeng Zu\\
-zusongpeng@gmail.com
-%advisor: shao li
+\author[zusp]{PhD Candidate: Songpeng Zu\\Advisor: Prof.\ Shao Li}
+\institute[tnlist]{
+  Bioinformatics Lab, Department of Automation \\Tsinghua university
 }
-%\institute[tnlist]{
-%  fit 1-108,  tsinghua university\\
-%}
 %\date[\initclock\mmddyyyy\tddate\ \ \hhmmss\tdtime]{\today}
 \date[\initclock\tdtime]{\today}
 %\maketitle
@@ -96,129 +93,88 @@ zusongpeng@gmail.com
     \setbeamercolor{uppercol}{fg=white,bg=teal}
     %\setbeamercolor{lowercol}{fg=black,bg=lime}
     \begin{beamerboxesrounded}[upper=uppercol,shadow=true]{outline}
-    \begin{spacing}{1.2}
-      \begin{itemize}
-      \item
-        Background:
+      \begin{spacing}{1.2}
         \begin{itemize}
-        \item Quantitative Structure-Activity Relationship (QSAR)
-        \item Multi-task Learning
+        \item
+          Background:
+          \begin{itemize}
+          \item Quantitative Structure-Activity Relationship (QSAR)
+          \item Multi-task Learning
+          \end{itemize}
+        \item
+          Method: hierarchical Bayesian model called MulTQSAR
+        \item
+          Result: reduce MSE on PeptideGPCR
+        \item
+          Discussion:
+          \begin{itemize}
+          \item Sparsity and feature selection
+          \item Multi-task Deep learning on QSAR
+          \end{itemize}
         \end{itemize}
-      \item
-        Method: hierarchical Bayesian model called MultiQSAR
-      \item
-        Result: reduce MSE on PeptideGPCR
-      \item
-        Discussion: other multi-task models.
-    \end{itemize}
-    \end{spacing}
+      \end{spacing}
     \end{beamerboxesrounded}
 }
-\part{Quantitatively predicting compound-protein interactions by multi-task learning}
-\frame{\partpage}
 \section{Background}
-\subsection{Methods for CPIs}
+\subsection{Quantitative Structure-Activity Relationship}
 \frame{
-\frametitle{background}
-    Methods for predicting compound-protein interactions (CPIs):
-        \begin{itemize}
-          \item
-          \textcolor{red}{structure-based molecular dynamics}
-          \begin{itemize}
-            \item depend on proteins' 3D structures.
-         %   \item cost too much time
-          \end{itemize}
-          \item
-          \textcolor{red}{ligand-based method}
-          \begin{itemize}
-            \item  can be independent of proteins' 3d structures.
-            \item  large-scale known CPIs data
-            \item  mainly dependent on machine learning approaches.
-          \end{itemize}
-       \end{itemize}
+\frametitle{Compound-Protein Interactions (CPIs)}
+%\includegraphics[width=\textwidth]{one-protein-one-drug}
 }
-\subsection{Machine learning on CPIs}
 \frame{
-\frametitle{Machine learning on CPIs}
-\begin{columns}
-\begin{column}{0.65\textwidth}
-\begin{itemize}
-    \item Compounds represented by topological fingerprints. The similar as proteins.
-    \item CPIs recorded as binary variable or continuous variables.
-    \item Classification or regression models then are used.
-  \end{itemize}
-\end{column}
-\begin{column}{0.5\textwidth}
-  \includegraphics[width=\columnwidth]{exam5}
-\end{column}
-\end{columns}
+\frametitle{Protein Versus Multiple Compounds}
+% \includegraphics[width=\textwidth]{one-protein-multi-drugs}
 }
-
 \frame{
-\frametitle{Modeling on a single protein}
-Keiser M.J. \textit{et~al}., \textit{Nature} 2009, developed the SEA method to predict drugs' new molecular targets.
-\begin{itemize}
-\item
-Each target represented by its set of known ligands.
-\item
-Drugs computationally screen against a panel of proteins by comparing the similarity of ligands against these proteins.
-\item
-The similarities expressed as E-values, adapting the BLAST algorithm.
-\end{itemize}}
+\frametitle{Chemical Space: Representation of Compounds}
+% \includegraphics[width=\textwidth]{compound-representation}
+}
 \frame{
-\frametitle{Modeling on a single protein}
-Besnard J. \textit{et~al}., \textit{Nature} 2012, used naive Bayesian model to predict compounds' polypharmacology profiling.
+\frametitle{Single Protein QSAR Model}
+For the protein $l$, we have $n_{l}$ compounds. Let $\mathbf{x}_{i}^{l}$
+represents the compound $i$'s features in the chemical space, and
+$\mathbf{y}_{i}^{l}$ represents the interaction affinity between the compound
+$i$ and protein $l$. \\QSAR is then to solve the problem:
+\begin{equation}
+f = \arg\min_{f}\mathcal{L}\left(\mathbf{y}^{l},f(\mathbf{X}^{l})\right)
+\end{equation}
+in which, $\mathbf{X}^{l}={(\mathbf{x}_{1}^{l},\cdots,\mathbf{x}_{n_{l}}^{l})}^{t}$,
+$\mathcal{L}(~,~)$ is the loss function. Usually we treat is as a linear
+regression model, $\mathit{i.e.}$,
+\begin{equation}
+\mathbf{\omega}^{l} = \arg\min_{\mathbf{\omega}^{l}}{\lVert
+  \mathbf{y}^{l}-\mathbf{X}^{l}\mathbf{\omega}^{l} \rVert}^{2}
+\end{equation}
+}
+\frame{
+\frametitle{Protein Family}
+% \includegraphics[width=\textwidth]{protein-family-multisequence}
+}
+\frame{
+\frametitle{Can We Learn QSAR Models In A Protein Family ?}
+% \includegraphics[with=\textwidth]{GPCR-seq-compounds}
+}
+\subsection{Multi-task Learning}
+\frame{
+\frametitle{Learning Different But Similar Tasks}
 \begin{itemize}
-  \item
-  215,000 activity data including 133,061 compounds and 784 proteins were used.
-  \item
-  Every compounds represented by the binary vectors of ECFP6 representations.
-  \item
-  For every protein, a Laplacian-modified naive models was built for classification.
+\item Learning multiple tasks together, one type of transfer learning (Pan
+  S. and Yang Q., 2010).
+\item Examples:
+\begin{enumerate}
+\item Multi-task feature selection (Obozinski G., Taskar B., Jordan, M., 2006)
+\begin{equation}
+\min_{\omega}\sum_{l=1}^{L}\frac{1}{N_{l}}\sum_{i=1}^{N_{l}}\mathcal{L}(\omega^{l},x_{i}^{l},y_{i}^{l})
++ \lambda\sum_{j=1}^{p}{\lVert \omega_{j}\rVert}^{2}
+\end{equation}
+in which, $p$ is the feature number, $L$ is the task number.
+\item Adaptive multi-task LASSO (Lee S., Zhu J., and Xing E., 2010)
+\begin{equation}
+\min_{\omega}\frac{1}{2}\sum_{l=1}^{L}{\lVert Y^{l} - X\omega^{l}\rVert}_{2}^{2} +
+\lambda_{1}\sum_{j=1}^{p}\theta_{j}\sum_{l=1}^{L}|\omega_{j}^{l}| + \lambda_{2}\sum_{j=1}^{p}\rho_{j}{\lVert \omega_{j} \rVert}_{2}
+\end{equation}
+\end{enumerate}
 \end{itemize}
-}
-\frame{
-
-\frametitle{Modeling on a protein family}
-\begin{columns}
-\begin{column}{0.9\textwidth}
-Yabuuchi H. \textit{et~al}., \textit{Molecular Systems Biology} 2011 developed the CGBVS framework.
-\begin{itemize}
-    \item 5207 CPIs data (including 317 GPCRs and 866 ligands)
-    \item Compounds' structure and proteins' sequences converted into 929- and 400-dimensional vectors
-    \item SVM then used.
-  \end{itemize}
-\end{column}
-%\begin{column}{0.45\textwidth}
-%  \includegraphics[width=\columnwidth]{hbda} %cgbv
-%\end{column}
-\end{columns}
-}
-\frame{
-\frametitle{Machine Learning on CPIs}
-Current machine learning on predicting CPIs
-\begin{itemize}
-  \item Modeling on a single protein\\
-  \textcolor{blue}{More specificity} \textcolor{red}{Lots of data needed}
-  \item Modeling on a protein family\\
-  \textcolor{blue}{Data sharing} \textcolor{red}{Less specificity}
-\end{itemize}
-}
-\subsection{Transfer Learning}
-
-\frame{
-\frametitle{Multi-Task Learning}
-\textcolor{blue}{Can we combine the two approaches ?}
-\begin{itemize}
-  \item
-  Learning different but similar tasks at the same time. (Finkel J.R. and Mannning C.D., 2009)
-  \item
-  Quantitative prediction.
-\end{itemize}
-\begin{figure}
-\centering
-\includegraphics[width=0.55\columnwidth]{hbda}
-\end{figure}
 }
 \section{Method}
 \subsection{Mathematical formulation}
