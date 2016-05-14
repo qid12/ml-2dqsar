@@ -109,7 +109,7 @@
           Discussion:
           \begin{itemize}
           \item Sparsity and feature selection
-          \item Multi-task Deep learning on QSAR
+          \item Multi-task deep learning on QSAR
           \end{itemize}
         \end{itemize}
       \end{spacing}
@@ -177,65 +177,68 @@ in which, $p$ is the feature number, $L$ is the task number.
 \end{itemize}
 }
 \section{Method}
-\subsection{Mathematical formulation}
+\subsection{Hierarchical Bayesian Model: MulTQSAR}
 \frame{
-\frametitle{Hierarchical Bayesian Model}
-Suppose $ \mathbf{\mathcal{D}}_{j} = \left\{\textbf{X}_{j},\textbf{y}_{j}\right\},j=1,...,m$, and $\textbf{X}_{j}\in\mathbb{R}^{d\times n_{j}}$. Then we have
+\frametitle{Statistics Behind Linear Regression}
+Suppose $ \mathbf{\mathcal{D}}^{l} =
+\left\{\textbf{X}^{l},\textbf{y}^{l}\right\},l=1,\cdots,L$, and
+$\textbf{X}^{l}\in\mathbb{R}^{n^{l}\times p}$. Then we have
 \begin{equation}
-  \mathbf{y}_{j} \sim \mathcal{N}\left(\mathbf{X}_{j}^{T}\mathbf{\omega}_{j},\sigma_{y}^{2}\mathbf{I}\right)
+  \mathbf{y}^{l} \sim \mathcal{N}\left(\mathbf{X}^{l}\mathbf{\omega}^{l},\sigma_{y}^{2}\mathbf{I}\right)
 \end{equation}
-Since different groups data may share similar features, we assume $\mathbf{\omega}_{j}$ have the same mean on the prior distribution.
 \begin{equation}
-  \mathbf{\omega}_{j} \sim \mathcal{N} \left(\mathbf{\omega}_{\ast},\sigma_{j}^{2}\mathbf{I}\right)
+  \mathbf{\omega}^{l} \sim \mathcal{N} \left(\mathbf{\omega}_{\ast},\sigma_{l}^{2}\mathbf{I}\right)
 \end{equation}
-In which,
 \begin{equation}
-  \mathbf{\omega}_{\ast} \sim \mathcal{N} \left(\mathbf{\mu},\mathbf{\sigma}_{\ast}^2\mathbf{I}\right)
+  \mathbf{\omega}^{\ast} \sim \mathcal{N} \left(\mathbf{0},\mathbf{\sigma}_{\ast}^2\mathbf{I}\right)
 \end{equation}
 }
 \subsection{Loglikehood Function}
 \frame{
-Suppose, for simplicity, that $\mathbf{\mu}=\textbf{0}$, $p(\sigma_{y}^2)\propto 1$, and that $\sigma_{j}^2$ and $\sigma_{\ast}$ are fixed. Let
-$\Theta = \left\{\mathbf{\omega}_j, j=1,...,m,\mathbf{\omega}_\ast,\sigma_{y}^2\right\}$. We have
+Here we assume that $p(\sigma_{y}^2) \propto 1$. Let
+$\Theta = \left\{\mathbf{\omega}^{l}, l=1,\cdots,L,\mathbf{\omega}^{\ast},\sigma_{y}^2\right\}$. We have
 \begin{equation}
 \small
 \begin{aligned}
   &\mathcal{L}_{hier}(\mathcal{D};\Theta) =
-  \mathcal{L}_{orig}(\mathcal{D}| \Theta)+ \textit{logp}(\Theta)\\
-  &=\sum_{j}\left(\textit{logp}(\mathcal{D}_{j}|\mathbf{\omega}_{j})-\frac{\parallel\mathbf{\omega}_{j}-\mathbf{\omega}_{\ast}\parallel^{2}}{2\sigma_{j}^2}\right)
+  \mathcal{L}_{orig}(\mathcal{D}| \Theta)+ \log\textit{p}(\Theta)\\
+  &=\sum^{L}_{l=1}\left(\log\textit{p}(\mathcal{P}^{l}|\mathbf{\omega}^{l})-\frac{\parallel\mathbf{\omega}^{l}-\mathbf{\omega}^{\ast}\parallel^{2}}{2\sigma_{l}^2}\right)
   -\frac{\parallel\mathbf{\omega}_{\ast}\parallel^{2}}{2\sigma_{\ast}^2}\\
-  &- \overbrace{\sum_{j}\frac{d}{2}\textit{log}(2\pi\sigma_{j}^2)-\frac{d}{2}\textit{log}(2\pi\sigma_{\ast}^2)}^{\textit{Const}}\\
-  &=\sum_{j}\left(-\frac{\parallel\mathbf{y}_{j}-\mathbf{X}^{T}_{j}\mathbf{\omega}_{j}\parallel^{2}}{2\sigma_{y}^2}-\frac{\parallel\mathbf{\omega}_{j}-\mathbf{\omega}_{\ast}\parallel^{2}}{2\sigma_{j}^2}\right)-
-  \frac{\parallel\mathbf{\omega}_{\ast}\parallel^{2}}{2\sigma_{\ast}^2}-\sum_{j}\frac{n_{j}}{2}\textit{log}(2\pi\sigma_{y}^2)\\
-  &- \overbrace{\sum_{j}\frac{d}{2}\textit{log}(2\pi\sigma_{j}^2)-\frac{d}{2}\textit{log}(2\pi\sigma_{\ast}^2)}^{\textit{Const}}
+  &- \sum^{l}\frac{p}{2}\log(2\pi\sigma_{l}^2)-\frac{p}{2}\log(2\pi\sigma_{\ast}^2)\\
+  &=\sum_{l=1}^{{L}}\left(-\frac{\parallel\mathbf{y}^{l}-\mathbf{X}^{l}\mathbf{\omega}^{l}\parallel^{2}}{2\sigma_{y}^2}-\frac{\parallel\mathbf{\omega}^{l}-\mathbf{\omega}^{\ast}\parallel^{2}}{2\sigma_{l}^2}\right)-
+  \frac{\parallel\mathbf{\omega}^{\ast}\parallel^{2}}{2\sigma_{\ast}^2}-\sum^{L}_{l=1}\frac{n^{l}}{2}\log(2\pi\sigma_{y}^2)\\
+  &- \sum^{L}_{l=1}\frac{p}{2}\log(2\pi\sigma_{l}^2)-\frac{p}{2}\log(2\pi\sigma_{\ast}^2)
 \end{aligned}
 \end{equation}
 }
 \subsection{Optimization: L-BFGS-B}
 \frame{
-L-BFGS-B optimization method is then used following the gradient below.
+We can use MCMC algorithm to simulate the posterior distribution of $\Theta$. Here
+$\sigma_{l}^2$, $\sigma_{\ast}$ are fixed, and L-BFGS-B is then used following the gradient below.
 \begin{equation}
 \small
 \begin{aligned}
-  \frac{\partial\mathcal{L}_{hier}(\mathcal{D};\Theta)}{\partial\mathbf{\omega}_j}
-  &= -\frac{1}{2\sigma_{y}^2}\frac{\parallel\mathbf{y}_j-\mathbf{X}_{j}^{T}\mathbf{\omega}_j\parallel^2}{\partial\mathbf{\omega}_j}
-  -\frac{1}{2\sigma_{j}^2}\frac{\parallel\mathbf{\omega}_j-\mathbf{\omega}_{\ast}\parallel^{2}}{\partial\mathbf{\omega}_j}\\
-  &=\frac{\mathbf{X}_j\mathbf{y}_j}{\sigma_{y}^2}+\frac{\mathbf{\omega}_{\ast}}{\sigma^2_j}-
-  \left(\frac{\mathbf{X}_j\mathbf{X}_j^{T}}{\sigma_{y}^2}+\frac{1}{\sigma_{j}^2}\mathbf{I}\right)\mathbf{\omega}_{j}
+  \frac{\partial\mathcal{L}_{hier}(\mathcal{D};\Theta)}{\partial\mathbf{\omega}^{l}}
+  &= -\frac{1}{2\sigma_{y}^2}\frac{\parallel\mathbf{y}^{l}-\mathbf{X}^{l}\mathbf{\omega}^{l}\parallel^2}{\partial\mathbf{\omega}^{l}}
+  -\frac{1}{2\sigma_{l}^2}\frac{\parallel\mathbf{\omega}^{l}-\mathbf{\omega}^{\ast}\parallel^{2}}{\partial\mathbf{\omega}^{l}}\\
+  &=\frac{{\mathbf{y}_{l}}^{t}\mathbf{X}^{l}}{\sigma_{y}^2}+\frac{\mathbf{\omega}^{\ast}}{\sigma^2_l}-
+  \left(\frac{{\mathbf{X}_{l}}^{t}\mathbf{X}^{l}}{\sigma_{y}^2}+\frac{1}{\sigma_{l}^2}\mathbf{I}\right)\mathbf{\omega}^{l}
 \end{aligned}
 \end{equation}
 \begin{equation}
 \small
-  \frac{\partial\mathcal{L}_{hier}(\mathcal{D};\Theta)}{\partial\mathbf{\omega}_{\ast}}
-  =-\sum_j\frac{\mathbf{\omega}_{\ast}-\mathbf{\omega}_j}{\sigma_{j}^2}-\frac{\mathbf{\omega}_{\ast}}{\sigma_{\ast}^2}
+  \frac{\partial\mathcal{L}_{hier}(\mathcal{D};\Theta)}{\partial\mathbf{\omega}^{\ast}}
+  =-\sum_{l}\frac{\mathbf{\omega}^{\ast}-\mathbf{\omega}^{l}}{\sigma_{l}^2}-\frac{\mathbf{\omega}^{\ast}}{\sigma_{\ast}^2}
 \end{equation}
 \begin{equation}
 \small
   \frac{\partial\mathcal{L}_{hier}(\mathcal{D};\Theta)}{\partial\sigma_{y}^2}
-  =\frac{\sum_j\parallel\mathbf{y}_j-\mathbf{X}_{j}^{T}\mathbf{\omega}_j\parallel^2}{2(\sigma_{y}^2)^2}-\frac{n}{2\sigma_{y}^2}
+  =\frac{\sum_l\parallel\mathbf{y}^{l}-\mathbf{X}^{l}\mathbf{\omega}^{l}\parallel^2}{2{\sigma_{y}^2}^2}-\frac{n}{2\sigma_{y}^2}
 \end{equation}
 where n is the total number of samples in all the groups.
 }
+
+\section{Result}
 \subsection{Data Sets}
 \frame{
 %\frametitle{Data Sets}
@@ -248,8 +251,7 @@ where n is the total number of samples in all the groups.
   \includegraphics[width=0.75\columnwidth]{pfamily}
 \end{figure}
 }
-\section{Result}
-\subsection{Feature Selection}
+\subsection{Feature Filter}
 \frame{
 \frametitle{Feature Selection}
 The protein family of Peptide GPCR including 85 proteins as examples.
@@ -274,7 +276,6 @@ The protein family of Peptide GPCR including 85 proteins as examples.
 %}
 \subsection{Comparison with single-task model}
 \frame{
-\frametitle{Comparison with Ridge Regression}
 \begin{figure}
   \centering
   \includegraphics[width=0.9\columnwidth]{compare}
