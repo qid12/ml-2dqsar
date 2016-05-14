@@ -119,15 +119,27 @@
 \subsection{Quantitative Structure-Activity Relationship}
 \frame{
 \frametitle{Compound-Protein Interactions (CPIs)}
-%\includegraphics[width=\textwidth]{one-protein-one-drug}
+\includegraphics[width=\textwidth]{one-protein-one-drug}
 }
 \frame{
 \frametitle{Protein Versus Multiple Compounds}
-% \includegraphics[width=\textwidth]{one-protein-multi-drugs}
+\includegraphics[width=\textwidth]{one-protein-multi-drugs}
 }
 \frame{
 \frametitle{Chemical Space: Representation of Compounds}
-% \includegraphics[width=\textwidth]{compound-representation}
+\begin{columns}
+\begin{column}{0.65\textwidth}
+\begin{itemize}
+    \item Compounds represented by topological fingerprints. The similar as proteins.
+    \item CPIs recorded as binary variable or continuous variables.
+    \item Classification or regression models then are used.
+  \end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+  \includegraphics[width=\columnwidth]{exam5}
+\end{column}
+\end{columns}
+
 }
 \frame{
 \frametitle{Single Protein QSAR Model}
@@ -148,11 +160,11 @@ regression model, $\mathit{i.e.}$,
 }
 \frame{
 \frametitle{Protein Family}
-% \includegraphics[width=\textwidth]{protein-family-multisequence}
+\includegraphics[width=\textwidth]{fig11.png}
 }
 \frame{
-\frametitle{Can We Learn QSAR Models In A Protein Family ?}
-% \includegraphics[with=\textwidth]{GPCR-seq-compounds}
+\frametitle{Can We Learn QSAR Models In A Protein Family?}
+\includegraphics[width=\textwidth]{GPCR-seq-compounds}
 }
 \subsection{Multi-task Learning}
 \frame{
@@ -283,25 +295,14 @@ The protein family of Peptide GPCR including 85 proteins as examples.
 }
 
 \section{Discussion}
+\subsection{Sparsity and Feature Selection}
 \frame{
-\frametitle{Discussion}
-\begin{itemize}
-\item More compounds' fingerprints are being collected by the open-source chemoinformatics and machine learning package termed RDKit.
-  %\item
-  %A hierarchial Bayesian model is constructed to predict CPIs following the multi-task approach.
-  %\item
-  %More computational tests
-  %\item
-  %The relationship between proteins' pharmacological and genomic information
-  \item
-  Computational issue:
-  \begin{itemize}
-    \item
-    High dimension v.s. Sparsity \\
-    Colinearity
-    \item
-    Linear v.s. Nonlinear
-  \end{itemize}
-\end{itemize}
+We can involve L1 regularization for sparsity and feature selection.
+\includegraphics[width=0.9\textwidth]{pattern.png}
+}
+\subsection{Multi-task deep learning}
+\frame{
+How can we involve features' combinations?
+\includegraphics[width=0.9\textwidth]{randomSample}
 }
 \end{document}
