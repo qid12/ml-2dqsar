@@ -145,13 +145,13 @@
 \frametitle{Single Protein QSAR Model}
 For the protein $l$, we have $n_{l}$ compounds. Let $\mathbf{x}_{i}^{l}$
 represents the compound $i$'s features in the chemical space, and
-$\mathbf{y}_{i}^{l}$ represents the interaction affinity between the compound
+${y}_{i}^{l}$ represents the interaction affinity between the compound
 $i$ and protein $l$. \\QSAR is then to solve the problem:
 \begin{equation}
 f = \arg\min_{f}\mathcal{L}\left(\mathbf{y}^{l},f(\mathbf{X}^{l})\right)
 \end{equation}
-in which, $\mathbf{X}^{l}={(\mathbf{x}_{1}^{l},\cdots,\mathbf{x}_{n_{l}}^{l})}^{t}$,
-$\mathcal{L}(~,~)$ is the loss function. Usually we treat is as a linear
+in which, $\mathbf{X}^{l}={(\mathbf{x}_{1}^{l},\ldots,\mathbf{x}_{n_{l}}^{l})}^{t}$,
+$\mathcal{L}(~,~)$ is the loss function. Usually we treat it as a linear
 regression model, $\mathit{i.e.}$,
 \begin{equation}
 \mathbf{\omega}^{l} = \arg\min_{\mathbf{\omega}^{l}}{\lVert
