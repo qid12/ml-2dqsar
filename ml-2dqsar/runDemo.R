@@ -18,13 +18,16 @@ source("FuncPreComPiHierBayes.R") # for ml2dqsar
 
 ### read file
 setwd("your data directory.")
-oneGroup <- fread("everyDataFile",sep=',',header=TRUE)
+files <- list.files(path="your data path",
+                    full.names=TRUE,
+                    pattern="*.*")
+oneGroup <- fread("everyDataFile", sep=',',header=TRUE)
 
 ### load data, take -log10 for y.
 data$affinity <- -log10(data$affinity)
 ### center data both (x and y) (scale data for some of phychem)
 ### y column
-data <- scale(data,center=TRUE, scale = FALSE)
+data <- scale(data, center=TRUE, scale = FALSE)
 
 
 ### data structure
@@ -36,11 +39,13 @@ cpi$coefm[[i]] # ith protein result for omega modified by ml2qsar.
 cpi$result[[i]] # ith protein result for ridge prediction.
 cpi$resultm[[i]] # ith protein result for ml2qsar.
 cpi$sigma # sigma parameter for ml2qsar.
-cpi$sigmadot <-  100
 
 
 ### label data for n-fold cross validation.
-flds <- createFolds(data$affnity,k = nfold,list=TRUE,returnTrain = FALSE)
+flds <- createFolds(data$affnity,
+                    k = nfold,
+                    list=TRUEx,
+                    returnTrain = FALSE)
 data$matrix[-flds[[i]],] # get the train sample.
 data$matrix[flds[[1]],] # get the test sample.
 #### another way for n-fold sample
@@ -51,11 +56,15 @@ trainData <- data[-testIndex,]
 
 ### run every task for ridge regression with glmnet package.
 #### for every protein,run
-fit <- glmnet(x = data$matrix[train, ], y = data$affinity[train],
-   lambda=cv.glmnet(data$matrix[train,],data$afffinity[train])$lambda.min)
+#### lambda chosen as nested cv.
+fit <- glmnet(x = data$matrix[train, ],
+              y = data$affinity[train],
+              lambda=cv.glmnet(data$matrix[train,],
+                               data$afffinity[train])$lambda.min)
 omega <- coef(fit) # for each protein
 #### record predicted tests and omega.
-test_result <- predict(fit,data$matrix[test,])
+test_result <- predict(fit,
+                       data$matrix[test,])
 rootMSE <- sqrt(mse(y[test],test_result))
 
 
