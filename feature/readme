@@ -1,0 +1,8 @@
+## Feature extraction method and its result will be here.
+
+2015-02-07
+Some SMILES formats are wrong. Around 820 compounds are not matched.
+The not matched can be got be the procedures below.
+$ awk -F "\t" '{print $(NF)}' phychemRDKit.txt >CHEMBLEPhy.tmp
+$ awk -F "\t" '{print $2}' chemble2cid2smiles.txt > CHEMBLE.tmp
+$ grep -v -F -f CHEMBLEPhy.tmp CHEMBLE.tmp > notMatchCHEMBL

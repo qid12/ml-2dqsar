@@ -1,0 +1,708 @@
+%\makeatletter\let\ifGm@compatii\relax\makeatother
+\documentclass[mathserif,fleqn]{beamer}
+
+\mode<presentation>
+{
+  %\usetheme{Warsaw}
+  \usetheme{Antibes}
+  %\usetheme{Boadilla}
+  \setbeamercovered{transparent}
+}
+%% 下面的包控制beamer的风格，可以根据自己的爱好修改
+%\usepackage{beamerthemesplit}   % 使用split风格
+\usepackage{beamerthemeshadow}  % 使用shadow风格
+%\usepackage[width=2cm,dark,tab]{beamerthemesidebar}
+
+
+%% 这些包是可能会用到的，不必修改
+\usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps}
+%\usepackage[tbtags]{amsmath}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{color,xcolor}
+\usepackage{graphicx}
+\usepackage{multimedia}
+\usepackage{manfnt}
+\usepackage[english]{babel}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{setspace}
+\usepackage[timeinterval=1]{tdclock}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+%\beamersetaveragebackground{black!10}
+\usefonttheme[stillsansseriflarge]{serif}
+\usepackage{times}
+%% 定义一些自选的模板，包括背景、图标、导航条和页脚等，修改要慎重
+\beamertemplatesolidbackgroundcolor{white} %设置单一的背景色
+%\beamertemplateshadingbackground{white!90}{structure!1}
+%\beamertemplatesolidbackgroundcolor{white!90!blue}
+\beamertemplatetransparentcovereddynamic
+\beamertemplateballitem
+\beamertemplatenumberedballsectiontoc
+%\beamertemplatelargetitlepage
+\beamertemplateboldpartpage
+\setbeamertemplate{itemize item}[triangle] % item 栏为三角号
+%\setbeamertemplate{footline}[page number]  %底部导航栏为PPT页码标记。
+\setbeamertemplate{footline}[text line]{%
+\llap{Songpeng Zu\hspace{-5mm}}\centerline{\strut Machine Learning on Compound-Protein Interactions}\llap{\insertframenumber\hspace{-5mm}}}
+\newtheorem{jiashe}{Assumption~}[section]
+
+
+%\setbeamertemplate{item}[triangle]
+\graphicspath{{./figures/}}
+%\AtBeginSection[]{                              % 在每个Section前都会加入的Frame
+%  \frame<handout:0>{
+%    \frametitle{Content}
+%    \tableofcontents[current,currentsubsection]
+%  }
+%}
+%\AtBeginSubsection[]{
+%  \frame<handout:0>{
+%    \frametitle{Content}
+%    \tableofcontents[current,currentsubsection] % 显示在目录中加亮当前章节。
+%  }
+%}
+% Table rules
+\def\toprule{\noalign{\ifnum0=`}\fi\hrule \@height 0.5pt \hrule \@height 6pt \@width 0pt \futurelet
+   \@tempa\@xhline}
+\def\midrule{\noalign{\ifnum0=`}\fi \hrule \@height 6.75pt \@width 0pt \hrule \@height 0.5pt
+    \hrule \@height 6pt \@width 0pt \futurelet \@tempa\@xhline}
+\def\botrule{\noalign{\ifnum0=`}\fi \hrule \@height 5.75pt \@width 0pt \hrule \@height 0.5pt \futurelet
+   \@tempa\@xhline}
+
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=blue!20,
+    text width=4.5em, text badly centered, node distance=2.5cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20,
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=2.5cm,
+    minimum height=2em]
+    
+    
+\begin{document}
+
+\title{Predicting Compound-Protein Interactions From Machine Learning Perspective}
+\author[zusp]{PhD Candidate: Songpeng Zu\\Advisor: Shao Li}
+\institute[TNLIST]{
+  FIT 1-108,  Tsinghua University\\
+}
+%\date[\initclock\mmddyyyy\tddate\ \ \hhmmss\tdtime]{\today}
+\date[\initclock\tdtime]{\today}
+%\maketitle
+\frame[plain]{\titlepage}
+
+%\frame
+%{
+%\frametitle{Introduction}
+%\begin{itemize}[<+->]
+%  \item Buffon's needle: estimation of $\pi$
+%  \item A systematic use of the Monte Carlo method appeared in the early days of electronic computing (1950s).
+%    \item Bayesian Stats:
+%    \begin{align}
+%    P(\Theta|X) = \frac{P(\Theta)P(X|\Theta)}{\int P(X|\Theta)P(\Theta)d\Theta}
+%    \end{align}
+%    \item Monte Carlo Integration under \textit{Central Limit theorem} (CLT):
+%    \begin{align}
+%      I = \int_{D}g(x)dx,~\overline{I_{m}}=\frac{1}{m}\sum_{i=1}^{m}g(x_i) \\
+%      \sqrt{m}(\overline{I_{m}}-I) \rightarrow N(0,\sigma^2),~\sigma^{2}=var(g(x))
+%    \end{align}
+%    \item Stochastic optimization: simulated annealing.
+%    \begin{align}
+%      \pi_{T}(x)\propto e^{-\textcolor[rgb]{0.8,0.1,0.1}{h(x)}/T},~T>0
+%    \end{align}
+%\end{itemize}
+%}
+\section*{Outline}
+\frame
+{
+    \setbeamercolor{uppercol}{fg=white,bg=teal}
+    %\setbeamercolor{lowercol}{fg=black,bg=lime}
+    \begin{beamerboxesrounded}[upper=uppercol,shadow=true]{Outline}
+    \begin{spacing}{1.2}
+      \begin{itemize}
+      \item
+      Quantitatively Predicting Compound-Protein Interactions by Multi-Task Learning
+      \item
+      Inference on Chemogenomic Features from Drug-Target Interactions
+      \item
+      Application on the Modification of Natural Products.
+      \end{itemize}
+    \end{spacing}
+    \end{beamerboxesrounded}
+}
+\part{Quantitatively Predicting Compound-Protein Interactions by Multi-Task Learning}
+\frame{\partpage}
+\section{Background}
+\subsection{Methods for CPIs}
+\frame{
+\frametitle{Background}
+    Methods for predicting compound-protein interactions (CPIs):
+        \begin{itemize}
+          \item
+          \textcolor{red}{Structure-based molecular dynamics}
+          \begin{itemize}
+            \item depend on proteins' 3D structures.
+         %   \item cost too much time
+          \end{itemize}
+          \item
+          \textcolor{red}{Ligand-based method}
+          \begin{itemize}
+            \item  can be independent of proteins' 3D structures.
+            \item  large-scale known CPIs data
+            \item  mainly dependent on machine learning approaches.
+          \end{itemize}
+       \end{itemize}
+}
+\subsection{Machine Learning on CPIs}
+\frame{
+\frametitle{Machine Learning on CPIs}
+\begin{columns}
+\begin{column}{0.65\textwidth}
+\begin{itemize}
+    \item Compounds represented by topological fingerprints. The similar as proteins.
+    \item CPIs recorded as binary variable or continuous variables.
+    \item Classification or regression models then are used.
+  \end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+  \includegraphics[width=\columnwidth]{exam5}
+\end{column}
+\end{columns}
+}
+
+\frame{
+\frametitle{Modeling on a single protein}
+Keiser M.J. \textit{et~al}., \textit{Nature} 2009, developed the SEA method to predict drugs' new molecular targets.
+\begin{itemize}
+\item
+Each target represented by its set of known ligands.
+\item
+Drugs computationally screen against a panel of proteins by comparing the similarity of ligands against these proteins.
+\item
+The similarities expressed as E-values, adapting the BLAST algorithm.  
+\end{itemize}}
+\frame{
+\frametitle{Modeling on a single protein}
+Besnard J. \textit{et~al}., \textit{Nature} 2012, used naive Bayesian model to predict compounds' polypharmacology profiling.
+\begin{itemize}
+  \item
+  215,000 activity data including 133,061 compounds and 784 proteins were used.
+  \item
+  Every compounds represented by the binary vectors of ECFP6 representations.
+  \item
+  For every protein, a Laplacian-modified naive models was built for classification.
+\end{itemize}
+}
+\frame{
+
+\frametitle{Modeling on a protein family}
+\begin{columns}
+\begin{column}{0.65\textwidth}
+Yabuuchi H. \textit{et~al}., \textit{Molecular Systems Biology} 2011 developed the CGBVS framework.
+\begin{itemize}
+    \item 5207 CPIs data (including 317 GPCRs and 866 ligands)
+    \item Compounds' structure and proteins' sequences converted into 929- and 400-dimensional vectors
+    \item SVM then used.
+  \end{itemize}
+\end{column}
+\begin{column}{0.45\textwidth}
+  \includegraphics[width=\columnwidth]{hbda} %cgbv 
+\end{column}
+\end{columns} 
+}
+\frame{
+%\frametitle{Transfer learning or Multi-task learning}
+\frametitle{Machine Learning on CPIs}
+Current machine learning on predicting CPIs
+\begin{itemize}
+%  \item Most of them focus on two-class classification.
+%  \begin{itemize}
+%    \item \textcolor{red}{The potencies  are critical in drug polypharmacology.}
+%  \end{itemize}
+  \item Modeling on a single protein\\
+  \textcolor{blue}{More specificity} \textcolor{red}{Lots of data needed}
+  \item Modeling on a protein family\\
+  \textcolor{blue}{Data sharing} \textcolor{red}{Less specificity}
+\end{itemize}
+}
+\subsection{Transfer Learning}
+
+\frame{
+%\frametitle{Hierarchical Bayesian Domain Adaption}
+\frametitle{Multi-Task Learning}
+\textcolor{blue}{Can we combine the two approaches ?}
+%Here we construct a hierarchical Bayesian model.
+\begin{itemize}
+  \item
+  Learning different but similar tasks at the same time. (Finkel J.R. and Mannning C.D., 2009)
+  \item
+  Quantitative prediction.
+\end{itemize}
+\begin{figure}
+\centering
+\includegraphics[width=0.55\columnwidth]{hbda}
+\end{figure}
+}
+\section{Method}
+\subsection{Mathematical formulation}
+\frame{
+\frametitle{Hierarchical Bayesian Model}
+Suppose $ \mathbf{\mathcal{D}}_{j} = \left\{\textbf{X}_{j},\textbf{y}_{j}\right\},j=1,...,m$, and $\textbf{X}_{j}\in\mathbb{R}^{d\times n_{j}}$. Then we have
+\begin{equation}
+  \mathbf{y}_{j} \sim \mathcal{N}\left(\mathbf{X}_{j}^{T}\mathbf{\omega}_{j},\sigma_{y}^{2}\mathbf{I}\right)
+\end{equation}
+Since different groups data may share similar features, we assume $\mathbf{\omega}_{j}$ have the same mean on the prior distribution.
+\begin{equation}
+  \mathbf{\omega}_{j} \sim \mathcal{N} \left(\mathbf{\omega}_{\ast},\sigma_{j}^{2}\mathbf{I}\right)
+\end{equation}
+In which,
+\begin{equation}
+  \mathbf{\omega}_{\ast} \sim \mathcal{N} \left(\mathbf{\mu},\mathbf{\sigma}_{\ast}^2\mathbf{I}\right)
+\end{equation}
+}
+\subsection{Loglikehood Function}
+\frame{
+Suppose, for simplicity, that $\mathbf{\mu}=\textbf{0}$, $p(\sigma_{y}^2)\propto 1$, and that $\sigma_{j}^2$ and $\sigma_{\ast}$ are fixed. Let
+$\Theta = \left\{\mathbf{\omega}_j, j=1,...,m,\mathbf{\omega}_\ast,\sigma_{y}^2\right\}$. We have
+\begin{equation}
+\small
+\begin{aligned}
+  %\textit{logp}(\mathbf{w}|\mathcal{D})
+  &\mathcal{L}_{hier}(\mathcal{D};\Theta) =
+  % \textit{logp}
+  \mathcal{L}_{orig}(\mathcal{D}| \Theta)+ \textit{logp}(\Theta)\\
+  &=\sum_{j}\left(\textit{logp}(\mathcal{D}_{j}|\mathbf{\omega}_{j})-\frac{\parallel\mathbf{\omega}_{j}-\mathbf{\omega}_{\ast}\parallel^{2}}{2\sigma_{j}^2}\right)
+  -\frac{\parallel\mathbf{\omega}_{\ast}\parallel^{2}}{2\sigma_{\ast}^2}\\
+  &- \overbrace{\sum_{j}\frac{d}{2}\textit{log}(2\pi\sigma_{j}^2)-\frac{d}{2}\textit{log}(2\pi\sigma_{\ast}^2)}^{\textit{Const}}\\
+  &=\sum_{j}\left(-\frac{\parallel\mathbf{y}_{j}-\mathbf{X}^{T}_{j}\mathbf{\omega}_{j}\parallel^{2}}{2\sigma_{y}^2}-\frac{\parallel\mathbf{\omega}_{j}-\mathbf{\omega}_{\ast}\parallel^{2}}{2\sigma_{j}^2}\right)-
+  \frac{\parallel\mathbf{\omega}_{\ast}\parallel^{2}}{2\sigma_{\ast}^2}-\sum_{j}\frac{n_{j}}{2}\textit{log}(2\pi\sigma_{y}^2)\\
+  &- \overbrace{\sum_{j}\frac{d}{2}\textit{log}(2\pi\sigma_{j}^2)-\frac{d}{2}\textit{log}(2\pi\sigma_{\ast}^2)}^{\textit{Const}}
+\end{aligned}
+\end{equation}
+}
+\subsection{Optimization: L-BFGS-B}
+\frame{
+%L-BFGS-B method, which is limited-memory, bound-constrain quasi Newton method, and suitable for large-scale optimization, is used to get the MAP estimations of these parameters following the gradient below.
+L-BFGS-B optimization method is then used following the gradient below.
+\begin{equation}
+\small
+\begin{aligned}
+  \frac{\partial\mathcal{L}_{hier}(\mathcal{D};\Theta)}{\partial\mathbf{\omega}_j}
+  &= -\frac{1}{2\sigma_{y}^2}\frac{\parallel\mathbf{y}_j-\mathbf{X}_{j}^{T}\mathbf{\omega}_j\parallel^2}{\partial\mathbf{\omega}_j}
+  -\frac{1}{2\sigma_{j}^2}\frac{\parallel\mathbf{\omega}_j-\mathbf{\omega}_{\ast}\parallel^{2}}{\partial\mathbf{\omega}_j}\\
+  &=\frac{\mathbf{X}_j\mathbf{y}_j}{\sigma_{y}^2}+\frac{\mathbf{\omega}_{\ast}}{\sigma^2_j}-
+  \left(\frac{\mathbf{X}_j\mathbf{X}_j^{T}}{\sigma_{y}^2}+\frac{1}{\sigma_{j}^2}\mathbf{I}\right)\mathbf{\omega}_{j}
+\end{aligned}
+\end{equation}
+\begin{equation}
+\small
+  \frac{\partial\mathcal{L}_{hier}(\mathcal{D};\Theta)}{\partial\mathbf{\omega}_{\ast}}
+  =-\sum_j\frac{\mathbf{\omega}_{\ast}-\mathbf{\omega}_j}{\sigma_{j}^2}-\frac{\mathbf{\omega}_{\ast}}{\sigma_{\ast}^2}
+\end{equation}
+\begin{equation}
+\small
+  \frac{\partial\mathcal{L}_{hier}(\mathcal{D};\Theta)}{\partial\sigma_{y}^2}
+  =\frac{\sum_j\parallel\mathbf{y}_j-\mathbf{X}_{j}^{T}\mathbf{\omega}_j\parallel^2}{2(\sigma_{y}^2)^2}-\frac{n}{2\sigma_{y}^2}
+\end{equation}
+where n is the total number of samples in all the groups.
+}
+\subsection{Data Sets}
+\frame{
+%\frametitle{Data Sets}
+\begin{itemize}
+  \item 210,000 CPIs including more than 1,000 proteins from 20 protein families, and  150,000 compounds.
+  \item 22 physicochemical properties and 881 chemical substructures as the compounds' features.
+\end{itemize}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.75\columnwidth]{pfamily}
+\end{figure}
+}
+\section{Result}
+\subsection{Feature Selection}
+\frame{
+\frametitle{Feature Selection}
+The protein family of Peptide GPCR including 85 proteins as examples.
+\begin{itemize}
+  \item
+  Based on the definitions of chemical fingerprints, SUB1-SUB115, SUB264-SUB327 are removed.
+  \item
+  Chemical fingerprints with too low or high frequencies are removed.
+  \item
+  Non-parametric dynamic slicing method for marginal feature selection.
+  \item
+  284 features are finally kept.
+\end{itemize}
+}
+%\subsection{Learning Pattern}
+%\frame{
+%%\frametitle{Learning Pattern}
+%\begin{figure}
+%  \centering
+%  \includegraphics[width=1.1\columnwidth]{pattern}
+%\end{figure}
+%}
+\subsection{Comparison with single-task model}
+\frame{
+\frametitle{Comparison with Ridge Regression}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\columnwidth]{compare}
+\end{figure}
+}
+\section{Discussion}
+\frame{
+\frametitle{Discussion}
+\begin{itemize}
+  %\item
+  %A hierarchial Bayesian model is constructed to predict CPIs following the multi-task approach.
+  \item
+  More computational tests
+  \item
+  The relationship between proteins' pharmacological and genomic information
+  \item
+  Deficiency:
+  \begin{itemize}
+    \item
+    High dimension v.s. Sparsity
+    \item
+    Linear v.s. Nonlinear
+  \end{itemize}
+\end{itemize}
+}
+\part{Inference on Chemogenomic Features from Drug-Target Interactions}
+\frame{\partpage}
+\section{Background}
+\frame{
+\frametitle{Background}
+\begin{figure}
+\centerline{\includegraphics[width=1.15\textwidth]{explains}}
+\end{figure}
+}
+\section{Method}
+\subsection{Definition}
+\frame
+{
+    \begin{definition}
+    \begin{description}
+    \item[$O_{ij}$] The observations of drug and protein interactions.
+    \item[$YP_{ij}$] The binary variable of drug i and protein j interactions.
+    \item[$D_{mn}^{(ij)}$] The interaction result of substructure m from drug i and domain n from protein j
+    \item[$\theta_{mn}$] \textcolor[rgb]{0.8,0.1,0.1}{$\theta_{mn}=Pr(ZD_{mn}=1)$}
+    \item[fn] \textcolor[rgb]{0.8,0.1,0.1}{fn $=Pr(O_{ij}=0|YP_{ij}=1)$}
+    \item[fp] \textcolor[rgb]{0.8,0.1,0.1}{fp $=Pr(O_{ij}=1|YP_{ij}=0)$}
+    \end{description}
+    \end{definition}
+}
+\subsection{Assumption}
+\frame{
+\frametitle{Assumption}
+\begin{itemize}
+  \item \textbf{Consistency}
+  \begin{equation}
+\theta_{mn} = Pr(D_{mn}^{(ij)}=1)
+\end{equation}
+  \item \textbf{Independence}
+  \begin{equation}
+Pr(YP_{ij}=1|\theta)=1-\prod_{D_{mn}^{(ij)}}(1-\theta_{mn})
+\end{equation}
+\end{itemize}
+}
+\subsection{EM Algorithm}
+\frame{
+\frametitle{EM Algorithm}
+\begin{itemize}
+\item
+Then the log likelihood function is followed:
+\begin{equation}
+  l(\theta) = log\left(Pr(O|\theta)\right)
+\end{equation}
+\begin{equation}
+  Pr(O_{ij}=1|\theta)=(1-\textit{fn})Pr(YP_{ij}=1|\theta)+\textit{fp}\cdot Pr(YP_{ij}=0|\theta)
+\end{equation}
+\item
+The EM Algorithm is used to get the MLE estimation due to the missing data of $D_{mn}$.
+\end{itemize}
+}
+
+\frame{
+\frametitle{EM Algorithm}
+\begin{itemize}
+\item
+E Step:
+\begin{equation}
+    E(D_{mn}^{(ij)}|O,\theta^{(t-1)}) =\frac{\theta_{mn}^{(t-1)}(1-\textit{fn})^{O_{ij}}\textit{fn}^{1-O_{ij}}}{Pr(O_{ij}|\theta^{(t-1)})}
+\end{equation}
+\item
+M Step:
+\begin{equation}
+\theta_{mn}^{(t)}=\frac{1}{N_{mn}} \sum_{i,j: Zm\in Y_i, Dn\in P_j}E(D_{mn}^{(ij)}|O_{ij},\theta^{(t-1)})
+\end{equation}
+\end{itemize}
+}
+\frame{
+\frametitle{Variance Estimation}
+\begin{itemize}
+  \item
+  The variance of the parameters are estimated by the observed Fisher information.
+  \begin{equation}
+var(\hat{\theta}) = \frac{1}{I(\hat{\theta})}, I(\theta) = -\frac{d^2 log(Pr(O|\theta))}{d{\theta}^2}
+  \end{equation}
+  \item
+  In our model, the observed Fisher information is followed:
+  \begin{equation}
+I({\theta}_{mn})
+ = \sum_{i,j: Zm\in Y_i, Dn\in P_j}{\delta}_{mn}^{(i,j)^2}(\frac{O_{mn}^{(ij)}}{{\mu}_{mn}^{(ij)^2}}+\frac{1-O_{mn}^{(ij)}}{(1-{\mu}_{mn}^{(ij)})^2})
+\end{equation}
+In which,
+\begin{equation}
+{\delta}_{mn}^{(ij)} = \frac{{\mu}_{mn}^{(ij)}}{\partial {\theta}_{mn}},
+{\mu}_{mn}^{(ij)} = Pr(O_{mn}^{(ij)}=1|\theta)
+\end{equation}
+\end{itemize}
+}
+\subsection{Data Source}
+\frame{
+\frametitle{Data Source}
+\begin{itemize}
+  \item
+  1862 drugs are represented by 881-dimensional chemical substructure binary vectors defined by the PubChem database.
+  \item
+  1554 proteins are represented by 876-dimensional protein domain binary vectors from  the Pfam database.
+  \item
+  4809 interactions between drugs and proteins.
+\end{itemize}
+}
+\section{Result}
+\subsection{Cross Validation}
+\frame{
+\begin{itemize}
+  \item
+  Different combinations of fn and fp.
+  \begin{figure}
+  \centerline{\includegraphics[width=0.8\columnwidth]{robustfnfp}}
+  \end{figure}
+\end{itemize}
+}
+
+%\frame{
+%\begin{itemize}
+%  \item
+%  Comparison with other methods.
+%  \begin{table}
+%{\begin{tabular}{ccccc}
+%\textbf{Ratio} & \textbf{GIFT} & \textbf{L1-Log} & \textbf{L1-SVM} & \textbf{SCCA}\\
+%1 & 0.835  & 0.829  & 0.830 & 0.798 \\
+%5 & 0.847  & 0.838  & 0.855 & 0.798 \\
+%\end{tabular}}
+%\end{table}
+%\end{itemize}
+%}
+\subsection{Drug-Domain Interactions}
+\frame{
+\begin{itemize}
+  \item
+  Comparison with other methods.
+  \begin{table}\footnotesize
+{\begin{tabular}{ccccc}
+\hline
+\textbf{Ratio} & \textbf{GIFT} & \textbf{L1-Log} & \textbf{L1-SVM} & \textbf{SCCA}\\
+\hline
+1 & 0.835  & 0.829  & 0.830 & 0.798 \\
+5 & 0.847  & 0.838  & 0.855 & 0.798 \\
+\hline
+\end{tabular}}
+\end{table}
+\item
+Results of predictions on known drug-domain interactions.
+  \begin{figure}
+  \centerline{\includegraphics[width=1.1\columnwidth]{Table2}}
+  \end{figure}
+\end{itemize}
+}
+\subsection{PDB Data}
+\frame{
+  \begin{figure}
+  \centerline{\includegraphics[width=1.3\columnwidth]{ligplot_3}}
+  \end{figure}
+}
+\section{Discussion}
+\frame{
+\frametitle{Discussion}
+\begin{itemize}
+  \item
+  Here we propose an efficient method to extract meaningful chemogenomic features, and it also shows the power to predict drug-protein interactions.
+  \item
+  The predicted chemical substructures might be a useful source to design the compounds' analogs against a given protein or its domain.
+  \item
+  Large-scale compound-protein interactions are accumulated in the PDB database (known 3D structures), BindDB and ChEMBL database, which can be further studied by our method.
+\end{itemize}
+}
+
+\part{Application on the Modification of Natural Products}
+\frame{\partpage}
+\section{Background}
+\subsection{Lead Discovery From TCM Herbs}
+\frame{
+\frametitle{Lead Discovery From TCM Herbs}
+\begin{itemize}
+  \item
+  Natural products important sources for drug discovery.
+  \item
+  By DrugCIPHER, several compounds from traditional Chinese Medicine (TCM) Herbs are predicted to have the antitumor activities.
+  \item
+  Many of them have been reported, but one compound called \textit{Albiflorin} few researches.
+\end{itemize}
+}
+\subsection{Difficulties on Albiflorin}
+\frame{
+\begin{itemize}
+  \item
+  Our experiments: \textit{Albiflorin} has the antitumor activities with low potency.
+  \item
+  Its biological mechanism is unknown.
+\end{itemize}
+\begin{figure}
+\centering
+\includegraphics[width=0.6\columnwidth]{AL}
+\end{figure}
+}
+\frame{
+\begin{itemize}
+  \item
+  \textit{Albiflorin}, a typical example from natural products.
+  \begin{itemize}
+  \item Low potencies or activities
+  \item Unknown targets
+  \end{itemize}
+  \item
+  Direct experiments difficult to discover the mechanisms.
+  \begin{itemize}
+  \item Low potencies $\longrightarrow$ false negative
+  \item Unknown targets $\longrightarrow$ hard to design analogs
+  \item Complex structures 
+  %which is hard for molecular simulation because of multiple spatial conformation.
+  \end{itemize}
+%  \item
+%  Here we propose a possible way to study compounds from natural products.
+\end{itemize}
+}
+\section{Method}
+\frame{
+\frametitle{Method}
+\begin{itemize}
+\item
+Firstly, several analogs are designed based on the chemical experience as a starting point.
+\item
+Then MTT assays are used to test their biological activities on tumor growth.
+\item
+Next structure-activity relationship (SAR) analysis is performed to predicted its possible functional mechanism.
+\item
+\textcolor{red}{Simulation and Filtering}
+\begin{itemize}
+\item
+Computational simulation of all the possible analogies.
+\item
+Quantitatively predicting their targets.
+\end{itemize}
+\item
+\textcolor{red}{Experimental design and validation.}
+\end{itemize}
+}
+%\frame{
+%\begin{tikzpicture}[node distance = 2cm, auto]
+%    % Place nodes
+%    \node [block] (init) {Analog synthesis};
+%    \node [cloud, left of=init] (expert) {Experts};
+%    \node [cloud, right of=init] (system) {Previous knowledge};
+%    \node [block, below of=init] (identify) {Experiments on biological activity};
+%    \node [block, below of=identify] (evaluate) {SAR Analysis};
+%    \node [block, left of=evaluate, node distance=3cm] (update) {update model};
+%    \node [decision, below of=evaluate] (decide) {is best candidate better?};
+%    \node [block, below of=decide, node distance=3cm] (stop) {stop};
+%    % Draw edges
+%    \path [line] (init) -- (identify);
+%    \path [line] (identify) -- (evaluate);
+%    \path [line] (evaluate) -- (decide);
+%    \path [line] (decide) -| node [near start] {yes} (update);
+%    \path [line] (update) |- (identify);
+%    \path [line] (decide) -- node {no}(stop);
+%    \path [line,dashed] (expert) -- (init);
+%    \path [line,dashed] (system) -- (init);
+%    \path [line,dashed] (system) |- (evaluate);
+%\end{tikzpicture}
+%}
+\section{Result}
+\subsection{Antitumor Activities}
+\frame{
+\frametitle{MTT Assay}
+\begin{figure}
+\centering
+\includegraphics[width=0.9\columnwidth]{mtt}
+\end{figure}
+}
+\subsection{SAR Analysis}
+\frame{
+\frametitle{LogP Analysis}
+\begin{figure}
+\centering
+\includegraphics[width=\columnwidth]{logP}
+\end{figure}
+}
+\frame{
+\frametitle{Partial Charge}
+\begin{figure}
+\centering
+\includegraphics[width=\columnwidth]{pcharge}
+\end{figure}
+}
+\frame{
+\frametitle{TPSA}
+\begin{figure}
+\centering
+\includegraphics[width=\columnwidth]{tpsa}
+\end{figure}
+}
+\section{Discussion}
+\frame{
+\frametitle{Discussion}
+ Explore a new strategy to study natural products. 
+\begin{itemize}
+  \item
+    Discovery by computational methods.
+  \item
+    Biological experiments validation.
+  \item 
+    Computational Simulation and analysis all the possible analogs.
+  \item 
+    Medicinal chemistry-based experiments validation.
+\end{itemize}
+}
+%
+%\part{Summary}
+%\section*{Summary}
+%\frame
+%{\frametitle{Big Picture}
+%  \begin{itemize}
+%  \item
+%  Two questions on machine learning on Bioinformatics:
+%  \begin{itemize}
+%  \item \textcolor{red}{Shao's Question:} Why your method is better, new aspects or more data?
+%  \item \textcolor{red}{Micheal's Question:} How can you say your method is more powerful if it involves more parameters?
+%  \end{itemize}
+%  \end{itemize}
+%}
+%\frame{
+%\frametitle{Reference}
+%\begin{itemize}
+%\item
+%Christian P.Robert and George Casella, \textbf{Monte Carlo Statistical Methods},\textit{second edition}
+%\item
+%Jun S. Liu, \textbf{Monte Carlo Strategies in Scientific Computing}
+%\end{itemize}
+%}
+
+\end{document}
+
+
