@@ -1,0 +1,39 @@
+CHEMBL1075195	345	enzyme  kinase  protein kinase  ser_thr  ste  ste20  tao	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Tao	\N
+CHEMBL1163104	400	enzyme  kinase  protein kinase  ser_thr  ste  ste20  fray	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Fray	\N
+CHEMBL1163108	400	enzyme  kinase  protein kinase  ser_thr  ste  ste20  fray	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Fray	\N
+CHEMBL1163123	340	enzyme  kinase  protein kinase  ser_thr  ste  ste11  ask	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste11	Ask	\N
+CHEMBL1163127	340	enzyme  kinase  protein kinase  ser_thr  ste  ste11  ask	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste11	Ask	\N
+CHEMBL2999	401	enzyme  kinase  protein kinase  ser_thr  ste  ste20  paka	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Paka	\N
+CHEMBL3956	261	enzyme  kinase  protein kinase  ser_thr  ste  ste11	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste11	\N	\N
+CHEMBL3981	344	enzyme  kinase  protein kinase  ser_thr  ste  ste20  slk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Slk	\N
+CHEMBL4202	344	enzyme  kinase  protein kinase  ser_thr  ste  ste20  slk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Slk	\N
+CHEMBL4310	343	enzyme  kinase  protein kinase  ser_thr  ste  ste20  mst	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Mst	\N
+CHEMBL4311	402	enzyme  kinase  protein kinase  ser_thr  ste  ste20  pakb	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Pakb	\N
+CHEMBL4482	402	enzyme  kinase  protein kinase  ser_thr  ste  ste20  pakb	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Pakb	\N
+CHEMBL4487	401	enzyme  kinase  protein kinase  ser_thr  ste  ste20  paka	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Paka	\N
+CHEMBL4524	402	enzyme  kinase  protein kinase  ser_thr  ste  ste20  pakb	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Pakb	\N
+CHEMBL4527	342	enzyme  kinase  protein kinase  ser_thr  ste  ste20  msn	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Msn	\N
+CHEMBL4598	343	enzyme  kinase  protein kinase  ser_thr  ste  ste20  mst	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Mst	\N
+CHEMBL4600	401	enzyme  kinase  protein kinase  ser_thr  ste  ste20  paka	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Paka	\N
+CHEMBL4708	343	enzyme  kinase  protein kinase  ser_thr  ste  ste20  mst	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Mst	\N
+CHEMBL4852	341	enzyme  kinase  protein kinase  ser_thr  ste  ste20  khs	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Khs	\N
+CHEMBL4853	261	enzyme  kinase  protein kinase  ser_thr  ste  ste11	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste11	\N	\N
+CHEMBL4899	261	enzyme  kinase  protein kinase  ser_thr  ste  ste11	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste11	\N	\N
+CHEMBL5082	346	enzyme  kinase  protein kinase  ser_thr  ste  ste20  ysk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Ysk	\N
+CHEMBL5261	345	enzyme  kinase  protein kinase  ser_thr  ste  ste20  tao	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Tao	\N
+CHEMBL5285	261	enzyme  kinase  protein kinase  ser_thr  ste  ste11	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste11	\N	\N
+CHEMBL5330	341	enzyme  kinase  protein kinase  ser_thr  ste  ste20  khs	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Khs	\N
+CHEMBL5358	498	enzyme  kinase  protein kinase  ser_thr  ste  ste-unique  ste-unique	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste-Unique	Ste-Unique	\N
+CHEMBL5432	341	enzyme  kinase  protein kinase  ser_thr  ste  ste20  khs	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Khs	\N
+CHEMBL5518	342	enzyme  kinase  protein kinase  ser_thr  ste  ste20  msn	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Msn	\N
+CHEMBL5546	420	enzyme  kinase  protein kinase  ser_thr  ste  ste20  ninac	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	NinaC	\N
+CHEMBL5552	346	enzyme  kinase  protein kinase  ser_thr  ste  ste20  ysk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Ysk	\N
+CHEMBL5654	420	enzyme  kinase  protein kinase  ser_thr  ste  ste20  ninac	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	NinaC	\N
+CHEMBL5701	345	enzyme  kinase  protein kinase  ser_thr  ste  ste20  tao	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Tao	\N
+CHEMBL5749	341	enzyme  kinase  protein kinase  ser_thr  ste  ste20  khs	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Khs	\N
+CHEMBL5888	498	enzyme  kinase  protein kinase  ser_thr  ste  ste-unique  ste-unique	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste-Unique	Ste-Unique	\N
+CHEMBL5914	339	enzyme  kinase  protein kinase  ser_thr  ste  ste  mekk2	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste	Mekk2	\N
+CHEMBL5941	346	enzyme  kinase  protein kinase  ser_thr  ste  ste20  ysk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Ysk	\N
+CHEMBL5970	419	enzyme  kinase  protein kinase  ser_thr  ste  ste11  mekk2	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste11	Mekk2	\N
+CHEMBL6166	342	enzyme  kinase  protein kinase  ser_thr  ste  ste20  msn	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste20	Msn	\N
+CHEMBL6191	399	enzyme  kinase  protein kinase  ser_thr  ste  ste  mekk15	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ste	Ste	Mekk15	\N

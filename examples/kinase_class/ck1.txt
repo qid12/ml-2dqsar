@@ -1,0 +1,8 @@
+CHEMBL2426	210	enzyme  kinase  protein kinase  ser_thr  ck1  ck1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ck1	Ck1	\N
+CHEMBL2543	210	enzyme  kinase  protein kinase  ser_thr  ck1  ck1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ck1	Ck1	\N
+CHEMBL2793	210	enzyme  kinase  protein kinase  ser_thr  ck1  ck1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ck1	Ck1	\N
+CHEMBL2828	210	enzyme  kinase  protein kinase  ser_thr  ck1  ck1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ck1	Ck1	\N
+CHEMBL4484	210	enzyme  kinase  protein kinase  ser_thr  ck1  ck1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ck1	Ck1	\N
+CHEMBL4937	210	enzyme  kinase  protein kinase  ser_thr  ck1  ck1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ck1	Ck1	\N
+CHEMBL5084	322	enzyme  kinase  protein kinase  ser_thr  ck1  ck1  ck1-g	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ck1	Ck1	Ck1-g
+CHEMBL5520	321	enzyme  kinase  protein kinase  ser_thr  ck1  ck1  ck1-a	Enzyme	Kinase	Protein Kinase	Ser_Thr	Ck1	Ck1	Ck1-a

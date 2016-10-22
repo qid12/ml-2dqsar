@@ -1,0 +1,117 @@
+CHEMBL1075098	151	enzyme  kinase  protein kinase  tyr  tk  insr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	InsR	\N	\N
+CHEMBL1075289	136	enzyme  kinase  protein kinase  tyr  tk  fak	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Fak	\N	\N
+CHEMBL1824	149	enzyme  kinase  protein kinase  tyr  tk  egfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Egfr	\N	\N
+CHEMBL1841	141	enzyme  kinase  protein kinase  tyr  tk  src	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	\N	\N
+CHEMBL1844	159	enzyme  kinase  protein kinase  tyr  tk  pdgfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Pdgfr	\N	\N
+CHEMBL1862	130	enzyme  kinase  protein kinase  tyr  tk  abl	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Abl	\N	\N
+CHEMBL1868	160	enzyme  kinase  protein kinase  tyr  tk  vegfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Vegfr	\N	\N
+CHEMBL1913	159	enzyme  kinase  protein kinase  tyr  tk  pdgfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Pdgfr	\N	\N
+CHEMBL1936	159	enzyme  kinase  protein kinase  tyr  tk  pdgfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Pdgfr	\N	\N
+CHEMBL1955	160	enzyme  kinase  protein kinase  tyr  tk  vegfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Vegfr	\N	\N
+CHEMBL1957	151	enzyme  kinase  protein kinase  tyr  tk  insr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	InsR	\N	\N
+CHEMBL1974	159	enzyme  kinase  protein kinase  tyr  tk  pdgfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Pdgfr	\N	\N
+CHEMBL1981	151	enzyme  kinase  protein kinase  tyr  tk  insr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	InsR	\N	\N
+CHEMBL2007	159	enzyme  kinase  protein kinase  tyr  tk  pdgfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Pdgfr	\N	\N
+CHEMBL203	149	enzyme  kinase  protein kinase  tyr  tk  egfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Egfr	\N	\N
+CHEMBL2041	140	enzyme  kinase  protein kinase  tyr  tk  ret	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Ret	\N	\N
+CHEMBL2068	135	enzyme  kinase  protein kinase  tyr  tk  eph	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Eph	\N	\N
+CHEMBL2073	141	enzyme  kinase  protein kinase  tyr  tk  src	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	\N	\N
+CHEMBL2148	152	enzyme  kinase  protein kinase  tyr  tk  jaka	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Jaka	\N	\N
+CHEMBL2148	153	enzyme  kinase  protein kinase  tyr  tk  jakb	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Jakb	\N	\N
+CHEMBL2250	141	enzyme  kinase  protein kinase  tyr  tk  src	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	\N	\N
+CHEMBL2258	141	enzyme  kinase  protein kinase  tyr  tk  src	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	\N	\N
+CHEMBL2480	141	enzyme  kinase  protein kinase  tyr  tk  src	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	\N	\N
+CHEMBL258	141	enzyme  kinase  protein kinase  tyr  tk  src	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	\N	\N
+CHEMBL2599	142	enzyme  kinase  protein kinase  tyr  tk  syk	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Syk	\N	\N
+CHEMBL2634	134	enzyme  kinase  protein kinase  tyr  tk  csk	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Csk	\N	\N
+CHEMBL267	141	enzyme  kinase  protein kinase  tyr  tk  src	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	\N	\N
+CHEMBL2689	139	enzyme  kinase  protein kinase  tyr  tk  met	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Met	\N	\N
+CHEMBL2695	136	enzyme  kinase  protein kinase  tyr  tk  fak	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Fak	\N	\N
+CHEMBL2742	150	enzyme  kinase  protein kinase  tyr  tk  fgfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Fgfr	\N	\N
+CHEMBL2749	159	enzyme  kinase  protein kinase  tyr  tk  pdgfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Pdgfr	\N	\N
+CHEMBL279	160	enzyme  kinase  protein kinase  tyr  tk  vegfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Vegfr	\N	\N
+CHEMBL2803	142	enzyme  kinase  protein kinase  tyr  tk  syk	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Syk	\N	\N
+CHEMBL2815	146	enzyme  kinase  protein kinase  tyr  tk  trk	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Trk	\N	\N
+CHEMBL2835	152	enzyme  kinase  protein kinase  tyr  tk  jaka	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Jaka	\N	\N
+CHEMBL2835	153	enzyme  kinase  protein kinase  tyr  tk  jakb	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Jakb	\N	\N
+CHEMBL2959	143	enzyme  kinase  protein kinase  tyr  tk  tec	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Tec	\N	\N
+CHEMBL2968	152	enzyme  kinase  protein kinase  tyr  tk  jaka	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Jaka	\N	\N
+CHEMBL2968	153	enzyme  kinase  protein kinase  tyr  tk  jakb	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Jakb	\N	\N
+CHEMBL2971	152	enzyme  kinase  protein kinase  tyr  tk  jaka	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Jaka	\N	\N
+CHEMBL2971	153	enzyme  kinase  protein kinase  tyr  tk  jakb	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Jakb	\N	\N
+CHEMBL3009	149	enzyme  kinase  protein kinase  tyr  tk  egfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Egfr	\N	\N
+CHEMBL3014	141	enzyme  kinase  protein kinase  tyr  tk  src	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	\N	\N
+CHEMBL3074	141	enzyme  kinase  protein kinase  tyr  tk  src	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	\N	\N
+CHEMBL3099	130	enzyme  kinase  protein kinase  tyr  tk  abl	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Abl	\N	\N
+CHEMBL3187	151	enzyme  kinase  protein kinase  tyr  tk  insr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	InsR	\N	\N
+CHEMBL3234	141	enzyme  kinase  protein kinase  tyr  tk  src	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	\N	\N
+CHEMBL3290	135	enzyme  kinase  protein kinase  tyr  tk  eph	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Eph	\N	\N
+CHEMBL3337	160	enzyme  kinase  protein kinase  tyr  tk  vegfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Vegfr	\N	\N
+CHEMBL3343	141	enzyme  kinase  protein kinase  tyr  tk  src	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	\N	\N
+CHEMBL3516	160	enzyme  kinase  protein kinase  tyr  tk  vegfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Vegfr	\N	\N
+CHEMBL3553	152	enzyme  kinase  protein kinase  tyr  tk  jaka	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Jaka	\N	\N
+CHEMBL3553	153	enzyme  kinase  protein kinase  tyr  tk  jakb	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Jakb	\N	\N
+CHEMBL3608	149	enzyme  kinase  protein kinase  tyr  tk  egfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Egfr	\N	\N
+CHEMBL3650	150	enzyme  kinase  protein kinase  tyr  tk  fgfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Fgfr	\N	\N
+CHEMBL3655	141	enzyme  kinase  protein kinase  tyr  tk  src	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	\N	\N
+CHEMBL3717	139	enzyme  kinase  protein kinase  tyr  tk  met	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Met	\N	\N
+CHEMBL3834	143	enzyme  kinase  protein kinase  tyr  tk  tec	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Tec	\N	\N
+CHEMBL3839	150	enzyme  kinase  protein kinase  tyr  tk  fgfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Fgfr	\N	\N
+CHEMBL3848	149	enzyme  kinase  protein kinase  tyr  tk  egfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Egfr	\N	\N
+CHEMBL3905	141	enzyme  kinase  protein kinase  tyr  tk  src	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	\N	\N
+CHEMBL3960	150	enzyme  kinase  protein kinase  tyr  tk  fgfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Fgfr	\N	\N
+CHEMBL3973	150	enzyme  kinase  protein kinase  tyr  tk  fgfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Fgfr	\N	\N
+CHEMBL3982	137	enzyme  kinase  protein kinase  tyr  tk  fer	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Fer	\N	\N
+CHEMBL3987	135	enzyme  kinase  protein kinase  tyr  tk  eph	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Eph	\N	\N
+CHEMBL3988	135	enzyme  kinase  protein kinase  tyr  tk  eph	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Eph	\N	\N
+CHEMBL4014	130	enzyme  kinase  protein kinase  tyr  tk  abl	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Abl	\N	\N
+CHEMBL4066	150	enzyme  kinase  protein kinase  tyr  tk  fgfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Fgfr	\N	\N
+CHEMBL4128	144	enzyme  kinase  protein kinase  tyr  tk  tie	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Tie	\N	\N
+CHEMBL4134	135	enzyme  kinase  protein kinase  tyr  tk  eph	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Eph	\N	\N
+CHEMBL4142	145	enzyme  kinase  protein kinase  tyr  tk  tlk	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Tlk	\N	\N
+CHEMBL4175	134	enzyme  kinase  protein kinase  tyr  tk  csk	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Csk	\N	\N
+CHEMBL4223	141	enzyme  kinase  protein kinase  tyr  tk  src	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	\N	\N
+CHEMBL4246	143	enzyme  kinase  protein kinase  tyr  tk  tec	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Tec	\N	\N
+CHEMBL4362	141	enzyme  kinase  protein kinase  tyr  tk  src	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	\N	\N
+CHEMBL4363	141	enzyme  kinase  protein kinase  tyr  tk  src	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	\N	\N
+CHEMBL4364	142	enzyme  kinase  protein kinase  tyr  tk  syk	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Syk	\N	\N
+CHEMBL4367	143	enzyme  kinase  protein kinase  tyr  tk  tec	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Tec	\N	\N
+CHEMBL4454	141	enzyme  kinase  protein kinase  tyr  tk  src	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	\N	\N
+CHEMBL4526	135	enzyme  kinase  protein kinase  tyr  tk  eph	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Eph	\N	\N
+CHEMBL4599	131	enzyme  kinase  protein kinase  tyr  tk  ack	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Ack	\N	\N
+CHEMBL4601	141	enzyme  kinase  protein kinase  tyr  tk  src	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	\N	\N
+CHEMBL4602	135	enzyme  kinase  protein kinase  tyr  tk  eph	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Eph	\N	\N
+CHEMBL4895	133	enzyme  kinase  protein kinase  tyr  tk  axl	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Axl	\N	\N
+CHEMBL4898	146	enzyme  kinase  protein kinase  tyr  tk  trk	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Trk	\N	\N
+CHEMBL4901	135	enzyme  kinase  protein kinase  tyr  tk  eph	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Eph	\N	\N
+CHEMBL4954	135	enzyme  kinase  protein kinase  tyr  tk  eph	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Eph	\N	\N
+CHEMBL5072	135	enzyme  kinase  protein kinase  tyr  tk  eph	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Eph	\N	\N
+CHEMBL5122	215	enzyme  kinase  protein kinase  tyr  tk  ddr  ddr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Ddr	Ddr	\N
+CHEMBL5147	135	enzyme  kinase  protein kinase  tyr  tk  eph	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Eph	\N	\N
+CHEMBL5166	130	enzyme  kinase  protein kinase  tyr  tk  abl	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Abl	\N	\N
+CHEMBL5199	144	enzyme  kinase  protein kinase  tyr  tk  tie	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Tie	\N	\N
+CHEMBL5250	152	enzyme  kinase  protein kinase  tyr  tk  jaka	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Jaka	\N	\N
+CHEMBL5250	153	enzyme  kinase  protein kinase  tyr  tk  jakb	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Jakb	\N	\N
+CHEMBL5251	143	enzyme  kinase  protein kinase  tyr  tk  tec	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Tec	\N	\N
+CHEMBL5274	220	enzyme  kinase  protein kinase  tyr  tk  tie  tie	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Tie	Tie	\N
+CHEMBL5314	214	enzyme  kinase  protein kinase  tyr  tk  axl  axl	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Axl	Axl	\N
+CHEMBL5319	215	enzyme  kinase  protein kinase  tyr  tk  ddr  ddr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Ddr	Ddr	\N
+CHEMBL5331	214	enzyme  kinase  protein kinase  tyr  tk  axl  axl	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Axl	Axl	\N
+CHEMBL5334	212	enzyme  kinase  protein kinase  tyr  tk  ack  ack	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Ack	Ack	\N
+CHEMBL5381	151	enzyme  kinase  protein kinase  tyr  tk  insr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	InsR	\N	\N
+CHEMBL5455	137	enzyme  kinase  protein kinase  tyr  tk  fer	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Fer	\N	\N
+CHEMBL5469	217	enzyme  kinase  protein kinase  tyr  tk  fak  fak	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Fak	Fak	\N
+CHEMBL5483	263	enzyme  kinase  protein kinase  tyr  tk  insr  insr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	InsR	InsR	\N
+CHEMBL5486	151	enzyme  kinase  protein kinase  tyr  tk  insr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	InsR	\N	\N
+CHEMBL5568	218	enzyme  kinase  protein kinase  tyr  tk  sev  sev	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Sev	Sev	\N
+CHEMBL5570	159	enzyme  kinase  protein kinase  tyr  tk  pdgfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Pdgfr	\N	\N
+CHEMBL5585	139	enzyme  kinase  protein kinase  tyr  tk  met	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Met	\N	\N
+CHEMBL5608	221	enzyme  kinase  protein kinase  tyr  tk  trk  trk	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Trk	Trk	\N
+CHEMBL5627	213	enzyme  kinase  protein kinase  tyr  tk  alk  alk	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Alk	Alk	\N
+CHEMBL5684	264	enzyme  kinase  protein kinase  tyr  tk  musk  musk	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Musk	Musk	\N
+CHEMBL5703	219	enzyme  kinase  protein kinase  tyr  tk  src  srm	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Src	Srm	\N
+CHEMBL5708	137	enzyme  kinase  protein kinase  tyr  tk  fer	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Fer	\N	\N
+CHEMBL5771	132	enzyme  kinase  protein kinase  tyr  tk  alk	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Alk	\N	\N
+CHEMBL5810	216	enzyme  kinase  protein kinase  tyr  tk  eph  eph	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Eph	Eph	\N
+CHEMBL5838	149	enzyme  kinase  protein kinase  tyr  tk  egfr	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Egfr	\N	\N
+CHEMBL5961	135	enzyme  kinase  protein kinase  tyr  tk  eph	Enzyme	Kinase	Protein Kinase	Tyr	Tk	Eph	\N	\N

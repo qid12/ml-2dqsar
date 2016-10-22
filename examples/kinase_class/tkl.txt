@@ -1,0 +1,20 @@
+CHEMBL1075104	240	enzyme  kinase  protein kinase  ser_thr  tkl  lrrk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Lrrk	\N	\N
+CHEMBL1163124	295	enzyme  kinase  protein kinase  ser_thr  tkl  mlk  lzk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Mlk	Lzk	\N
+CHEMBL3836	348	enzyme  kinase  protein kinase  ser_thr  tkl  lisk  limk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Lisk	Limk	\N
+CHEMBL4247	404	enzyme  kinase  protein kinase  ser_thr  tkl  stkr  type1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Stkr	Type1	\N
+CHEMBL5014	241	enzyme  kinase  protein kinase  ser_thr  tkl  ripk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Ripk	\N	\N
+CHEMBL5081	347	enzyme  kinase  protein kinase  ser_thr  tkl  irak  irak	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Irak	Irak	\N
+CHEMBL5247	294	enzyme  kinase  protein kinase  ser_thr  tkl  mlk  ilk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Mlk	Ilk	\N
+CHEMBL5260	349	enzyme  kinase  protein kinase  ser_thr  tkl  mlk  hh498	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Mlk	HH498	\N
+CHEMBL5275	404	enzyme  kinase  protein kinase  ser_thr  tkl  stkr  type1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Stkr	Type1	\N
+CHEMBL5310	404	enzyme  kinase  protein kinase  ser_thr  tkl  stkr  type1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Stkr	Type1	\N
+CHEMBL5311	404	enzyme  kinase  protein kinase  ser_thr  tkl  stkr  type1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Stkr	Type1	\N
+CHEMBL5466	405	enzyme  kinase  protein kinase  ser_thr  tkl  stkr  type2	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Stkr	Type2	\N
+CHEMBL5467	405	enzyme  kinase  protein kinase  ser_thr  tkl  stkr  type2	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Stkr	Type2	\N
+CHEMBL5476	404	enzyme  kinase  protein kinase  ser_thr  tkl  stkr  type1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Stkr	Type1	\N
+CHEMBL5547	350	enzyme  kinase  protein kinase  ser_thr  tkl  ripk  ripk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Ripk	Ripk	\N
+CHEMBL5616	405	enzyme  kinase  protein kinase  ser_thr  tkl  stkr  type2	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Stkr	Type2	\N
+CHEMBL5776	307	enzyme  kinase  protein kinase  ser_thr  tkl  mlk  tak1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Mlk	Tak1	\N
+CHEMBL5903	403	enzyme  kinase  protein kinase  ser_thr  tkl  stkr  stkr1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Stkr	Stkr1	\N
+CHEMBL5932	348	enzyme  kinase  protein kinase  ser_thr  tkl  lisk  limk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Lisk	Limk	\N
+CHEMBL6083	350	enzyme  kinase  protein kinase  ser_thr  tkl  ripk  ripk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Tkl	Ripk	Ripk	\N

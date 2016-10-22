@@ -1,0 +1,66 @@
+CHEMBL1075133	283	enzyme  kinase  protein kinase  ser_thr  agc  grk  grk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Grk
+CHEMBL1075155	284	enzyme  kinase  protein kinase  ser_thr  agc  ndr  ndr	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Ndr
+CHEMBL1075295	304	enzyme  kinase  protein kinase  ser_thr  agc  pkc  pkcd	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL1163128	316	enzyme  kinase  protein kinase  ser_thr  agc  mast  mast	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Mast
+CHEMBL2213	317	enzyme  kinase  protein kinase  ser_thr  agc  pkc  alpha	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL2343	209	enzyme  kinase  protein kinase  ser_thr  agc  sgk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Sgk
+CHEMBL2345	289	enzyme  kinase  protein kinase  ser_thr  agc  rsk  rsk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Rsk
+CHEMBL2431	203	enzyme  kinase  protein kinase  ser_thr  agc  akt	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Akt
+CHEMBL2534	232	enzyme  kinase  protein kinase  ser_thr  agc  pdk1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pdk1
+CHEMBL2553	289	enzyme  kinase  protein kinase  ser_thr  agc  rsk  rsk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Rsk
+CHEMBL2560	318	enzyme  kinase  protein kinase  ser_thr  agc  pkc  delta	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL2567	317	enzyme  kinase  protein kinase  ser_thr  agc  pkc  alpha	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL2598	303	enzyme  kinase  protein kinase  ser_thr  agc  pkc  iota	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL2855	317	enzyme  kinase  protein kinase  ser_thr  agc  pkc  alpha	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL2896	207	enzyme  kinase  protein kinase  ser_thr  agc  pkg	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkg
+CHEMBL2918	205	enzyme  kinase  protein kinase  ser_thr  agc  pka	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pka
+CHEMBL2938	317	enzyme  kinase  protein kinase  ser_thr  agc  pkc  alpha	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL2973	315	enzyme  kinase  protein kinase  ser_thr  agc  dmpk  rock	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Dmpk
+CHEMBL299	317	enzyme  kinase  protein kinase  ser_thr  agc  pkc  alpha	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL2996	318	enzyme  kinase  protein kinase  ser_thr  agc  pkc  delta	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL3020	317	enzyme  kinase  protein kinase  ser_thr  agc  pkc  alpha	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL3032	208	enzyme  kinase  protein kinase  ser_thr  agc  pkn	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkn
+CHEMBL3045	317	enzyme  kinase  protein kinase  ser_thr  agc  pkc  alpha	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL3125	287	enzyme  kinase  protein kinase  ser_thr  agc  rsk  msk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Rsk
+CHEMBL3183	207	enzyme  kinase  protein kinase  ser_thr  agc  pkg	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkg
+CHEMBL3231	315	enzyme  kinase  protein kinase  ser_thr  agc  dmpk  rock	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Dmpk
+CHEMBL3384	208	enzyme  kinase  protein kinase  ser_thr  agc  pkn	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkn
+CHEMBL3390	205	enzyme  kinase  protein kinase  ser_thr  agc  pka	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pka
+CHEMBL3424	286	enzyme  kinase  protein kinase  ser_thr  agc  pkc  eta	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL3438	303	enzyme  kinase  protein kinase  ser_thr  agc  pkc  iota	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL3582	286	enzyme  kinase  protein kinase  ser_thr  agc  pkc  eta	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL3604	317	enzyme  kinase  protein kinase  ser_thr  agc  pkc  alpha	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL3616	286	enzyme  kinase  protein kinase  ser_thr  agc  pkc  eta	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL3906	289	enzyme  kinase  protein kinase  ser_thr  agc  rsk  rsk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Rsk
+CHEMBL3920	318	enzyme  kinase  protein kinase  ser_thr  agc  pkc  delta	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL4079	302	enzyme  kinase  protein kinase  ser_thr  agc  grk  bark	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Grk
+CHEMBL4101	205	enzyme  kinase  protein kinase  ser_thr  agc  pka	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pka
+CHEMBL4237	287	enzyme  kinase  protein kinase  ser_thr  agc  rsk  msk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Rsk
+CHEMBL4273	207	enzyme  kinase  protein kinase  ser_thr  agc  pkg	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkg
+CHEMBL4282	203	enzyme  kinase  protein kinase  ser_thr  agc  akt	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Akt
+CHEMBL4366	286	enzyme  kinase  protein kinase  ser_thr  agc  pkc  eta	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL4501	288	enzyme  kinase  protein kinase  ser_thr  agc  rsk  p70	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Rsk
+CHEMBL4516	301	enzyme  kinase  protein kinase  ser_thr  agc  dmpk  gek	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Dmpk
+CHEMBL4816	203	enzyme  kinase  protein kinase  ser_thr  agc  akt	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Akt
+CHEMBL4851	204	enzyme  kinase  protein kinase  ser_thr  agc  ndr	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Ndr
+CHEMBL4885	205	enzyme  kinase  protein kinase  ser_thr  agc  pka	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pka
+CHEMBL4924	289	enzyme  kinase  protein kinase  ser_thr  agc  rsk  rsk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Rsk
+CHEMBL4992	286	enzyme  kinase  protein kinase  ser_thr  agc  pkc  eta	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL5036	207	enzyme  kinase  protein kinase  ser_thr  agc  pkg	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkg
+CHEMBL5052	301	enzyme  kinase  protein kinase  ser_thr  agc  dmpk  gek	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Dmpk
+CHEMBL5320	301	enzyme  kinase  protein kinase  ser_thr  agc  dmpk  gek	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Dmpk
+CHEMBL5405	319	enzyme  kinase  protein kinase  ser_thr  agc  yank  yank	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Yank
+CHEMBL5490	315	enzyme  kinase  protein kinase  ser_thr  agc  dmpk  rock	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Dmpk
+CHEMBL5509	315	enzyme  kinase  protein kinase  ser_thr  agc  dmpk  rock	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Dmpk
+CHEMBL5515	490	enzyme  kinase  protein kinase  ser_thr  agc  pkc  pkc-unclassified	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pkc
+CHEMBL5579	314	enzyme  kinase  protein kinase  ser_thr  agc  dmpk  crik	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Dmpk
+CHEMBL5607	283	enzyme  kinase  protein kinase  ser_thr  agc  grk  grk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Grk
+CHEMBL5615	301	enzyme  kinase  protein kinase  ser_thr  agc  dmpk  gek	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Dmpk
+CHEMBL5818	285	enzyme  kinase  protein kinase  ser_thr  agc  pka  pka	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Pka
+CHEMBL5859	203	enzyme  kinase  protein kinase  ser_thr  agc  akt	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Akt
+CHEMBL5861	283	enzyme  kinase  protein kinase  ser_thr  agc  grk  grk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Grk
+CHEMBL5907	284	enzyme  kinase  protein kinase  ser_thr  agc  ndr  ndr	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Ndr
+CHEMBL5912	319	enzyme  kinase  protein kinase  ser_thr  agc  yank  yank	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Yank
+CHEMBL6150	233	enzyme  kinase  protein kinase  ser_thr  agc  yank	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Yank
+CHEMBL6167	284	enzyme  kinase  protein kinase  ser_thr  agc  ndr  ndr	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Ndr
+CHEMBL6186	209	enzyme  kinase  protein kinase  ser_thr  agc  sgk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Agc	Sgk

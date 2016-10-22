@@ -1,0 +1,64 @@
+CHEMBL2116	409	enzyme  kinase  protein kinase  ser_thr  camk  camkl  ampk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Ampk	\N
+CHEMBL2147	235	enzyme  kinase  protein kinase  ser_thr  camk  pim	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Pim	\N	\N
+CHEMBL2208	472	enzyme  kinase  protein kinase  ser_thr  camk  mapkapk  mapkapk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Mapkapk	Mapkapk	\N
+CHEMBL2345	386	enzyme  kinase  protein kinase  ser_thr  camk  rskb  rskb	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Rskb	Rskb	\N
+CHEMBL2349	234	enzyme  kinase  protein kinase  ser_thr  camk  phk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Phk	\N	\N
+CHEMBL2428	246	enzyme  kinase  protein kinase  ser_thr  camk  mlck	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Mlck	\N	\N
+CHEMBL2468	245	enzyme  kinase  protein kinase  ser_thr  camk  dapk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Dapk	\N	\N
+CHEMBL2493	268	enzyme  kinase  protein kinase  ser_thr  camk  camk1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camk1	\N	\N
+CHEMBL2494	268	enzyme  kinase  protein kinase  ser_thr  camk  camk1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camk1	\N	\N
+CHEMBL2527	270	enzyme  kinase  protein kinase  ser_thr  camk  rad53	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Rad53	\N	\N
+CHEMBL2553	386	enzyme  kinase  protein kinase  ser_thr  camk  rskb  rskb	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Rskb	Rskb	\N
+CHEMBL2558	245	enzyme  kinase  protein kinase  ser_thr  camk  dapk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Dapk	\N	\N
+CHEMBL2595	236	enzyme  kinase  protein kinase  ser_thr  camk  pkd	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Pkd	\N	\N
+CHEMBL2777	246	enzyme  kinase  protein kinase  ser_thr  camk  mlck	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Mlck	\N	\N
+CHEMBL2801	269	enzyme  kinase  protein kinase  ser_thr  camk  camk2	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camk2	\N	\N
+CHEMBL3062	246	enzyme  kinase  protein kinase  ser_thr  camk  mlck	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Mlck	\N	\N
+CHEMBL3094	472	enzyme  kinase  protein kinase  ser_thr  camk  mapkapk  mapkapk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Mapkapk	Mapkapk	\N
+CHEMBL3123	245	enzyme  kinase  protein kinase  ser_thr  camk  dapk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Dapk	\N	\N
+CHEMBL3125	385	enzyme  kinase  protein kinase  ser_thr  camk  rskb  mskb	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Rskb	Mskb	\N
+CHEMBL3542	414	enzyme  kinase  protein kinase  ser_thr  camk  camkl  nim1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Nim1	\N
+CHEMBL3829	269	enzyme  kinase  protein kinase  ser_thr  camk  camk2	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camk2	\N	\N
+CHEMBL3831	412	enzyme  kinase  protein kinase  ser_thr  camk  camkl  mark	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Mark	\N
+CHEMBL3863	236	enzyme  kinase  protein kinase  ser_thr  camk  pkd	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Pkd	\N	\N
+CHEMBL3906	386	enzyme  kinase  protein kinase  ser_thr  camk  rskb  rskb	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Rskb	Rskb	\N
+CHEMBL3980	245	enzyme  kinase  protein kinase  ser_thr  camk  dapk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Dapk	\N	\N
+CHEMBL4004	234	enzyme  kinase  protein kinase  ser_thr  camk  phk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Phk	\N	\N
+CHEMBL4045	409	enzyme  kinase  protein kinase  ser_thr  camk  camkl  ampk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Ampk	\N
+CHEMBL4121	269	enzyme  kinase  protein kinase  ser_thr  camk  camk2	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camk2	\N	\N
+CHEMBL4147	269	enzyme  kinase  protein kinase  ser_thr  camk  camk2	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camk2	\N	\N
+CHEMBL4204	428	enzyme  kinase  protein kinase  ser_thr  camk  mapkapk  mnk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Mapkapk	Mnk	\N
+CHEMBL4237	385	enzyme  kinase  protein kinase  ser_thr  camk  rskb  mskb	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Rskb	Mskb	\N
+CHEMBL4523	235	enzyme  kinase  protein kinase  ser_thr  camk  pim	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Pim	\N	\N
+CHEMBL4525	245	enzyme  kinase  protein kinase  ser_thr  camk  dapk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Dapk	\N	\N
+CHEMBL4533	409	enzyme  kinase  protein kinase  ser_thr  camk  camkl  ampk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Ampk	\N
+CHEMBL4574	410	enzyme  kinase  protein kinase  ser_thr  camk  camkl  brsk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Brsk	\N
+CHEMBL4578	413	enzyme  kinase  protein kinase  ser_thr  camk  camkl  melk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Melk	\N
+CHEMBL4627	246	enzyme  kinase  protein kinase  ser_thr  camk  mlck	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Mlck	\N	\N
+CHEMBL4630	411	enzyme  kinase  protein kinase  ser_thr  camk  camkl  chk1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Chk1	\N
+CHEMBL4637	409	enzyme  kinase  protein kinase  ser_thr  camk  camkl  ampk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Ampk	\N
+CHEMBL4670	472	enzyme  kinase  protein kinase  ser_thr  camk  mapkapk  mapkapk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Mapkapk	Mapkapk	\N
+CHEMBL4718	428	enzyme  kinase  protein kinase  ser_thr  camk  mapkapk  mnk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Mapkapk	Mnk	\N
+CHEMBL4900	236	enzyme  kinase  protein kinase  ser_thr  camk  pkd	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Pkd	\N	\N
+CHEMBL4924	386	enzyme  kinase  protein kinase  ser_thr  camk  rskb  rskb	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Rskb	Rskb	\N
+CHEMBL4990	472	enzyme  kinase  protein kinase  ser_thr  camk  mapkapk  mapkapk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Mapkapk	Mapkapk	\N
+CHEMBL5073	268	enzyme  kinase  protein kinase  ser_thr  camk  camk1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camk1	\N	\N
+CHEMBL5258	268	enzyme  kinase  protein kinase  ser_thr  camk  camk1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camk1	\N	\N
+CHEMBL5407	235	enzyme  kinase  protein kinase  ser_thr  camk  pim	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Pim	\N	\N
+CHEMBL5426	246	enzyme  kinase  protein kinase  ser_thr  camk  mlck	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Mlck	\N	\N
+CHEMBL5519	451	enzyme  kinase  protein kinase  ser_thr  camk  dcamkl  dcamkl	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Dcamkl	Dcamkl	\N
+CHEMBL5560	268	enzyme  kinase  protein kinase  ser_thr  camk  camk1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camk1	\N	\N
+CHEMBL5600	412	enzyme  kinase  protein kinase  ser_thr  camk  camkl  mark	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Mark	\N
+CHEMBL5606	383	enzyme  kinase  protein kinase  ser_thr  camk  camkl  lkb	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Lkb	\N
+CHEMBL5650	410	enzyme  kinase  protein kinase  ser_thr  camk  camkl  brsk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Brsk	\N
+CHEMBL5683	451	enzyme  kinase  protein kinase  ser_thr  camk  dcamkl  dcamkl	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Dcamkl	Dcamkl	\N
+CHEMBL5698	415	enzyme  kinase  protein kinase  ser_thr  camk  camkl  nuak	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Nuak	\N
+CHEMBL5699	384	enzyme  kinase  protein kinase  ser_thr  camk  camkl  qik	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Qik	\N
+CHEMBL5754	412	enzyme  kinase  protein kinase  ser_thr  camk  camkl  mark	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Mark	\N
+CHEMBL5784	415	enzyme  kinase  protein kinase  ser_thr  camk  camkl  nuak	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Nuak	\N
+CHEMBL5940	412	enzyme  kinase  protein kinase  ser_thr  camk  camkl  mark	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Mark	\N
+CHEMBL6003	387	enzyme  kinase  protein kinase  ser_thr  camk  tssk  tssk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Tssk	Tssk	\N
+CHEMBL6005	523	enzyme  kinase  protein kinase  ser_thr  camk  camk-unique  camk-unique	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camk-Unique	Camk-Unique	\N
+CHEMBL6082	384	enzyme  kinase  protein kinase  ser_thr  camk  camkl  qik	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Qik	\N
+CHEMBL6123	451	enzyme  kinase  protein kinase  ser_thr  camk  dcamkl  dcamkl	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Dcamkl	Dcamkl	\N
+CHEMBL6149	384	enzyme  kinase  protein kinase  ser_thr  camk  camkl  qik	Enzyme	Kinase	Protein Kinase	Ser_Thr	Camk	Camkl	Qik	\N

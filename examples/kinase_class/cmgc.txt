@@ -1,0 +1,56 @@
+CHEMBL1075167	390	enzyme  kinase  protein kinase  ser_thr  cmgc  dyrk  hipk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Dyrk	Hipk	\N
+CHEMBL1075255	211	enzyme  kinase  protein kinase  ser_thr  cmgc  ck	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Ck	\N	\N
+CHEMBL1075321	239	enzyme  kinase  protein kinase  ser_thr  cmgc  gsk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Gsk	\N	\N
+CHEMBL1163106	306	enzyme  kinase  protein kinase  ser_thr  cmgc  rck  mak	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Rck	Mak	\N
+CHEMBL1163112	248	enzyme  kinase  protein kinase  ser_thr  cmgc  cdkl	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdkl	\N	\N
+CHEMBL1163117	248	enzyme  kinase  protein kinase  ser_thr  cmgc  cdkl	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdkl	\N	\N
+CHEMBL1163126	306	enzyme  kinase  protein kinase  ser_thr  cmgc  rck  mak	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Rck	Mak	\N
+CHEMBL2276	330	enzyme  kinase  protein kinase  ser_thr  cmgc  mapk  jnk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Mapk	Jnk	\N
+CHEMBL2336	332	enzyme  kinase  protein kinase  ser_thr  cmgc  mapk  p38	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Mapk	p38	\N
+CHEMBL2508	148	enzyme  kinase  protein kinase  ser_thr  cmgc	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	\N	\N	\N
+CHEMBL260	332	enzyme  kinase  protein kinase  ser_thr  cmgc  mapk  p38	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Mapk	p38	\N
+CHEMBL262	239	enzyme  kinase  protein kinase  ser_thr  cmgc  gsk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Gsk	\N	\N
+CHEMBL2637	330	enzyme  kinase  protein kinase  ser_thr  cmgc  mapk  jnk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Mapk	Jnk	\N
+CHEMBL2850	239	enzyme  kinase  protein kinase  ser_thr  cmgc  gsk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Gsk	\N	\N
+CHEMBL2939	332	enzyme  kinase  protein kinase  ser_thr  cmgc  mapk  p38	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Mapk	p38	\N
+CHEMBL301	323	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk  cdc2	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	Cdc2	\N
+CHEMBL3055	326	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk  cdk7	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	Cdk7	\N
+CHEMBL308	323	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk  cdc2	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	Cdc2	\N
+CHEMBL3116	328	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk  cdk9	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	Cdk9	\N
+CHEMBL331	148	enzyme  kinase  protein kinase  ser_thr  cmgc	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	\N	\N	\N
+CHEMBL3385	329	enzyme  kinase  protein kinase  ser_thr  cmgc  mapk  erk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Mapk	Erk	\N
+CHEMBL3669	239	enzyme  kinase  protein kinase  ser_thr  cmgc  gsk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Gsk	\N	\N
+CHEMBL3961	332	enzyme  kinase  protein kinase  ser_thr  cmgc  mapk  p38	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Mapk	p38	\N
+CHEMBL4036	325	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk  cdk5	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	Cdk5	\N
+CHEMBL4040	329	enzyme  kinase  protein kinase  ser_thr  cmgc  mapk  erk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Mapk	Erk	\N
+CHEMBL4090	237	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	\N	\N
+CHEMBL4179	330	enzyme  kinase  protein kinase  ser_thr  cmgc  mapk  jnk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Mapk	Jnk	\N
+CHEMBL4335	332	enzyme  kinase  protein kinase  ser_thr  cmgc  mapk  p38	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Mapk	p38	\N
+CHEMBL4375	250	enzyme  kinase  protein kinase  ser_thr  cmgc  srpk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Srpk	\N	\N
+CHEMBL4442	323	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk  cdc2	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	Cdc2	\N
+CHEMBL4514	238	enzyme  kinase  protein kinase  ser_thr  cmgc  ck2	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Ck2	\N	\N
+CHEMBL4597	388	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk  taire	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	Taire	\N
+CHEMBL4674	332	enzyme  kinase  protein kinase  ser_thr  cmgc  mapk  p38	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Mapk	p38	\N
+CHEMBL5121	392	enzyme  kinase  protein kinase  ser_thr  cmgc  mapk  erk3	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Mapk	Erk3	\N
+CHEMBL5198	249	enzyme  kinase  protein kinase  ser_thr  cmgc  mapk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Mapk	\N	\N
+CHEMBL5213	324	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk  cdk2	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	Cdk2	\N
+CHEMBL5233	391	enzyme  kinase  protein kinase  ser_thr  cmgc  mapk  erk1	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Mapk	Erk1	\N
+CHEMBL5316	429	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk  pctaire	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	Pctaire	\N
+CHEMBL5332	393	enzyme  kinase  protein kinase  ser_thr  cmgc  mapk  erk5	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Mapk	Erk5	\N
+CHEMBL5364	331	enzyme  kinase  protein kinase  ser_thr  cmgc  mapk  nmo	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Mapk	nmo	\N
+CHEMBL5415	250	enzyme  kinase  protein kinase  ser_thr  cmgc  srpk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Srpk	\N	\N
+CHEMBL5416	431	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk  pitslre	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	Pitslre	\N
+CHEMBL5427	390	enzyme  kinase  protein kinase  ser_thr  cmgc  dyrk  hipk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Dyrk	Hipk	\N
+CHEMBL5589	325	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk  cdk5	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	Cdk5	\N
+CHEMBL5668	394	enzyme  kinase  protein kinase  ser_thr  cmgc  srpk  srpk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Srpk	Srpk	\N
+CHEMBL5718	330	enzyme  kinase  protein kinase  ser_thr  cmgc  mapk  jnk	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Mapk	Jnk	\N
+CHEMBL5719	327	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk  cdk8	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	Cdk8	\N
+CHEMBL5728	389	enzyme  kinase  protein kinase  ser_thr  cmgc  cdkl  cdkl	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdkl	Cdkl	\N
+CHEMBL5759	392	enzyme  kinase  protein kinase  ser_thr  cmgc  mapk  erk3	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Mapk	Erk3	\N
+CHEMBL5789	389	enzyme  kinase  protein kinase  ser_thr  cmgc  cdkl  cdkl	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdkl	Cdkl	\N
+CHEMBL5790	429	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk  pctaire	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	Pctaire	\N
+CHEMBL5808	431	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk  pitslre	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	Pitslre	\N
+CHEMBL5856	430	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk  pftaire	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	Pftaire	\N
+CHEMBL5901	325	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk  cdk5	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	Cdk5	\N
+CHEMBL6002	327	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk  cdk8	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	Cdk8	\N
+CHEMBL6162	430	enzyme  kinase  protein kinase  ser_thr  cmgc  cdk  pftaire	Enzyme	Kinase	Protein Kinase	Ser_Thr	Cmgc	Cdk	Pftaire	\N
