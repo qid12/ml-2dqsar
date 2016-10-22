@@ -12,7 +12,7 @@ library(doParallel) # for parallel calculations
 library(foreach)
 library(caret) # for create cross validation samples
 library(matrixStats) # for calculate matrix columnwise variance
-
+library(reshape)
 setwd("c:/users/zhou/desktop/sx")
 source("FuncPreComPiHierBayes.R") # for ml2dqsar
 
@@ -159,3 +159,24 @@ compNum <- getCompNum(cpi,16)
 statSM <- data.frame(single = rmse_single,
                      multi = rmse_multi,
                      compNum = compNum)
+
+### draw
+##data = read.table("gene.txt",sep = '\t',header = TRUE)
+
+
+custom_box_plot <- function(data){
+  dfm = melt(data,id.vars = 'compNum')
+  ggplot(dfm, aes(x = as.character(compNum), y = value, fill = variable)) +
+                                        # bar plot
+    geom_bar(stat = "identity", position = "dodge") +
+                                        #geom_text(aes(label = variable), vjust = 1.5, colour = "white", position = position_dodge(.9), size = 5) +
+    scale_fill_brewer(palette='Blues') +
+    labs(title = 'barplot', x = 'num' ,y = 'VALUE')+
+                                        # change title name  xlabel   ylabel
+    theme(axis.text=element_text(size=15,face = "bold") ,
+          plot.title = element_text(size=15,colour = "blue",face = "bold")
+         ,axis.title.x = element_text(size=15,face = "bold")
+         ,axis.title.y = element_text(size=15,face = "bold"))
+}
+#example:
+custom_box_plot(statSM)
