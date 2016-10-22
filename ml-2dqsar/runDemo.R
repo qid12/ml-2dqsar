@@ -44,7 +44,7 @@ cpi$sigma # sigma parameter for ml2qsar.
 ### label data for n-fold cross validation.
 flds <- createFolds(data$affnity,
                     k = nfold,
-                    list=TRUEx,
+                    list=TRUE,
                     returnTrain = FALSE)
 data$matrix[-flds[[i]],] # get the train sample.
 data$matrix[flds[[1]],] # get the test sample.
