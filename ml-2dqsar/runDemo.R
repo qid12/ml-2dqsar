@@ -11,7 +11,7 @@ library(optimx) # for optimization
 library(doParallel) # for parallel calculations
 library(foreach)
 library(caret) # for create cross validation samples
-library(rowVars) # for calculate matrix columnwise variance
+library(matrixStats) # for calculate matrix columnwise variance
 source("FuncPreComPiHierBayes.R") # for ml2dqsar
 
 ### use proteins with compound between (50 to 1000)
@@ -70,8 +70,7 @@ rootMSE <- sqrt(mse(y[test],test_result))
 
 ### estimate sigma based on the omega metrix.
 #### if each row corresponds to one protein, then
-sigma <- mean(colVars(omega_matrix))
-
+sigma <- mean(colVars(omega_matrix)) # use all cpis.
 
 ### run ml-2dqsar with personal code and sigma
 #### set
@@ -85,3 +84,4 @@ testResult <- crossPreComPiHier(cpi,
                                 maxit = TRUE,
                                 iteration = 1000,
                                 parallel = TRUE)
+### compare both test results.
