@@ -59,8 +59,9 @@ trainData <- data[-testIndex,]
 #### lambda chosen as nested cv.
 fit <- glmnet(x = data$matrix[train, ],
               y = data$affinity[train],
+              intercept=FALSE,
               lambda=cv.glmnet(data$matrix[train,],
-                               data$afffinity[train])$lambda.min)
+                               data$afffinity[train], intercept=FALSE)$lambda.min)
 omega <- coef(fit) # for each protein
 #### record predicted tests and omega.
 test_result <- predict(fit,
