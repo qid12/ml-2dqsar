@@ -6,7 +6,6 @@ bifeakeep <- function(datalist,cutoff){
   ## for binary feature only in datalist$X
   ##   each column of X is feature.
   ## return as vector for index to keep.
-  
   feanum <- ncol(datalist$X[[1]])
   samplenum <- 0
   bifeaneed <- 1:feanum

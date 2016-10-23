@@ -49,6 +49,11 @@ source(paste(ml2dqsar_dir,wiperfunc_filenm,sep=""))
 ### load features.
 features <- fealist[fc_index]
 isbinaryfc <- isbinaryf[fc_index]
+if(isGPCR){
+  subdirs <- gpcr_names[subd_index]
+} else{
+  subdirs <- kinase_names[subd_index]
+}
 
 ### run
 for(f in 1:length(features)){# f for feature
