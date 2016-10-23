@@ -34,7 +34,7 @@ custom_box_plot <- function(rmsem,rmses,compNum,titlestr){
     geom_bar(stat = "identity", position = "dodge") +
     scale_fill_grey() +
     labs(title = titlestr, x = 'Compound Number' ,y = 'RMSE')+
-    theme(axis.text=element_text(size=15,face = "bold") ,
+    theme(axis.text=element_text(size=10,face = "bold") ,
           plot.title = element_text(size=15,colour = "black",face = "bold"),
           axis.title.x = element_text(size=15,face = "bold"),
           axis.title.y = element_text(size=15,face = "bold"))
@@ -51,6 +51,7 @@ boxplot_file <- function(fs,fm,title){
 }
 
 ### run
+#### kinase
 boxplot_file('cpi_kinase_agc_macc.data','testResult_kinase_agc_macc.data','kinase-agc-macc')
 boxplot_file('cpi_kinase_camk_macc.data','testResult_kinase_camk_macc.data','kinase-camk-macc')
 boxplot_file('cpi_kinase_cmgc_macc.data','testResult_kinase_cmgc_macc.data','kinase-cmgc-macc')
@@ -64,3 +65,24 @@ boxplot_file('cpi_kinase_cmgc_fingerprint.data','testResult_kinase_cmgc_fingerpr
 
 boxplot_file('cpi_kinase_agc_morgan.data','testResult_kinase_agc_morgan.data','kinase-agc-morgan')
 boxplot_file('cpi_kinase_camk_morgan.data','testResult_kinase_camk_morgan.data','kinase-camk-morgan')
+
+#### gpcr
+boxplot_file('cpi_CPIs_GPCR  lipid-like ligand receptor_fingerprint.data',
+             'testResult_CPIs_GPCR  lipid-like ligand receptor_fingerprint.data',
+             'GPCR-lipid-like ligand receptor-morgan')
+
+boxplot_file('cpi_CPIs_GPCR  lipid-like ligand receptor_morgan.data',
+             'testResult_CPIs_GPCR  lipid-like ligand receptor_morgan.data',
+              'GPCR-lipid-like ligand receptor-morgan')
+
+boxplot_file('cpi_CPIs_GPCR nucleotide-like receptor_macc.data',
+             'testResult_CPIs_GPCR nucleotide-like receptor_macc.data',
+              'GPCR-nucleotide-like receptor-macc')
+
+boxplot_file('cpi_CPIs_GPCR nucleotide-like receptor_fingerprint.data',
+             'testResult_CPIs_GPCR nucleotide-like receptor_fingerprint.data',
+             'GPCR-nucleotide-like receptor-fingerprint')
+
+boxplot_file('cpi_CPIs_Peptide GPCR_macc.data',
+             'testResult_CPIs_Peptide GPCR_macc.data',
+              'GPCR-Peptide GPCR-macc')
