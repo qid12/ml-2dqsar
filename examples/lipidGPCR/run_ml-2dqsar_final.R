@@ -57,34 +57,26 @@ for(f in 1:length(features)){# f for feature
     ldat = loadfiles(datadir,gpcr_nm, kinase_nm,isGPCR,f,k)
     files = ldat$allfiles
     dirs = ldat$protnms
-    
     oneGroup = list()
     len = list()
     oneGroup_xy = list()
-    
     for (i in (1:length(files))){
       oneGroup[[i]] <- fread(as.character(files[i][[1]]), sep=',',header=TRUE)
       len[i] <- length(oneGroup[[i]]$aveaffinty)
       ## load data, take -log10 for y.
       oneGroup[[i]]$aveaffinty <- -log10(oneGroup[[i]]$aveaffinty)
-      ## center data both (x and y)
-      ## y column
-      #oneGroup[[i]] <- scale(oneGroup[[i]], center=TRUE, scale = FALSE)
-      
       oneGroup_xy$X[[i]] <- subset(oneGroup[[i]], select = c(-V1,-aveaffinty))
       oneGroup_xy$y[[i]] <- subset(oneGroup[[i]], select = aveaffinty)
     }
-    
     keepft <- bifeakeep(oneGroup_xy,cutoff)
     for(i in length(oneGroup_xy$y)){
       oneGroup_xy$X[[i]] = oneGroup_xy$X[[i]][ ,keepft]
     }
-    
+    ## scale data
     for (i in (1:length(files))){
       oneGroup_xy$X[[i]] <- scale(oneGroup_xy$X[[i]], center=TRUE, scale = FALSE)
       oneGroup_xy$y[[i]] <- scale(oneGroup_xy$y[[i]], center=TRUE, scale = FALSE)
     }
-    
     ## filter based on compounds' number.
     cpi <- list()
     cpi$proteins <- list()
@@ -101,49 +93,33 @@ for(f in 1:length(features)){# f for feature
     ## check j == 0 ; continue
     if(j==0){next;}
     ## filter features, and update cpi
-
-    
-      cpi$omega_matrix = matrix(nrow=length(cpi$y),ncol=ncol(cpi$X[[1]]))
-      for(i in 1:length(cpi$y)){
-        ## label data for n-fold cross validation.
-        flds <- createFolds(cpi$y[[i]],
-                            k = nfold,
-                            list=TRUE,
-                            returnTrain = FALSE)
-        
-        for(j in 1:nfold){
-          tmp_mse = 0
-          
-          ## run every task for ridge regression with glmnet package.
-          ## for every protein,run
-          ## lambda chosen as nested cv.
-          fit <- glmnet(x = cpi$X[[i]][-flds[[j]],],
-                        y = cpi$y[[i]][-flds[[j]]],
-                        lambda=cv.glmnet(cpi$X[[i]][-flds[[j]],],
-                                         y = cpi$y[[i]][-flds[[j]]],intercept = FALSE, nfold = nfold)$lambda.min,
-                        intercept = FALSE)
-          #omega <- coef(fit) # for each protein
-          
-          ## record predicted tests and omega.
-          test_result <- predict(fit,
-                                 cpi$X[[i]][flds[[j]],])
-          #cpi$rootMSE[(i-1)*nfold+j] <- sqrt(mse(cpi$y[[i]][flds[[j]]],test_result))
-          tmp_mse = tmp_mse + sqrt(mse(cpi$y[[i]][flds[[j]]],test_result))
-          
-          #cpi$omega_matrix[,(i-1)*nfold+j] = omega[2:nrow(omega)]
-        } # end of nfold for j.
-        
-        cpi$rootMSE[[i]] <- tmp_mse /nfold
-        
-        fit <- glmnet(x = cpi$X[[i]],
-                      y = cpi$y[[i]],
-                      lambda=cv.glmnet(cpi$X[[i]],y = cpi$y[[i]],intercept = FALSE, nfold = nfold)$lambda.min,
+    cpi$omega_matrix = matrix(nrow=length(cpi$y),ncol=ncol(cpi$X[[1]]))
+    for(i in 1:length(cpi$y)){
+      ## label data for n-fold cross validation.
+      flds <- createFolds(cpi$y[[i]],
+                          k = nfold,
+                          list=TRUE,
+                          returnTrain = FALSE)
+      tmp_mse = 0
+      for(j in 1:nfold){
+        fit <- glmnet(x = cpi$X[[i]][-flds[[j]],],
+                      y = cpi$y[[i]][-flds[[j]]],
+                      lambda=cv.glmnet(cpi$X[[i]][-flds[[j]],],
+                                       y = cpi$y[[i]][-flds[[j]]],intercept = FALSE, nfold = nfold)$lambda.min,
                       intercept = FALSE)
-        
-        omega <- coef(fit)
-        cpi$omega_matrix[i,] = t(omega[2:nrow(omega)])
-        
-      } # end of protein num for i.
+        test_result <- predict(fit,
+                               cpi$X[[i]][flds[[j]],])
+        tmp_mse = tmp_mse + sqrt(mse(cpi$y[[i]][flds[[j]]],test_result))
+      } # end of nfold for j.
+      cpi$rootMSE[[i]] <- tmp_mse /nfold
+      fit <- glmnet(x = cpi$X[[i]],
+                    y = cpi$y[[i]],
+                    lambda=cv.glmnet(cpi$X[[i]],y = cpi$y[[i]],intercept = FALSE, nfold = nfold)$lambda.min,
+                    intercept = FALSE)
+      omega <- coef(fit)
+      cpi$omega_matrix[i,] = t(omega[2:nrow(omega)])
+
+    } # end of protein num for i.
     ## estimate sigma based on the omega metrix.
     ## if each row corresponds to one protein, then
     ## only use features not zero
