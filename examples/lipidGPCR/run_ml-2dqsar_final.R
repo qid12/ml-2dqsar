@@ -3,9 +3,9 @@
 ### 2016-10-20
 
 ### set parameter.
-jobdir <- "D:/lab/TransferLearning/TransferModel/Code/data_161023/"
-datadir <- "D:/lab/TransferLearning/TransferModel/Code/data_161023/"
-ml2dqsar_dir <- "D:/lab/TransferLearning/TransferModel/Code/data_161023/"
+jobdir <- "D:/lab/sx/"
+datadir <- "D:/lab/sx/"
+ml2dqsar_dir <- "D:/lab/sx/"
 
 ml2dqsar_filenm <- "FuncPreComPiHierBayes.R"
 wiperfunc_filenm <- "wiperdata.R"
@@ -25,10 +25,10 @@ sigma2dot <- 100
 iternum <- 1000
 
 isGPCR <- TRUE
-subd_index= c(1,2) # subdirs choose index
-fc_index= c(1,2,3) # feature choose index
+subd_index= c(3) # subdirs choose index
+fc_index= c(4) # feature choose index
 
-cutoff = 5 # to filter the features.
+cutoff = 0.05 # to filter the features.
 ###------keep unchanged below----------###
 ### packages
 library(glmnet)
@@ -55,73 +55,95 @@ for(f in 1:length(features)){# f for feature
   for(k in 1:length(subdirs)){ # k for subdirs.
     ## load data.
     ldat = loadfiles(datadir,gpcr_nm, kinase_nm,isGPCR,f,k)
-    files = ldat$files
+    files = ldat$allfiles
     dirs = ldat$protnms
-
+    
     oneGroup = list()
     len = list()
-    oneGroup_scaled = list()
-
+    oneGroup_xy = list()
+    
     for (i in (1:length(files))){
-      oneGroup[[i]] <- fread(files[i][[1]], sep=',',header=TRUE)
+      oneGroup[[i]] <- fread(as.character(files[i][[1]]), sep=',',header=TRUE)
       len[i] <- length(oneGroup[[i]]$aveaffinty)
       ## load data, take -log10 for y.
       oneGroup[[i]]$aveaffinty <- -log10(oneGroup[[i]]$aveaffinty)
       ## center data both (x and y)
       ## y column
-      oneGroup[[i]] <- scale(oneGroup[[i]], center=TRUE, scale = FALSE)
-
-      oneGroup_scaled$X[[i]] <- subset(oneGroup[[i]], select = c(-V1,-aveaffinty))
-      oneGroup_scaled$y[[i]] <- subset(oneGroup[[i]], select = aveaffinty)
+      #oneGroup[[i]] <- scale(oneGroup[[i]], center=TRUE, scale = FALSE)
+      
+      oneGroup_xy$X[[i]] <- subset(oneGroup[[i]], select = c(-V1,-aveaffinty))
+      oneGroup_xy$y[[i]] <- subset(oneGroup[[i]], select = aveaffinty)
     }
-
+    
+    keepft <- bifeakeep(oneGroup_xy,cutoff)
+    for(i in length(oneGroup_xy$y)){
+      oneGroup_xy$X[[i]] = oneGroup_xy$X[[i]][ ,keepft]
+    }
+    
+    for (i in (1:length(files))){
+      oneGroup_xy$X[[i]] <- scale(oneGroup_xy$X[[i]], center=TRUE, scale = FALSE)
+      oneGroup_xy$y[[i]] <- scale(oneGroup_xy$y[[i]], center=TRUE, scale = FALSE)
+    }
+    
     ## filter based on compounds' number.
     cpi <- list()
     cpi$proteins <- list()
+    cpi$rootMSE  <- c()
     j = 0
-    for(i in 1:length(oneGroup_scaled$y)){
+    for(i in 1:length(oneGroup_xy$y)){
       if(len[[i]]>=lower_limit & len[[i]] <= upper_limit){
         j = j + 1
         cpi$proteins[j] = dirs[[i]]
-        cpi$y[[j]] <- oneGroup_scaled$y[[i]] # log of affinity
-        cpi$X[[j]] <- oneGroup_scaled$X[[i]] # Matrix of the covarietes
+        cpi$y[[j]] <- oneGroup_xy$y[[i]] # log of affinity
+        cpi$X[[j]] <- oneGroup_xy$X[[i]] # Matrix of the covarietes
       }
     }
     ## check j == 0 ; continue
     if(j==0){next;}
     ## filter features, and update cpi
-    keepft <- bifeakeep(cpi,cutoff)
-    for(i in length(cip$y)){
-      cpi$X[[i]] = cpi$X[[i]][ ,keepft]
-    }
 
-    result = tryCatch({
-      cpi$omega_matrix = matrix(nrow=ncol(cpi$X[[1]]),ncol=nfold*length(cpi$y))
+    
+      cpi$omega_matrix = matrix(nrow=length(cpi$y),ncol=ncol(cpi$X[[1]]))
       for(i in 1:length(cpi$y)){
         ## label data for n-fold cross validation.
         flds <- createFolds(cpi$y[[i]],
                             k = nfold,
                             list=TRUE,
                             returnTrain = FALSE)
+        
         for(j in 1:nfold){
+          tmp_mse = 0
+          
           ## run every task for ridge regression with glmnet package.
           ## for every protein,run
           ## lambda chosen as nested cv.
           fit <- glmnet(x = cpi$X[[i]][-flds[[j]],],
                         y = cpi$y[[i]][-flds[[j]]],
                         lambda=cv.glmnet(cpi$X[[i]][-flds[[j]],],
-                                         y = cpi$y[[i]][-flds[[j]]],intercept = FALSE)$lambda.min,
+                                         y = cpi$y[[i]][-flds[[j]]],intercept = FALSE, nfold = nfold)$lambda.min,
                         intercept = FALSE)
-          omega <- coef(fit) # for each protein
-
+          #omega <- coef(fit) # for each protein
+          
           ## record predicted tests and omega.
           test_result <- predict(fit,
                                  cpi$X[[i]][flds[[j]],])
-          cpi$rootMSE[(i-1)*nfold+j] <- sqrt(mse(cpi$y[[i]][flds[[j]]],test_result))
-          cpi$omega_matrix[,(i-1)*nfold+j] = omega[2:nrow(omega)]
+          #cpi$rootMSE[(i-1)*nfold+j] <- sqrt(mse(cpi$y[[i]][flds[[j]]],test_result))
+          tmp_mse = tmp_mse + sqrt(mse(cpi$y[[i]][flds[[j]]],test_result))
+          
+          #cpi$omega_matrix[,(i-1)*nfold+j] = omega[2:nrow(omega)]
         } # end of nfold for j.
+        
+        cpi$rootMSE[[i]] <- tmp_mse /nfold
+        
+        fit <- glmnet(x = cpi$X[[i]],
+                      y = cpi$y[[i]],
+                      lambda=cv.glmnet(cpi$X[[i]],y = cpi$y[[i]],intercept = FALSE, nfold = nfold)$lambda.min,
+                      intercept = FALSE)
+        
+        omega <- coef(fit)
+        cpi$omega_matrix[i,] = t(omega[2:nrow(omega)])
+        
       } # end of protein num for i.
-    })
     ## estimate sigma based on the omega metrix.
     ## if each row corresponds to one protein, then
     ## only use features not zero

@@ -6,17 +6,17 @@ bifeakeep <- function(datalist,cutoff){
   ## for binary feature only in datalist$X
   ##   each column of X is feature.
   ## return as vector for index to keep.
-
-  feanum <- ncol(datalist$X[1])
+  
+  feanum <- ncol(datalist$X[[1]])
   samplenum <- 0
-  bifeakeep <- 1:feanum
+  bifeaneed <- 1:feanum
   colsmeans <- rep(0,feanum)
-  for(prot in length(datalist$X)){
-    colsmeans = colsmeans + colSums(datalist$X[[i]])
-    samplenum <- samplenum + nrow(datalist$X[[i]])
+  for(prot in 1:length(datalist$X)){
+    colsmeans = colsmeans + colSums(datalist$X[[prot]])
+    samplenum <- samplenum + nrow(datalist$X[[prot]])
   }
   colsmeans <- colsmeans/samplenum
-  return bifeakeep[which((colsmeans > cutoff) & (colsmeans < 1-cutoff))]
+  return(bifeaneed[which( (colsmeans > cutoff) & (colsmeans < (1-cutoff))) ])
 }
 
 loadfiles <- function(datadir,gpcr_nm,kinase_nm,isGPCR,f,k){
@@ -26,10 +26,10 @@ loadfiles <- function(datadir,gpcr_nm,kinase_nm,isGPCR,f,k){
     subdirs <- kinase_names[subd_index]
   }
   if(isGPCR){
-    files <- list.files(path=paste(datadir,"GPCR",subdirs[k],sep=""),
+    files <- list.files(path=paste(datadir,"GPCR/",subdirs[k],sep=""),
                         full.names=TRUE,recursive=TRUE,
                         pattern=paste(".*",features[f],".csv",sep=""))
-    dirs <- dir(path=paste(datadir,"GPCR",subdirs[k],sep=""),
+    dirs <- dir(path=paste(datadir,"GPCR/",subdirs[k],sep=""),
                 full.names=FALSE,no..=FALSE)
   } else {
     files <- list.files(path=paste(datadir,subdirs[k],sep=""),
