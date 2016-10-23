@@ -1,8 +1,24 @@
 ### run ml-2dqsar
-### demo
 ### szu
 ### 2016-10-20
 
+### set parameter.
+jobdir <- "D:/lab/TransferLearning/TransferModel/Code/data_161023/"
+datadir <- "D:/lab/TransferLearning/TransferModel/Code/data_161023/"
+ml2dqsar_dir <- "D:/lab/TransferLearning/TransferModel/Code/data_161023/"
+
+ml2dqsar_filenm <- "FuncPreComPiHierBayes.R"
+gpcr_names <- c("CPIs_GPCR_monoamine_receptor",
+                "CPIs_GPCR_nucleotide-like_receptor",
+                "CPIs_GPCR  lipid-like ligand receptor",
+                "CPIs_Peptide GPCR")
+kinase_names <- c("kinase_agc", "kinase_camk","kinase_ck1","kinase_cmgc",
+                  "kinase_ste","kinase_tk","kinase_tkl")
+fealist <- c("macc","phychem","fingerprint","morgan")
+
+nfold <- 5
+lower_limit = 50
+upper_limit = 1000
 ### packages
 library(glmnet) # for ridge regression
 library(data.table) # for load data quickly
@@ -12,28 +28,28 @@ library(doParallel) # for parallel calculations
 library(foreach)
 library(caret) # for create cross validation samples
 library(matrixStats) # for calculate matrix columnwise variance
-library(Metrics)
-source("FuncPreComPiHierBayes.R") # for ml2dqsar
-
+library(Metrics) 
 ### set dir
-setwd("c:/users/zhou/desktop/sx")
-
+setwd(jobdir)
+source(paste(ml2dqsar_dir,ml2dqsar_filenm,sep="")) # under jobdir.
 ### use proteins with compound between (50 to 1000)
-subdirs <- c("CPIs_GPCR  lipid-like ligand receptor","CPIs_Peptide GPCR")
-features <- c("macc","phychem","fingerprint")
-
-nfold = 5
-lower_limit = 50
-upper_limit = 1000
-
-for(f in 1:3){
-  for(k in 1:length(subdirs))
+proclass <- "GPCR" # if kinase set it proclass <- ""
+subdirs <- gpcr_names[1,2]
+features <- fealist[1,2,3]
+### run
+for(f in 1:length(features)){# f for feature
+  for(k in 1:length(subdirs)) # k for subdirs
   {
     ## read file
-    files <- list.files(path=paste("c:/users/zhou/desktop/sx/GPCR/",subdirs[k],sep=""),
+    files <- list.files(path=paste(jobdir,subdirs[k],sep=""),
                         full.names=TRUE,recursive=TRUE,
                         pattern=paste(".*",features[f],".csv",sep=""))
-    dirs <- dir(path=paste("c:/users/zhou/desktop/sx/GPCR/",subdirs[k],sep=""),
+    ## record protei names
+    if(proclass){
+        dirs <- dir(path=paste("D:/lab/TransferLearning/TransferModel/Code/data_161023/GPCR/",subdirs[k],sep=""),
+                    full.names=FALSE,no..=FALSE)
+    }
+    dirs <- dir(path=paste("D:/lab/TransferLearning/TransferModel/Code/data_161023/GPCR/",subdirs[k],sep=""),
                 full.names=FALSE,no..=FALSE)
 
     oneGroup = list()
@@ -68,6 +84,7 @@ for(f in 1:3){
         cpi$X[[j]] <- oneGroup_scaled$X[[i]] # Matrix of the covarietes
       }
     }
+    ### check j == 0 ; continue
     cpi$omega_matrix = matrix(nrow=ncol(cpi$X[[1]]),ncol=nfold*length(cpi$y))
     for(i in 1:length(cpi$y)){
       ## label data for n-fold cross validation.
@@ -92,11 +109,12 @@ for(f in 1:3){
                                cpi$X[[i]][flds[[j]],])
 
         cpi$rootMSE[(i-1)*nfold+j] <- sqrt(mse(cpi$y[[i]][flds[[j]]],test_result))
-        cpi$omega_matrix[,(i-1)*nfold+j] = omega[2:168]
+        cpi$omega_matrix[,(i-1)*nfold+j] = omega[2:nrow(omega)]
       }
     }
     ## estimate sigma based on the omega metrix.
     ## if each row corresponds to one protein, then
+    ## only use features not zero
     sigma <- mean(colVars(cpi$omega_matrix))
     cpi$sigma <- sigma
     for(i in 1:length(cpi$y)){
