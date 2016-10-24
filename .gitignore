@@ -242,3 +242,6 @@ sympy-plots-for-*.tex/
 *.temp
 /*.csv
 *.csv
+/examples/lipidGPCR/cpi_lipidGPCR_macc.data
+/examples/lipidGPCR/testResult_lipidGPCR_macc.data
+*.data
