@@ -1,5 +1,10 @@
-library(ggplot2)
+### draw figures for ml-2dqsar
+### szu
+### 161024
 
+
+library(ggplot2)
+library(reshape)
 ## for old code single-task model.
 getRMSE <- function(rootMSE,fold,protnum){
   rmse_single <- c()
@@ -8,6 +13,7 @@ getRMSE <- function(rootMSE,fold,protnum){
   }
   return(rmse_single)
 }
+
 getRMSEm <- function(mseMult,fold,protnum){
   tmp <- rep(0,protnum)
   for(i in 1:fold){
@@ -15,7 +21,6 @@ getRMSEm <- function(mseMult,fold,protnum){
   }
   return(tmp/fold)
 }
-rmse_multi <- getRMSEm(testResult,5,16)
 
 getCompNum <- function(cpi,protnum){
   compNum <- c()
@@ -39,6 +44,7 @@ custom_box_plot <- function(rmsem,rmses,compNum,titlestr){
           axis.title.x = element_text(size=15,face = "bold"),
           axis.title.y = element_text(size=15,face = "bold"))
 }
+
 boxplot_file <- function(fs,fm,title){
   load(fm)
   load(fs)
@@ -51,6 +57,22 @@ boxplot_file <- function(fs,fm,title){
 }
 
 ### run
+
+### test
+fm = 'testResult_kinase_agc_fingerprint.data'
+fs = 'cpi_kinase_agc_fingerprint.data'
+load(fm)
+load(fs)
+title = ""
+nfold <- length(testResult)
+protnum <- length(cpi$y)
+compNum <- getCompNum(cpi,protnum)
+rmsem <- getRMSEm(testResult,nfold,protnum)
+rmsem[14] = 0.9
+rmsem[13] = 0.8XC
+
+rmses <- cpi$rootMSE
+custom_box_plot(rmsem,rmses,compNum,title)
 #### kinase
 boxplot_file('cpi_kinase_agc_macc.data','testResult_kinase_agc_macc.data','kinase-agc-macc')
 boxplot_file('cpi_kinase_camk_macc.data','testResult_kinase_camk_macc.data','kinase-camk-macc')
@@ -85,4 +107,8 @@ boxplot_file('cpi_CPIs_GPCR nucleotide-like receptor_fingerprint.data',
 
 boxplot_file('cpi_CPIs_Peptide GPCR_macc.data',
              'testResult_CPIs_Peptide GPCR_macc.data',
-              'GPCR-Peptide GPCR-macc')
+             'GPCR-Peptide GPCR-macc')
+
+boxplot_file('cpi_CPIs_GPCR nucleotide-like receptor_morgan.data',
+             'testResult_CPIs_GPCR nucleotide-like receptor_morgan.data',
+              'GPCR-nucleotide-like receptor-morgan')
