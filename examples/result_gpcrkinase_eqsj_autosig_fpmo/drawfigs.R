@@ -59,8 +59,8 @@ boxplot_file <- function(fs,fm,title){
 ### run
 
 ### test
-fm = 'testResult_kinase_agc_fingerprint.data'
-fs = 'cpi_kinase_agc_fingerprint.data'
+fm = 'testResult_kinase_tk_fingerprint.data'
+fs = 'cpi_kinase_tk_fingerprint.data'
 load(fm)
 load(fs)
 title = ""
@@ -70,46 +70,6 @@ compNum <- getCompNum(cpi,protnum)
 rmsem <- getRMSEm(testResult,nfold,protnum)
 rmses <- cpi$rootMSE
 custom_box_plot(rmsem,rmses,compNum,title)
-
-#### kinase
-boxplot_file('cpi_kinase_agc_macc.data','testResult_kinase_agc_macc.data','kinase-agc-macc')
-boxplot_file('cpi_kinase_camk_macc.data','testResult_kinase_camk_macc.data','kinase-camk-macc')
-boxplot_file('cpi_kinase_cmgc_macc.data','testResult_kinase_cmgc_macc.data','kinase-cmgc-macc')
-boxplot_file('cpi_kinase_ste_macc.data','testResult_kinase_ste_macc.data','kinase-ste-macc')
-boxplot_file('cpi_kinase_tk_macc.data','testResult_kinase_tk_macc.data','kinase-tk-macc')
-boxplot_file('cpi_kinase_tkl_macc.data','testResult_kinase_tkl_macc.data','kinase-tkl-macc')
-
-boxplot_file('cpi_kinase_agc_fingerprint.data','testResult_kinase_agc_fingerprint.data','kinase-agc-fingerprint')
-boxplot_file('cpi_kinase_camk_fingerprint.data','testResult_kinase_camk_fingerprint.data','kinase-camk-fingerprint')
-boxplot_file('cpi_kinase_cmgc_fingerprint.data','testResult_kinase_cmgc_fingerprint.data','kinase-cmgc-fingerprint')
-
-boxplot_file('cpi_kinase_agc_morgan.data','testResult_kinase_agc_morgan.data','kinase-agc-morgan')
-boxplot_file('cpi_kinase_camk_morgan.data','testResult_kinase_camk_morgan.data','kinase-camk-morgan')
-
-#### gpcr
-boxplot_file('cpi_CPIs_GPCR  lipid-like ligand receptor_fingerprint.data',
-             'testResult_CPIs_GPCR  lipid-like ligand receptor_fingerprint.data',
-             'GPCR-lipid-like ligand receptor-morgan')
-
-boxplot_file('cpi_CPIs_GPCR  lipid-like ligand receptor_morgan.data',
-             'testResult_CPIs_GPCR  lipid-like ligand receptor_morgan.data',
-              'GPCR-lipid-like ligand receptor-morgan')
-
-boxplot_file('cpi_CPIs_GPCR nucleotide-like receptor_macc.data',
-             'testResult_CPIs_GPCR nucleotide-like receptor_macc.data',
-              'GPCR-nucleotide-like receptor-macc')
-
-boxplot_file('cpi_CPIs_GPCR nucleotide-like receptor_fingerprint.data',
-             'testResult_CPIs_GPCR nucleotide-like receptor_fingerprint.data',
-             'GPCR-nucleotide-like receptor-fingerprint')
-
-boxplot_file('cpi_CPIs_Peptide GPCR_macc.data',
-             'testResult_CPIs_Peptide GPCR_macc.data',
-             'GPCR-Peptide GPCR-macc')
-
-boxplot_file('cpi_CPIs_GPCR nucleotide-like receptor_morgan.data',
-             'testResult_CPIs_GPCR nucleotide-like receptor_morgan.data',
-              'GPCR-nucleotide-like receptor-morgan')
 
 ### draw figures.
 boxplot_file('cpi_kinase_agc_morgan.data',
@@ -126,6 +86,8 @@ boxplot_file('cpi_kinase_camk_fingerprint.data',
              'testResult_kinase_camk_fingerprint.data',
              'kinase camk fingerprint')
 
+## sigma = 0.0076 kept fp: 343
+## performance is ok, should compared with learn in group
 boxplot_file('cpi_kinase_tk_morgan.data',
              'testResult_kinase_tk_morgan.data',
              'kinase tk morgan')
@@ -133,9 +95,13 @@ boxplot_file('cpi_kinase_tk_fingerprint.data',
              'testResult_kinase_tk_fingerprint.data',
              'kinase tk fingerprint')
 
+
 boxplot_file('cpi_kinase_cmgc_morgan.data',
              'testResult_kinase_cmgc_morgan.data',
              'kinase cmgc morgan')
+
+## sigma = 0.0089 kept fp: 339
+## performance is bad, should compared with larger variance
 boxplot_file('cpi_kinase_cmgc_fingerprint.data',
              'testResult_kinase_cmgc_fingerprint.data',
              'kinase cmgc fingerprint')
