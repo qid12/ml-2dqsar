@@ -3,7 +3,7 @@
 ### 2016-10-20
 
 ### accept args
-
+args <- commandArgs(trailingOnly = TRUE)
 ## args <- commandArgs(TRUE)
 ### set parameter.
 jobdir <- "/data/home/szu/Lab/ml-2dqsar/getmcode/result/"
@@ -34,13 +34,17 @@ upper_limit <- 1000
 sigma2dot <- 100
 iternum <- 1000
 
-isGPCR <- TRUE
-subd_index= c(1) # subdirs choose index
-fi= 1 # feature choose index
+if(as.numeric(args[1]) > 0){
+  isGPCR <- TRUE
+} else{
+  isGPCR <- FALSE
+}
+subd_index= c(as.numeric(args[2])) # subdirs choose index
+fi= as.numeric(args[3]) # feature choose index
 
 cutoff = 0.05 # to filter the features.
 
-isaddstd <- TRUE
+isaddstd <- FALSE
 isusemin <- FALSE
 useminv <- 0.05
 ###------keep unchanged below----------###
@@ -73,7 +77,7 @@ for(k in 1:length(subdirs)){ # k for subdirs.
   ## load data.
   ldat = loadfiles(datadir,gpcr_nm, kinase_nm,isGPCR,fi,k)
   precpi <- getpredata(ldat)
-  cpi <- getcpid(precpi, fi, cutoff,lower_limit, upper_limit)
+  cpi <- getcpid(precpi,fi, cutoff,lower_limit, upper_limit)
 
   sresult <- get_singlpar_sigma(cpi,nfold,isaddstd,isusemin,useminv)
 
