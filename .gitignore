@@ -245,3 +245,4 @@ sympy-plots-for-*.tex/
 /examples/lipidGPCR/cpi_lipidGPCR_macc.data
 /examples/lipidGPCR/testResult_lipidGPCR_macc.data
 *.data
+/examples/result_gk_eqsj_addvarsj_append/drawfigs.R
