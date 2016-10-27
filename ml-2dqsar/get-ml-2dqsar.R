@@ -36,9 +36,13 @@ iternum <- 1000
 
 isGPCR <- TRUE
 subd_index= c(1) # subdirs choose index
-fc_index= c(1) # feature choose index
+fi= c(1) # feature choose index
 
 cutoff = 0.05 # to filter the features.
+
+isaddstd <- TRUE
+isusemin <- FALSE
+useminv <- 0.05
 ###------keep unchanged below----------###
 ### packages
 library(methods)
@@ -57,9 +61,7 @@ setwd(jobdir)
 source(paste(ml2dqsar_dir,ml2dqsar_filenm,sep=""))
 source(paste(ml2dqsar_dir,wiperfunc_filenm,sep=""))
 
-### load features.
-features <- fealist[fc_index]
-isbinaryfc <- isbinaryf[fc_index]
+isbinaryfc <- isbinaryf[fi]
 if(isGPCR){
   subdirs <- gpcr_names[subd_index]
 } else{
@@ -67,11 +69,16 @@ if(isGPCR){
 }
 
 ### run
-for(f in 1:length(features)){# f for feature
-  for(k in 1:length(subdirs)){ # k for subdirs.
-    ## load data.
-    ldat = loadfiles(datadir,gpcr_nm, kinase_nm,isGPCR,f,k)
-    save(cpi, file=paste('cpi_',subdirs[k],'_',features[f],'.data',sep=""))
-    save(testResult, file=paste('testResult_',subdirs[k],'_',features[f],'.data',sep=""))
-  }
+for(k in 1:length(subdirs)){ # k for subdirs.
+  ## load data.
+  ldat = loadfiles(datadir,gpcr_nm, kinase_nm,isGPCR,fi,k)
+  precpi <- getpredata(ldata)
+  cpi <- getcpid(precpi, fi, cutoff,lower_limit, upper_limit)
+
+  sresult <- get_singlpar_sigma(cpi,nfold,isaddstd,isusemin,useminv)
+
+  mresult <- get_ml2dqsarpar(cpi,sresult$simgma,sigmadot)
+
+  save(sresult, file=paste('s_',subdirs[k],'_',fealist[fi],'.data',sep=""))
+  save(mresult, file=paste('m_',subdirs[k],'_',fealist[fi],'.data',sep=""))
 }

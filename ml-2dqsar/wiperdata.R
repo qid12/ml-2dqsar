@@ -26,7 +26,7 @@ loadfiles <- function(datadir,gpcr_nm,kinase_nm,isGPCR,f,k){
   return(loadfiles)
 }
 
-getpredata <- function(filesl,){
+getpredata <- function(filesl){
   files <- filesl$allfiles
   dirs <- filesl$protnums
   oneGroup = list()
@@ -65,8 +65,8 @@ bifeakeep <- function(datalist,cutoff){
   return(bifeaneed[which( (colsmeans > cutoff) & (colsmeans < (1-cutoff))) ])
 }
 
-getcpid <- function(oneGroup_xy, isbinaryf, cutoff, lower_limit, upper_limit){
-  if(isbinaryf){
+getcpid <- function(oneGroup_xy, isbinaryfc, cutoff, lower_limit, upper_limit){
+  if(isbinaryfc){
     keepft <- bifeakeep(oneGroup_xy,cutoff)
 
   } else{
