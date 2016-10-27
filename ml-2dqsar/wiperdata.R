@@ -103,7 +103,7 @@ getcpid <- function(oneGroup_xy, isbinaryf, cutoff, lower_limit, upper_limit){
 
 get_singlpar_sigma <- function(cpi, nfold, isaddstd,isusemin,useminv){
   omega_matrix  = matrix(nrow=length(cpi$y),
-                         ncol = ncol(cpi$X[[1]]))
+                         ncol = nrow(cpi$X[[1]]))
   for(i in seq(cpi$y)){
     fit <- glmnet(x=cpi$X,
                   y=cpi$y,
@@ -122,5 +122,32 @@ get_singlpar_sigma <- function(cpi, nfold, isaddstd,isusemin,useminv){
   result <- list()
   result$singlepar <- omega_matrix
   result$sigma <- sigmae
+  return(result)
+}
+
+get_ml2dqsarpar <- function(cpi,sigma2j,sigma2dot){
+  p <- nrow(cpi$X[[1]])
+  omega_matrix = matrix(nrow=length(cpi$y),
+                        ncol=p)
+  tmodel <- trainPreComPiHier(cpi$X,
+                              sigma2j,
+                              sigma2dot,
+                              maxit,
+                              iteration)
+  numm <- length(cpi$y)
+  for(i in seq(numm)){
+    froml = (i-1)*p + 1
+    tor = i*p
+    omega_matri[i,] <- as.numeric(unlist(tmodel[froml:tor]))
+  }
+  froml = numm*p+1
+  tor  = froml + p
+  omega_dot = as.numeric(unlist(tmodel[froml:tor]))
+  sigma_y = as.numeric(unlist(tmodel[tor+1]))
+
+  result <- list()
+  result$omega_matrix <- omega_matrix
+  result$omega_dot <- omega_dot
+  result$sigma_y <- sigma_y
   return(result)
 }
