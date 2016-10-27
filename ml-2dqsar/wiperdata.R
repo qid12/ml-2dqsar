@@ -100,3 +100,27 @@ getcpid <- function(oneGroup_xy, isbinaryf, cutoff, lower_limit, upper_limit){
   try(if(j==0) stop('No data between "lower_limit" and "upper_limit".'))
   return(cpi)
 }
+
+get_singlpar_sigma <- function(cpi, nfold, isaddstd,isusemin,useminv){
+  omega_matrix  = matrix(nrow=length(cpi$y),
+                         ncol = ncol(cpi$X[[1]]))
+  for(i in seq(cpi$y)){
+    fit <- glmnet(x=cpi$X,
+                  y=cpi$y,
+                  lambda=cv.glmnet(cpi$X, cpi$y, intercept=FALSE,nfold=nfold)$lambda.min,
+                  intercept = FALSE)
+    omega <- coef(fit)
+    omega_matrix[i, ] = t(omega[2:nrow(omega)])
+  }
+  sigma <- mean(colVars(omega_matrix))
+  if(isaddstd){
+    sigma <- sigma+2*sqrt(var(colVars(omega_matrix)))
+  }
+  if(isusemin){
+    sigma <- max(c(sigma,useminv))
+  }
+  result <- list()
+  result$singlepar <- omega_matrix
+  result$sigma <- sigmae
+  return(result)
+}
