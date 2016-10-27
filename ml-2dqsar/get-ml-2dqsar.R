@@ -4,11 +4,11 @@
 
 ### accept args
 
-args <- commandArgs(TRUE)
+## args <- commandArgs(TRUE)
 ### set parameter.
-jobdir <- "/data/home/szu/Lab/ml-2dqsar/code/result/"
+jobdir <- "/data/home/szu/Lab/ml-2dqsar/getmcode/result/"
 datadir <- "/data/home/szu/Lab/ml-2dqsar/"
-ml2dqsar_dir <- "/data/home/szu/Lab/ml-2dqsar/code/"
+ml2dqsar_dir <- "/data/home/szu/Lab/ml-2dqsar/getmcode/"
 
 ml2dqsar_filenm <- "FuncPreComPiHierBayes.R"
 wiperfunc_filenm <- "wiperdata.R"
@@ -36,7 +36,7 @@ iternum <- 1000
 
 isGPCR <- TRUE
 subd_index= c(1) # subdirs choose index
-fi= c(1) # feature choose index
+fi= 1 # feature choose index
 
 cutoff = 0.05 # to filter the features.
 
@@ -72,12 +72,12 @@ if(isGPCR){
 for(k in 1:length(subdirs)){ # k for subdirs.
   ## load data.
   ldat = loadfiles(datadir,gpcr_nm, kinase_nm,isGPCR,fi,k)
-  precpi <- getpredata(ldata)
+  precpi <- getpredata(ldat)
   cpi <- getcpid(precpi, fi, cutoff,lower_limit, upper_limit)
 
   sresult <- get_singlpar_sigma(cpi,nfold,isaddstd,isusemin,useminv)
 
-  mresult <- get_ml2dqsarpar(cpi,sresult$simgma,sigmadot)
+  mresult <- get_ml2dqsarpar(cpi,sresult$sigma,sigma2dot,iternum)
 
   save(sresult, file=paste('s_',subdirs[k],'_',fealist[fi],'.data',sep=""))
   save(mresult, file=paste('m_',subdirs[k],'_',fealist[fi],'.data',sep=""))

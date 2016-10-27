@@ -11,13 +11,13 @@ loadfiles <- function(datadir,gpcr_nm,kinase_nm,isGPCR,f,k){
   if(isGPCR){
     files <- list.files(path=paste(datadir,"GPCR/",subdirs[k],sep=""),
                         full.names=TRUE,recursive=TRUE,
-                        pattern=paste(".*",features[f],".csv",sep=""))
+                        pattern=paste(".*",fealist[f],".csv",sep=""))
     dirs <- dir(path=paste(datadir,"GPCR/",subdirs[k],sep=""),
                 full.names=FALSE,no..=FALSE)
   } else {
     files <- list.files(path=paste(datadir,"kinase/",subdirs[k],sep=""),
                         full.names=TRUE,recursive=TRUE,
-                        pattern=paste(".*",features[f],".csv",sep=""))
+                        pattern=paste(".*",fealist[f],".csv",sep=""))
     dirs <- dir(path=paste(datadir,'kinase/',subdirs[k],sep=""),
                 full.names = FALSE, no.. = FALSE)
   }
@@ -46,6 +46,8 @@ getpredata <- function(filesl){
     ## oneGroup_xy$y[[i]] <- scale(oneGroup_xy$y[[i]],center = TRUE, scale = FALSE)
     ## oneGroup_xy$ym[[i]] <- attributes(oneGroup_xy$y[[i]])x$`scaled:center`
   }
+  oneGroup_xy$len <- len
+  oneGroup_xy$dirs <- dirs
   return(oneGroup_xy)
 }
 
@@ -73,7 +75,7 @@ getcpid <- function(oneGroup_xy, isbinaryfc, cutoff, lower_limit, upper_limit){
     keepft <- seq(ncol(oneGroup_xy$X[[1]]))
   }
 
-  for(i in seq(filse)){
+  for(i in seq(length(oneGroup_xy$y))){
     oneGroup_xy$X[[i]] <- scale(oneGroup_xy$X[[i]], center = TRUE, scale = FALSE)
     oneGroup_xy$xcolm[[i]] <- attributes(oneGroup_xy$X[[i]])$`scaled:center`
 
@@ -86,10 +88,10 @@ getcpid <- function(oneGroup_xy, isbinaryfc, cutoff, lower_limit, upper_limit){
   cpi$rootMSE  <- c()
   j = 0
   for(i in seq(oneGroup_xy$y)){
-    if(len[[i]]>=lower_limit & len[[i]] <= upper_limit){
+    if(oneGroup_xy$len[[i]]>=lower_limit & oneGroup_xy$len[[i]] <= upper_limit){
       j = j + 1
       ## as.character is needed since dirs is factor. f*ck!!!
-      cpi$proteins[j] = as.character(dirs[[i]])
+      cpi$proteins[j] = as.character(oneGroup_xy$dirs[[i]])
       cpi$y[[j]] <- oneGroup_xy$y[[i]] # log of affinity
       cpi$ym[[j]] <- oneGroup_xy$ym[[i]]
       ## after scale, not data.table. f*ck!!!
@@ -97,7 +99,8 @@ getcpid <- function(oneGroup_xy, isbinaryfc, cutoff, lower_limit, upper_limit){
       cpi$xcolm[[j]] <- oneGroup_xy$xcolm[[i]]
     }
   }
-  try(if(j==0) stop('No data between "lower_limit" and "upper_limit".'))
+  cpi$kf <- keepft
+  #try(if(j==0) stop('No data between "lower_limit" and "upper_limit".'))
   return(cpi)
 }
 
@@ -105,9 +108,9 @@ get_singlpar_sigma <- function(cpi, nfold, isaddstd,isusemin,useminv){
   omega_matrix  = matrix(nrow=length(cpi$y),
                          ncol = nrow(cpi$X[[1]]))
   for(i in seq(cpi$y)){
-    fit <- glmnet(x=cpi$X,
-                  y=cpi$y,
-                  lambda=cv.glmnet(cpi$X, cpi$y, intercept=FALSE,nfold=nfold)$lambda.min,
+    fit <- glmnet(x=t(cpi$X[[i]]),
+                  y=cpi$y[[i]],
+                  lambda=cv.glmnet(t(cpi$X[[i]]), cpi$y[[i]], intercept=FALSE,nfold=nfold)$lambda.min,
                   intercept = FALSE)
     omega <- coef(fit)
     omega_matrix[i, ] = t(omega[2:nrow(omega)])
@@ -120,28 +123,29 @@ get_singlpar_sigma <- function(cpi, nfold, isaddstd,isusemin,useminv){
     sigma <- max(c(sigma,useminv))
   }
   result <- list()
-  result$singlepar <- omega_matrix
-  result$sigma <- sigmae
+  result$omega_matrix <- omega_matrix
+  result$sigma <- sigma
+  result$kf <- cpi$kf
   return(result)
 }
 
-get_ml2dqsarpar <- function(cpi,sigma2j,sigma2dot){
-  p <- nrow(cpi$X[[1]])
-  omega_matrix = matrix(nrow=length(cpi$y),
+get_ml2dqsarpar <- function(cpi,sigma2j,sigma2dot,iternum){
+  p <- length(cpi$kf)
+  numm <- length(cpi$y)
+  omega_matrix = matrix(nrow=numm,
                         ncol=p)
-  tmodel <- trainPreComPiHier(cpi$X,
+  tmodel <- trainPreComPiHier(cpi,
                               sigma2j,
                               sigma2dot,
-                              maxit,
-                              iteration)
-  numm <- length(cpi$y)
+                              maxit = TRUE,
+                              iteration = iternum)
   for(i in seq(numm)){
     froml = (i-1)*p + 1
     tor = i*p
-    omega_matri[i,] <- as.numeric(unlist(tmodel[froml:tor]))
+    omega_matrix[i,] <- as.numeric(unlist(tmodel[froml:tor]))
   }
   froml = numm*p+1
-  tor  = froml + p
+  tor  = (numm+1)*p
   omega_dot = as.numeric(unlist(tmodel[froml:tor]))
   sigma_y = as.numeric(unlist(tmodel[tor+1]))
 
@@ -149,5 +153,6 @@ get_ml2dqsarpar <- function(cpi,sigma2j,sigma2dot){
   result$omega_matrix <- omega_matrix
   result$omega_dot <- omega_dot
   result$sigma_y <- sigma_y
+  result$kf <- cpi$kf
   return(result)
 }
