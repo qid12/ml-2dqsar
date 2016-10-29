@@ -40,7 +40,7 @@ corrplot(sresult$omega_matrix[ ,samind], is.corr=FALSE, diag = FALSE,
          method = "circle", tl.pos="n",
          col=col3(20))
 
-### ginkgolide structure similarity
+### ginkgolide structure similarit
 simgink = as.matrix(read.table("ginkgolidesim"))
 row.names(simgink) = c("GA","GB","GC","GJ","GM","GK")
 colnames(simgink) =  c("GA","GB","GC","GJ","GM","GK")
