@@ -5,9 +5,9 @@
 
 args <- commandArgs(TRUE)
 ### set parameter.
-jobdir <- "/data/home/szu/Lab/ml-2dqsar/code/result/"
+jobdir <- "/data/home/szu/Lab/ml-2dqsar/cv_alld_glmnet/result/"
 datadir <- "/data/home/szu/Lab/ml-2dqsar/"
-ml2dqsar_dir <- "/data/home/szu/Lab/ml-2dqsar/code/"
+ml2dqsar_dir <- "/data/home/szu/Lab/ml-2dqsar/cv_alld_glmnet/"
 
 ml2dqsar_filenm <- "FuncPreComPiHierBayes.R"
 wiperfunc_filenm <- "wiperdata.R"
@@ -48,7 +48,7 @@ library(Metrics)
 
 ### set dir, and load func.
 setwd(jobdir)
-source(paste(ml2dqsar_dir,ml2dqsar_filenm,sep=""))
+##source(paste(ml2dqsar_dir,ml2dqsar_filenm,sep=""))
 source(paste(ml2dqsar_dir,wiperfunc_filenm,sep=""))
 source(paste(ml2dqsar_dir,mergdglm_filenm, sep=""))
 ### load features.

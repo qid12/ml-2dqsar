@@ -4,17 +4,17 @@
 ### need glmnet package.
 mergedatalist <- function(datalist){
   totalrow <- 0
-  totalcol <- ncol(datalist[[1]]$X)
-  for(i in length(datalist)){
-    totalrow = totalrow + nrow(datalist[[i]]$X)
+  totalcol <- ncol(datalist$X[[1]])
+  for(i in 1:length(datalist)){
+    totalrow = totalrow + nrow(datalist$X[[i]])
   }
   mergedm <- matrix(,nrow=totalrow,ncol=totalcol)
   mergedv <- rep(0.0,totalrow)
   trow <- 0
-  for(i in length(datalist)){
+  for(i in 1:length(datalist)){
     tmpl <- trow + nrow(datalist$X[[i]])
-    mergedm[trow:tmpl,] <- datalist[[i]]$X
-    mergedv[trow:tmpl] <- datalist[[i]]$y
+    mergedm[trow:tmpl,] <- datalist$X[[i]]
+    mergedv[trow:tmpl] <- datalist$y[[i]]
     trow = tmpl + 1
   }
   finald <- data.frame(X = mergedm, y = mergedv)
@@ -29,13 +29,12 @@ tp_merge_glm <- function(traind,testd,nfold=5){
                 y = td$y,
                 lambda = cv.glmnet(x=td$X,y=td$y,interpret=FALSE,nfold=nfold)$lambda.min,
                 intercept  = FALSE)
-  for(i in tasknm){
-    tpre <- predict(fit, testd[[i]]$X)
-    msevec[i] <- mse(testd[[i]]$y,tpre)
+  for(i in 1:tasknm){
+    tpre <- predict(fit, testd$X[[i]])
+    msevec[i] <- mse(testd$y[[i]],tpre)
   }
   omega <- coef(fit)[2:ncol(td)]
-  finalr <- data.frame(omega = omega,
-                       mse = msevec)
+  finalr <- data.frame(omega = omega, mse = msevec)
   return(finalr)
 }
 
@@ -49,7 +48,7 @@ cv_merge_glm <- function(datalist, nfold){
     traincv[[j]]$y <- list()
     testcv[[j]]$X <- list()
     testcv[[j]]$y <- list()
-    for(i in 1:group){
+    for(i in 1:length(datalist)){
       foldid <- sample(rep(seq(nfold),length=ncol(datalist$X[[i]])))
       which <- foldid==j
       traincv[[j]]$y[[i]] = datalist$y[[i]][!which]
@@ -58,6 +57,18 @@ cv_merge_glm <- function(datalist, nfold){
       testcv[[j]]$y[[i]] = datalist$y[[i]][which]
     } # end of i in group
   } # end of j in nfold
-  finalr <- tp_merge_glm(traincv,testcv,nfold)
+  ## init finalr.
+  finalr <- list()
+  for(i in 1:nfold){
+    finalr[[i]] <- list()
+    finalr[[i]]$omega <- rep(0.0, ncol(datalist$X[[1]]))
+    finalr[[i]]$mse <- rep(0.0, length(datalist))
+  }
+  ## record every fold result
+  for(i in 1:nfold){
+    tmp <- tp_merge_glm(traincv[[i]],testcv[[i]],nfold)
+    finalr[[i]]$omega <- tmp$omega
+    finalr[[i]]$mse <- tmp$mse
+  }
   return(finalr)
 }
