@@ -1,9 +1,7 @@
 ### contrary to single-model, merge all data
 ### szu
-### 2016-10-20
-
-library(glmnet)
-
+### 2016-11-07
+### need glmnet package.
 mergedatalist <- function(datalist){
   totalrow <- 0
   totalcol <- ncol(datalist[[1]]$X)
