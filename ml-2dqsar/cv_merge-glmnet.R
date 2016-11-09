@@ -34,8 +34,8 @@ tp_merge_glm <- function(traind,testd,nfold=5){
     tpre <- predict(fit, testd$X[[i]])
     msevec[i] <- mse(testd$y[[i]],tpre)
   }
-  omega <- coef(fit)[2:ncol(td)]
-  finalr <- data.frame(omega = omega, mse = msevec)
+  omega <- coef(fit)
+  finalr <- list(omega = omega[2:ncol(td$X)], mse = msevec)
   return(finalr)
 }
 
@@ -51,11 +51,11 @@ cv_merge_glm <- function(datalist, nfold){
     testcv[[j]]$X <- list()
     testcv[[j]]$y <- list()
     for(i in 1:tasknm){
-      foldid <- sample(rep(seq(nfold),length=ncol(datalist$X[[i]])))
+      foldid <- sample(rep(seq(nfold),length=nrow(datalist$X[[i]])))
       which <- foldid==j
       traincv[[j]]$y[[i]] = datalist$y[[i]][!which]
-      traincv[[j]]$X[[i]] = datalist$X[[i]][,!which]
-      testcv[[j]]$X[[i]] = datalist$X[[i]][,which]
+      traincv[[j]]$X[[i]] = datalist$X[[i]][!which, ]
+      testcv[[j]]$X[[i]] = datalist$X[[i]][which, ]
       testcv[[j]]$y[[i]] = datalist$y[[i]][which]
     } # end of i in group
   } # end of j in nfold
