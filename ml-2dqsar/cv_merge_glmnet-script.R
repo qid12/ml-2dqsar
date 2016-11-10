@@ -17,20 +17,32 @@ gpcr_names <- c("lipidlike",
                 "nucleotidelike",
                 "peptide",
                 "others")
-kinase_names <- c("kinase_agc", "kinase_camk","kinase_ck1","kinase_cmgc",
-                  "kinase_ste","kinase_tk","kinase_tkl")
+kinase_names <- c("kinase_agc",
+                  "kinase_camk",
+                  "kinase_ck1",
+                  "kinase_cmgc",
+                  "kinase_ste",
+                  "kinase_tk",
+                  "kinase_all_tkl",
+                  "kinase_tkl",
+                  "kinase_stt_tkl")
+
 fealist <- c("macc","phychem","fingerprint","morgan")
 isbinaryf <- c(TRUE, FALSE, TRUE, TRUE)
 
 nfold <- 5
-lower_limit <- 50
+lower_limit <- 30
 upper_limit <- 1000
 sigma2dot <- 100
 iternum <- 1000
 
-isGPCR <- TRUE
-subd_index= c(1) # subdirs choose index
-fc_index= c(1) # feature choose index
+if(as.numeric(args[1]) > 0){
+  isGPCR <- TRUE
+} else{
+  isGPCR <- FALSE
+}
+subd_index= c(as.numeric(args[2])) # subdirs choose index
+fc_index= c(as.numeric(args[3])) # feature choose index
 
 cutoff = 0.05 # to filter the features.
 ###------keep unchanged below----------###
@@ -39,7 +51,7 @@ library(methods)
 library(glmnet)
 library(data.table)
 ###library(ggplot2)
-library(optimx)
+##library(optimx)
 ###library(doParallel)
 ###library(foreach)
 ###library(caret)
