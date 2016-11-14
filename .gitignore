@@ -248,3 +248,5 @@ sympy-plots-for-*.tex/
 /examples/result_gk_eqsj_addvarsj_append/drawfigs.R
 *.o399982
 /examples/cv_sigma2j_same_dset/log/g0p9f1sj1.o399997
+/examples/*/log/*
+/examples/*/result/*

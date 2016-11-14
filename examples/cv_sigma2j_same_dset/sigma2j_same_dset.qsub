@@ -1,0 +1,26 @@
+#!/bin/bash
+## szu
+## 2016-11-10
+## ref online doc for multiple batch jobs in northwestern university.
+
+while read isGPCR proclass comfea sigma2j
+do
+    JOB=`qsub -N g${isGPCR}p${proclass}f${comfea}sj${sigma2j} <<EOJ
+#!/bin/bash
+
+#$ -S /bin/bash
+#$ -q week.q
+#$ -j yes
+#$ -cwd
+#$ -o /data/home/szu/Lab/ml-2dqsar/cv_sigma2j_same_dset/log/
+#$ -l p=1
+#$ -l vf=1g
+
+source ~/.bashrc
+Rscript cv_sigmaj_same_dset.R ${isGPCR} ${proclass} ${comfea} ${sigma2j}
+EOJ
+`
+    echo "JobID = ${JOB} for parameters isGPCR ${isGPCR} proclass ${proclass}"
+    echo "comfea ${comfea} sigma2j ${sigma2j} submitted on `date`"
+done < sigma2j_dset_params.txt
+exit
