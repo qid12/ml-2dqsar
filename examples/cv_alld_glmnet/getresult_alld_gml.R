@@ -2,16 +2,16 @@
 ## szu
 ## 20161113
 
-## directory of result.
-job_dir_pre <- "/Users/wangchao/home/songpeng/git-recipes/ml-2dqsar/examples/"
-ref_ml_dir_rela <- "result_gpcrkinase_eqsj_autosig_fpmo/"
-alld_glmnet_dir_rela <- "cv_all_glmnet/result/"
-alld_result_file_pre <- "alldata_glm"
-singled_result_file_pre <- "cpi_"
-mqsar_result_file_pre <- "testResult_"
 ## load packages
 library(ggplot2)
 library(reshape)
+## directory of result.
+job_dir_pre <- "/Users/wangchao/home/songpeng/git-recipes/ml-2dqsar/examples/"
+ref_ml_dir_rela <- "result_gpcrkinase_eqsj_autosig_fpmo/"
+alld_glmnet_dir_rela <- "cv_alld_glmnet/result/"
+alld_result_file_pre <- "alldata_glm_"
+singled_result_file_pre <- "cpi_"
+mqsar_result_file_pre <- "testResult_"
 ## basic information.
 gpcr_names <- c("lipidlike",
                 "monoamine",
@@ -40,7 +40,7 @@ getrmse_ms<- function(mqsard,cpid){
   fold <- length(mqsard)
   rmsem <- rep(0,protnum)
   for(i in 1:fold){
-    rmsem = rmsem + sqrt(mseMult[[i]]$mse)
+    rmsem <- rmsem + sqrt(mqsard[[i]]$mse)
   }
   result <- data.frame(rmsem = rmsem/fold,
                        rmses = cpid$rootMSE,
@@ -48,14 +48,14 @@ getrmse_ms<- function(mqsard,cpid){
   return(result)
 }
 getrmse_alldglm <- function(alldglm){
-  fold <- length(alldglm)
+  fold <- length(alldglm) - 1 # leave one for protnm
   protnum <- length(alldglm$protnm)
   rmsealld <- rep(0,protnum)
   for(i in 1:fold){
     rmsealld <- rmsealld + sqrt(alldglm[[i]]$mse)
   }
-  result <- data.frame(rmsea = rmesealld/fold,
-                       protnm = alldgml$protnm)
+  result <- data.frame(rmsea = rmsealld/fold,
+                       protnm = unlist(alldglm$protnm))
   return(result)
 }
 getfnm <- function(isgpcr,proind,ftind){
@@ -65,30 +65,45 @@ getfnm <- function(isgpcr,proind,ftind){
     pronm <- kinase_names[proind]
   }
   ftnm <- fealist[ftind]
-  fnmall <- list()
-  fnmall$singledfn <- paste(job_dir_pre,
+  afnm <- list()
+  afnm$singledfn <- paste(job_dir_pre,
                             ref_ml_dir_rela,
-                            singled_result_file_pre,'_',
+                            singled_result_file_pre,
                             pronm,'_',ftnm,'.data',sep = "")
-  fnmall$mqsarfn <- paste(job_dir_pre,
+  afnm$mqsarfn <- paste(job_dir_pre,
                           ref_ml_dir_rela,
-                          mqsar_result_file_pre,'_',
+                          mqsar_result_file_pre,
                           pronm,'_',ftnm,'.data',sep = "")
-  fnmall$alldfn <- paste(job_dir_pre,
+  afnm$alldfn <- paste(job_dir_pre,
                          alld_glmnet_dir_rela,
-                         alld_result_file_pre,'_',
+                         alld_result_file_pre,
                          pronm,'_',ftnm,'.data',sep = "")
-  return(fnmall)
+  return(afnm)
 }
-load_alld <- function(ftnmall){
-  singled <- load_obj(ftnmall$singledfn)
-  mqsard <- load_obj(ftnmall$mqsarfn)
-  alld <- load_obj(ftnmall$alldfn)
+load_alld <- function(afnm){
+  singled <- load_obj(afnm$singledfn)
+  mqsard <- load_obj(afnm$mqsarfn)
+  alld <- load_obj(afnm$alldfn)
 
   rmsems <- getrmse_ms(mqsard,singled)
   rmsea <- getrmse_alldglm(alld)
 
-  allrmse <- merge(rmses, rmsea, by = "pronm")
+  allrmse <- merge(rmsems, rmsea, by = "protnm")
   return(allrmse)
 }
 ## run
+##-----
+isgpcr <- 1
+proind <- 4
+ftind <- 3
+
+afnm_g_p <- getfnm(isgpcr, proind, ftind)
+armse_g_p <- load_alld(afnm_g_p)
+
+##-----
+isgpcr <- 0
+proind <- 1
+ftind <- 3
+
+afnm_k_a <- getfnm(isgpcr, proind, ftind)
+armse_k_a <- load_alld(afnm_k_a)
