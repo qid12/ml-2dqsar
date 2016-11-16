@@ -156,3 +156,22 @@ get_ml2dqsarpar <- function(cpi,sigma2j,sigma2dot,iternum){
   result$kf <- cpi$kf
   return(result)
 }
+load_obj <- function(filenm){
+  ## load rdata to new variable.
+  env <- new.env()
+  nm <- load(filenm,env)[1]
+  env[[nm]]
+}
+getrmse_ms<- function(mqsard,cpid){
+  ## get rmse for single and mqsar results.
+  protnum <- length(cpid$y)
+  fold <- length(mqsard)
+  rmsem <- rep(0,protnum)
+  for(i in 1:fold){
+    rmsem <- rmsem + sqrt(mqsard[[i]]$mse)
+  }
+  result <- data.frame(rmsem = rmsem/fold,
+                       rmses = cpid$rootMSE,
+                       protnm = unlist(cpid$proteins))
+  return(result)
+}
