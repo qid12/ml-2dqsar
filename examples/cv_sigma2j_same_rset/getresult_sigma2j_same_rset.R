@@ -65,7 +65,7 @@ load_alld <- function(isgpcr,proind,ftind){
                        full.names = FALSE,no..=TRUE,
                        pattern=paste(mqsar_result_file_pre,
                                      pronm,".*",ftnm,".*",sep=""))
-  floatmatch <- gregexpr("0\\.[0-9]+",mfiles)
+  floatmatch <- gregexpr("[0-9]+\\.{0,}[0-9]{0,}",mfiles)
   sigma2jvec_real <- as.numeric(unique(unlist(regmatches(mfiles,floatmatch))))
   for(i in 1:length(mfiles)){
     mqsard <- load_obj(mfiles[i])
