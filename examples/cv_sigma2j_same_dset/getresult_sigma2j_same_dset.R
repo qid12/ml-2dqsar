@@ -3,7 +3,7 @@
 ### 20161116
 
 ## set dir
-job_dir <- "/Users/wangchao/home/songpeng/git-recipes/ml-2dqsar/examples/cv_sigma2j_same_dset/"
+job_dir_pre <- "/Users/wangchao/home/songpeng/git-recipes/ml-2dqsar/examples/cv_sigma2j_same_dset/"
 result_subdir <- "result/"
 mqsar_result_file_pre <- "mresult_"
 singled_result_file_pre <- "cpi_"
@@ -27,3 +27,52 @@ kinase_names <- c("kinase_agc",
                   "kinase_stt_tkl")
 fealist <- c("macc","phychem","fingerprint","morgan")
 sigma2jvec <- c(0.05,0.1,0.2,0.4,0.8,1,2,4,16)
+## functions
+getfnm <- function(isgpcr,proind,ftind,varind){
+  if(isgpcr > 0){
+    pronm <- gpcr_names[proind]
+  } else{
+    pronm <- kinase_names[proind]
+  }
+  ftnm <- fealist[ftind]
+  sigma2j <- sigma2jvec[varind]
+  afnm <- list()
+  afnm$singledfn <- paste(job_dir_pre,
+                          result_subdir,
+                          singled_result_file_pre,
+                          pronm,'_',ftnm,'_','.data',sep = "")
+  afnm$mqsarfn <- paste(job_dir_pre,
+                        result_subdir,
+                        mqsar_result_file_pre,
+                        pronm,'_',ftnm,'_',
+                        sigma2j,'.data',sep = "")
+  return(afnm)
+}
+load_alld <- function(isgpcr,proind,ftind){
+  if(isgpcr > 0){
+    pronm <- gpcr_names[proind]
+  } else{
+    pronm <- kinase_names[proind]
+  }
+  ftnm <- fealist[ftind]
+  singledfn <- paste(job_dir_pre,
+                     result_subdir,
+                     singled_result_file_pre,
+                     pronm,'_',ftnm,'_','.data',sep = "")
+  singled <- load_obj(singledfn)
+  result <- data.frame(protnm = unlist(singled$proteins),
+                       rmses = singled$rootMSE,)
+  for(i in 1:length(sigma2jvec)){
+    mqsarfn <- paste(job_dir_pre,
+                     result_subdir,
+                     mqsar_result_file_pre,
+                     pronm,'_',ftnm,'_',
+                     sigma2j,'.data',sep = "")
+    mqsard <- load_obj(mqsarfn)
+    temp <- getrmse_ms(mqsard,singled)
+    ## assign(paste('m',sigma2jvec[i],sep=""),temp$rmsem)
+    ## eval(as.name(paste(something)))
+    result[paste("m",sigma2jvec[i],sep="")] = temp$rmsem
+    return(result)
+  }
+}
