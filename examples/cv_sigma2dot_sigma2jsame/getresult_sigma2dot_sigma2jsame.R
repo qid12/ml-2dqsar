@@ -63,15 +63,24 @@ load_alld <- function(isgpcr,proind,ftind){
                        pattern=paste(mqsar_result_file_pre,
                                      pronm,".*",ftnm,".*",sep=""))
   floatmatch <- gregexpr("[0-9]+\\.{0,}[0-9]{0,}",mfiles)
-  sigma2dot_real <- as.numeric((unlist(regmatches(mfiles,floatmatch))))
-  int j <- 1
+  ## pairs of sigma2j and sigma2dot
+  sigma2dot_tmp <- as.numeric(unlist(regmatches(mfiles,floatmatch)))
+  ## get sigma2dot
+  sigma2dot_real_ind <- rep(2,length(sigma2dot_tmp),2)
+  sigma2dot_real <- sigma2dot_tmp[sigma2dot_real_ind]
+  ## sort refsize
+  j <- 1
+  refsize <- rep(0.0,length(mfiles))
   for(i in 1:length(mfiles)){
+    refsize[i] <- round(sigma2dot_tmp[j+1]/sigma2dot_tmp[j],1)
+    j <- j+2
+  }
+  refsizeind <- rank(refsize)
+  for(i in refsizeind){
     mqsard <- load_obj(mfiles[i])
     temp <- getrmse_ms(mqsard,singled)
-    colnm <- paste("m",sigma2dot_real[j],"_",
-                   sigma2dot_real[j+1],sep="")
+    colnm <- paste(sigma2dot_real[i],"_",refsize[i],sep="")
     result[colnm] <- temp$rmsem
-    j <- j+2
   }
   return(result)
 }
