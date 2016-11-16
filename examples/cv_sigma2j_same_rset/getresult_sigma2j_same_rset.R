@@ -70,7 +70,9 @@ load_alld <- function(isgpcr,proind,ftind){
   for(i in 1:length(mfiles)){
     mqsard <- load_obj(mfiles[i])
     temp <- getrmse_ms(mqsard,singled)
-    result[paste("m",sigma2jvec_real[i],sep="")] <- temp$rmsem
+    colnm <- paste("m",sigma2jvec_real[i],"_",
+                   sigma2jvec_ref[i],sep="")
+    result[colnm] <- temp$rmsem
   }
   return(result)
 }
