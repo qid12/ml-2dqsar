@@ -66,8 +66,8 @@ load_alld <- function(isgpcr,proind,ftind){
   ## pairs of sigma2j and sigma2dot
   sigma2dot_tmp <- as.numeric(unlist(regmatches(mfiles,floatmatch)))
   ## get sigma2dot
-  sigma2dot_real_ind <- rep(2,length(sigma2dot_tmp),2)
-  sigma2dot_real <- sigma2dot_tmp[sigma2dot_real_ind]
+  sigma2dot_real_ind <- seq(2,length(sigma2dot_tmp),2)
+  sigma2dot_real <- round(sigma2dot_tmp[sigma2dot_real_ind],3)
   ## sort refsize
   j <- 1
   refsize <- rep(0.0,length(mfiles))
@@ -77,7 +77,10 @@ load_alld <- function(isgpcr,proind,ftind){
   }
   refsizeind <- rank(refsize)
   for(i in refsizeind){
-    mqsard <- load_obj(mfiles[i])
+    mfnm <- paste(job_dir_pre,
+                  result_subdir,
+                  mfiles[1],sep="")
+    mqsard <- load_obj(mfnm)
     temp <- getrmse_ms(mqsard,singled)
     colnm <- paste(sigma2dot_real[i],"_",refsize[i],sep="")
     result[colnm] <- temp$rmsem
