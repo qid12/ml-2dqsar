@@ -75,11 +75,11 @@ load_alld <- function(isgpcr,proind,ftind){
     refsize[i] <- round(sigma2dot_tmp[j+1]/sigma2dot_tmp[j],1)
     j <- j+2
   }
-  refsizeind <- rank(refsize)
+  refsizeind <- order(refsize)
   for(i in refsizeind){
     mfnm <- paste(job_dir_pre,
                   result_subdir,
-                  mfiles[1],sep="")
+                  mfiles[i],sep="")
     mqsard <- load_obj(mfnm)
     temp <- getrmse_ms(mqsard,singled)
     colnm <- paste(sigma2dot_real[i],"_",refsize[i],sep="")
